@@ -1,0 +1,51 @@
+---
+title: Security en JavaScript
+date: '2023-11-02'
+tags: ['JavaScript', 'Key Concept', 'Security']
+draft: false
+summary: 'La seguridad en JavaScript es un tema crítico, especialmente en el desarrollo web, ya que el código JavaScript se ejecuta en el navegador del usuario y puede estar expuesto a diversas amenazas'
+---
+
+Aquí, una visión general de las consideraciones clave para garantizar la seguridad en JavaScript:
+
+1. **Cross-Site Scripting (XSS)**:
+   - **Definición**: XSS es un ataque en el que un atacante inyecta código malicioso (generalmente JavaScript) en una página web, que luego se ejecuta en el navegador del usuario.
+   - **Prevención**: Sanitizar y escapar todas las entradas del usuario. Utiliza bibliotecas como DOMPurify para limpiar las entradas de usuario antes de mostrarlas en la página.
+
+2. **Cross-Site Request Forgery (CSRF)**:
+   - **Definición**: CSRF es un ataque en el que un atacante aprovecha la sesión activa de un usuario para realizar acciones no deseadas en otro sitio web.
+   - **Prevención**: Utiliza tokens CSRF para verificar la autenticidad de las solicitudes del usuario. Evita realizar acciones importantes a través de peticiones GET.
+
+3. **Same-Origin Policy (SOP)**:
+   - **Definición**: SOP restringe las solicitudes de recursos a un origen (dominio) diferente al de la página actual. Esto es fundamental para prevenir ataques XSS y CSRF.
+   - **Prevención**: Aprovecha SOP para evitar solicitudes a dominios no confiables y utiliza encabezados CORS para permitir acceso controlado a recursos en otros dominios.
+
+4. **Autenticación y Autorización**:
+   - **Definición**: Implementa un sistema de autenticación seguro para garantizar que los usuarios solo tengan acceso a las partes del sitio que les corresponden.
+   - **Prevención**: Usa mecanismos de autenticación sólidos como JSON Web Tokens (JWT) y asegúrate de que los usuarios tengan los permisos adecuados para las operaciones que intentan realizar.
+
+5. **Manejo de Cookies y Sesiones**:
+   - **Definición**: Almacena y maneja cookies y sesiones de manera segura para evitar ataques de robo de sesiones.
+   - **Prevención**: Usa cookies seguras y establece atributos HttpOnly y Secure en las cookies para protegerlas contra XSS. Asimismo, regenera las sesiones después de la autenticación.
+
+6. **Dependencias Seguras**:
+   - **Definición**: Asegúrate de que las bibliotecas y dependencias de terceros que utilizas sean seguras y estén actualizadas para evitar vulnerabilidades conocidas.
+   - **Prevención**: Utiliza herramientas como npm audit para verificar vulnerabilidades en tus paquetes y mantén tus dependencias actualizadas.
+
+7. **Control de Entradas y Salidas**:
+   - **Definición**: Valida y escapa todas las entradas de usuario antes de mostrarlas en la página y valida las entradas del usuario en el servidor.
+   - **Prevención**: Utiliza bibliotecas de validación y escape de datos para garantizar que no se ejecuten scripts maliciosos.
+
+8. **Seguridad en API Restful**:
+   - **Definición**: Asegura tus API Restful para evitar accesos no autorizados y ataques como la inyección SQL.
+   - **Prevención**: Utiliza autenticación y autorización adecuadas en tus endpoints API. Evita concatenar directamente parámetros de URL en consultas SQL para prevenir la inyección SQL.
+
+9. **Seguridad en Almacenamiento Local**:
+   - **Definición**: Almacena datos localmente de manera segura, evitando la exposición de información sensible.
+   - **Prevención**: Usa localStorage y sessionStorage con precaución, y evita almacenar información confidencial en el cliente.
+
+10. **Actualizaciones y Parches**:
+    - **Definición**: Mantén tu aplicación y sus dependencias actualizadas para protegerla contra vulnerabilidades conocidas.
+    - **Prevención**: Sigue las actualizaciones de seguridad de tus bibliotecas y frameworks, y aplica parches cuando estén disponibles.
+
+La seguridad en JavaScript es un tema amplio y esencial para cualquier desarrollador web. Asegurarte de entender y aplicar estas prácticas de seguridad te ayudará a proteger tu aplicación y a los datos de los usuarios.

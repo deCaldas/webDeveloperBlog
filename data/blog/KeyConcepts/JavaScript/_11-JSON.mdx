@@ -1,0 +1,68 @@
+---
+title: JavaScript Object Notation (JSON)
+date: '2023-11-02'
+tags: ['JavaScript', 'Key Concept', 'JavaScript Object Notation (JSON)']
+draft: false
+summary: 'JSON, que significa "JavaScript Object Notation", es un formato de intercambio de datos muy común en JavaScript y en el desarrollo web en general'
+---
+
+Aquí tienes información completa sobre JSON en JavaScript:
+
+**¿Qué es JSON?**
+JSON es un formato de texto ligero utilizado para representar datos estructurados. Es legible tanto para humanos como para máquinas, lo que lo hace ideal para el intercambio de datos en aplicaciones web y la comunicación entre servidores y clientes.
+
+**Sintaxis de JSON:**
+JSON utiliza una sintaxis simple y fácil de entender:
+
+- Los datos se almacenan en pares clave-valor.
+- Los objetos se delimitan con llaves `{}`.
+- Los arreglos se delimitan con corchetes `[]`.
+- Los elementos en un arreglo se separan por comas.
+- Las claves y cadenas de texto deben ir entre comillas dobles, como `"nombre": "John"`.
+- Los valores pueden ser números, cadenas, booleanos, objetos, arreglos o `null`.
+
+Ejemplo de un objeto JSON:
+
+```json
+{
+  "nombre": "Juan",
+  "edad": 30,
+  "soltero": true,
+  "hobbies": ["programación", "lectura"],
+  "dirección": {
+    "calle": "123 Main St",
+    "ciudad": "Ciudad Ejemplo"
+  }
+}
+```
+
+**Uso de JSON en JavaScript:**
+En JavaScript, puedes trabajar con JSON de varias maneras:
+
+1. **Parsear JSON**: Para convertir una cadena JSON en un objeto JavaScript, puedes utilizar `JSON.parse()`. Por ejemplo:
+
+```javascript
+const jsonString = '{"nombre": "Juan", "edad": 30}';
+const objeto = JSON.parse(jsonString);
+console.log(objeto.nombre); // Imprime "Juan"
+```
+
+2. **Generar JSON**: Para convertir un objeto JavaScript en una cadena JSON, puedes utilizar `JSON.stringify()`. Por ejemplo:
+
+```javascript
+const persona = { nombre: "Juan", edad: 30 };
+const jsonString = JSON.stringify(persona);
+console.log(jsonString); // Imprime '{"nombre":"Juan","edad":30}'
+```
+
+**Uso común de JSON en desarrollo web:**
+
+- Comunicación con servidores: En aplicaciones web, es común enviar y recibir datos en formato JSON a través de solicitudes HTTP (por ejemplo, AJAX) para intercambiar información con un servidor.
+
+- Almacenamiento de datos: JSON se utiliza en bases de datos NoSQL como MongoDB y en sistemas de configuración.
+
+- Configuración de aplicaciones: JSON es un formato popular para almacenar configuraciones de aplicaciones debido a su legibilidad y facilidad de uso.
+
+- Representación de datos estructurados: JSON es ampliamente utilizado para representar datos estructurados en aplicaciones web y en la comunicación de datos entre componentes de la aplicación.
+
+JSON es una parte esencial del desarrollo web moderno y una herramienta poderosa para transmitir datos de manera eficiente y estructurada entre aplicaciones.

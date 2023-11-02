@@ -1,0 +1,97 @@
+---
+title: AJAX (Asynchronous JavaScript and XML)
+date: '2023-11-02'
+tags: ['JavaScript', 'Key Concept', 'AJAX (Asynchronous JavaScript and XML)']
+draft: false
+summary: 'Es una técnica de programación que permite a las aplicaciones web enviar y recibir datos del servidor de manera asincrónica, sin necesidad de recargar la página completa'
+---
+
+### Esto proporciona una experiencia de usuario más fluida y rápida.
+
+AJAX (Asynchronous JavaScript and XML) en JavaScript, se utiliza ampliamente para cargar datos en formatos como JSON. AJAX permite realizar solicitudes asincrónicas al servidor y actualizar una página web sin necesidad de recargarla. Aquí tienes una descripción detallada de AJAX:
+
+### Componentes clave de AJAX:
+
+1. **Objeto XMLHttpRequest**:
+   - El objeto XMLHttpRequest es la base de AJAX en JavaScript. Permite crear una conexión con el servidor y enviar solicitudes y recibir respuestas sin necesidad de recargar la página.
+
+   ```javascript
+   var xhr = new XMLHttpRequest();
+   ```
+
+2. **Métodos HTTP**:
+   - AJAX utiliza los métodos HTTP, como GET, POST, PUT y DELETE, para enviar solicitudes al servidor. Dependiendo de la acción que deseas realizar, seleccionas el método apropiado.
+
+   ```javascript
+   xhr.open('GET', 'miurl.com/datos', true);
+   ```
+
+3. **Eventos**:
+   - Puedes definir funciones de devolución de llamada (callbacks) que se ejecutarán cuando ocurran ciertos eventos en la solicitud AJAX, como cuando se completa la solicitud o cuando se produce un error.
+
+   ```javascript
+   xhr.onload = function() {
+     // Se ejecuta cuando la solicitud se completa con éxito
+   };
+
+   xhr.onerror = function() {
+     // Se ejecuta en caso de error
+   };
+   ```
+
+4. **Formatos de datos**:
+   - AJAX puede manejar diversos formatos de datos, siendo JSON el formato más común en la actualidad. Puedes enviar y recibir datos en formatos como JSON, XML, HTML, o incluso texto plano.
+
+   ```javascript
+   xhr.setRequestHeader('Content-Type', 'application/json');
+   ```
+
+5. **Solicitud y respuesta**:
+   - Para enviar una solicitud al servidor, utilizas `xhr.send()` y para recibir una respuesta, puedes acceder a la propiedad `xhr.responseText`.
+
+   ```javascript
+   xhr.send();
+   ```
+
+6. **Promesas y async/await**:
+   - Puedes utilizar promesas o async/await para trabajar con AJAX de manera más legible y mantenible.
+
+   ```javascript
+   const fetchData = async () => {
+     try {
+       const response = await fetch('miurl.com/datos');
+       const data = await response.json();
+       console.log(data);
+     } catch (error) {
+       console.error(error);
+     }
+   };
+   ```
+
+### Ejemplo de solicitud AJAX (GET):
+
+A continuación, te muestro un ejemplo de una solicitud AJAX con el método GET:
+
+```javascript
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'miurl.com/datos', true);
+
+xhr.onload = function() {
+  if (xhr.status >= 200 && xhr.status < 300) {
+    var data = JSON.parse(xhr.responseText);
+    console.log(data);
+  } else {
+    console.error('Error en la solicitud: ' + xhr.status);
+  }
+};
+
+xhr.onerror = function() {
+  console.error('Error en la solicitud.');
+};
+
+xhr.send();
+```
+
+Este código realiza una solicitud GET a 'miurl.com/datos' y maneja la respuesta. Puedes adaptar este ejemplo para otros métodos y formatos de datos según tus necesidades.
+
+Ten en cuenta que, en la actualidad, es común utilizar la API Fetch para realizar solicitudes AJAX en lugar de XMLHttpRequest debido a su sintaxis más moderna y su capacidad para trabajar con promesas.

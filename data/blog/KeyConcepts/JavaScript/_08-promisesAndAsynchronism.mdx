@@ -1,0 +1,101 @@
+---
+title: Promises and Async/Await
+date: '2023-11-02'
+tags: ['JavaScript', 'Key Concept', 'Promises and Async/Await']
+draft: false
+summary: 'Las promesas y su método async/await son características clave en JavaScript que se utilizan para trabajar con operaciones asincrónicas de manera más legible y manejable'
+---
+
+Las promesas y su método async/await son características clave en JavaScript que se utilizan para trabajar con operaciones asincrónicas de manera más legible y manejable. Aquí tienes una explicación completa:
+
+**Promesas**:
+
+1. **¿Qué es una promesa?**: Una promesa es un objeto que representa un valor que puede estar disponible ahora, en el futuro o nunca.
+
+2. **Estados de una promesa**:
+   - **Pending (pendiente)**: Estado inicial de una promesa.
+   - **Fulfilled (cumplida)**: La operación asincrónica se completó con éxito, y la promesa tiene un valor.
+   - **Rejected (rechazada)**: La operación asincrónica falló, y la promesa tiene un motivo de rechazo (un error).
+
+3. **Creación de promesas**: Puedes crear una promesa usando el constructor `Promise`. A menudo, se utiliza para encapsular operaciones asincrónicas, como llamadas a una API o peticiones de red.
+
+   ```javascript
+   const miPromesa = new Promise((resolve, reject) => {
+     // Hacer una operación asincrónica
+     if (operacionExitosa) {
+       resolve(resultado);
+     } else {
+       reject(error);
+     }
+   });
+   ```
+
+4. **Manejo de promesas**:
+   - **then()**: Se utiliza para manejar el valor resuelto de una promesa.
+   - **catch()**: Se utiliza para manejar el motivo de rechazo de una promesa.
+
+   ```javascript
+   miPromesa
+     .then(resultado => {
+       console.log(resultado);
+     })
+     .catch(error => {
+       console.error(error);
+     });
+   ```
+
+5. **Encadenamiento de promesas**: Puedes encadenar múltiples operaciones asincrónicas secuencialmente utilizando `then()`. Esto mejora la legibilidad y evita el anidamiento excesivo de callbacks.
+
+   ```javascript
+   miPromesa
+     .then(primerResultado => {
+       return hacerOtraOperacionAsincronica(primerResultado);
+     })
+     .then(segundoResultado => {
+       console.log(segundoResultado);
+     })
+     .catch(error => {
+       console.error(error);
+     });
+   ```
+
+**async/await**:
+
+1. **¿Qué es async/await?**: Async/await es una forma más moderna y legible de trabajar con promesas. Permite escribir código asincrónico de manera secuencial, como si fuera síncrono.
+
+2. **Palabras clave**:
+   - `async`: Se coloca antes de una función para indicar que es asincrónica y que devolverá una promesa.
+   - `await`: Se usa dentro de una función `async` para esperar a que una promesa se resuelva antes de continuar con la ejecución del código.
+
+   ```javascript
+   async function miFuncionAsincronica() {
+     const resultado = await miPromesa;
+     console.log(resultado);
+   }
+   ```
+
+3. **Manejo de errores**:
+   Puedes manejar errores utilizando `try...catch` en funciones `async`.
+
+   ```javascript
+   async function miFuncionAsincronica() {
+     try {
+       const resultado = await miPromesa;
+       console.log(resultado);
+     } catch (error) {
+       console.error(error);
+     }
+   }
+   ```
+
+4. **Paralelismo**:
+   Múltiples operaciones asincrónicas pueden esperarse en paralelo utilizando `Promise.all()` con `await`.
+
+   ```javascript
+   async function variasOperacionesAsync() {
+     const [resultado1, resultado2] = await Promise.all([promesa1, promesa2]);
+     console.log(resultado1, resultado2);
+   }
+   ```
+
+Las promesas y async/await hacen que el código asincrónico sea más fácil de leer y mantener, evitando el callback hell (anidamiento excesivo de funciones). Estas características son fundamentales en el desarrollo web moderno, especialmente cuando trabajas con llamadas a API, manipulación del DOM y otras operaciones asincrónicas.

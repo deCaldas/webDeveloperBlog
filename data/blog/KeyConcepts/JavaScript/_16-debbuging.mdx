@@ -1,0 +1,67 @@
+---
+title: Debugging en JavaScript
+date: '2023-11-02'
+tags: ['JavaScript', 'Key Concept', 'Debugging']
+draft: false
+summary: 'El debugging en JavaScript es un proceso fundamental para identificar y solucionar errores en tu código'
+---
+
+A continuación, una visión general de cómo realizar debugging en JavaScript, qué herramientas puedes utilizar y algunas técnicas comunes:
+
+### 1. Utiliza la Consola del Navegador:
+
+La consola del navegador es una herramienta esencial para realizar debugging en JavaScript. Puedes acceder a ella presionando F12 o clicando con el botón derecho en la página web y seleccionando "Inspeccionar" o "Elemento".
+
+- **Console.log**: La forma más simple de debugging es utilizar `console.log()` para imprimir valores y mensajes en la consola. Esto te permite rastrear el flujo de tu programa y ver el valor de variables en diferentes puntos del código.
+
+```javascript
+console.log("Mensaje de depuración");
+console.log(variable);
+```
+
+- **Console.error**: Si encuentras un error crítico, puedes utilizar `console.error()` para resaltarlo en la consola.
+
+```javascript
+console.error("¡Error crítico!");
+```
+
+### 2. Puntos de Interrupción (Breakpoints):
+
+Las herramientas de desarrollo de los navegadores te permiten establecer puntos de interrupción en tu código. Cuando se alcanza un punto de interrupción, la ejecución se detiene y puedes inspeccionar el estado del programa.
+
+- En la pestaña "Sources" de las herramientas de desarrollo, puedes hacer clic en la línea de código donde deseas establecer un punto de interrupción. Esto es útil para examinar el estado de las variables en ese punto específico.
+
+### 3. Stepping (Paso a Paso):
+
+Una vez que has establecido un punto de interrupción, puedes utilizar las opciones de "Step Over" (Pasar a la Siguiente Línea), "Step Into" (Entrar en la Función), y "Step Out" (Salir de la Función) para avanzar o retroceder en la ejecución del código.
+
+- "Step Over" te permite avanzar a la siguiente línea de código sin entrar en funciones.
+
+- "Step Into" te permite entrar en una función y seguir ejecutando el código línea por línea dentro de esa función.
+
+- "Step Out" te permite salir de la función actual y volver al punto de llamada.
+
+### 4. Inspección de Variables:
+
+Puedes inspeccionar el valor de las variables en tiempo real mientras realizas debugging. En la pestaña "Sources" o "Debugger" de las herramientas de desarrollo, encontrarás una ventana que muestra las variables locales y globales.
+
+- Haz clic derecho en una variable para agregarla a "Watches", lo que te permite rastrear su valor mientras avanzas en el código.
+
+### 5. Uso de Try...Catch:
+
+El uso de bloques `try...catch` es una técnica para manejar excepciones y errores de manera controlada. Puedes capturar y gestionar errores para evitar que tu aplicación se bloquee.
+
+```javascript
+try {
+  // Código que puede generar errores
+} catch (error) {
+  // Manejar el error
+  console.error(error);
+}
+```
+
+### 6. Herramientas de Desarrollo Avanzadas:
+
+Además de la consola y los puntos de interrupción, las herramientas de desarrollo de los navegadores ofrecen funciones avanzadas, como la monitorización de eventos, el seguimiento de red y la edición en tiempo real del código para un debugging más completo.
+
+Estas son las bases para realizar debugging en JavaScript. A medida que ganes experiencia, podrás utilizar estas herramientas de manera más efectiva para resolver problemas y mejorar la calidad de tus aplicaciones.

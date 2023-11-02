@@ -1,0 +1,105 @@
+---
+title: Operators en JavaScript
+date: '2023-11-02'
+tags: ['JavaScript', 'Key Concept', 'Operators']
+draft: false
+summary: 'Son símbolos o palabras clave que se utilizan para realizar operaciones en variables y valores.'
+---
+
+Los Operadores en JavaScript son símbolos o palabras clave que se utilizan para realizar operaciones en variables y valores. Aquí te presento una descripción completa de los operadores en JavaScript:
+
+1. **Operadores Aritméticos**:
+   - `+`: Suma dos valores.
+   - `-`: Resta el valor derecho del valor izquierdo.
+   - `*`: Multiplica dos valores.
+   - `/`: Divide el valor izquierdo por el valor derecho.
+   - `%`: Devuelve el resto de la división del valor izquierdo por el valor derecho.
+   - `++`: Incrementa en 1 una variable.
+   - `--`: Decrementa en 1 una variable.
+
+   Ejemplo:
+   ```javascript
+   let x = 5;
+   let y = 3;
+   let suma = x + y; // suma = 8
+   let modulo = x % y; // modulo = 2
+   ```
+
+2. **Operadores de Asignación**:
+   - `=`: Asigna un valor a una variable.
+   - `+=`, `-=`, `*=`, `/=`: Realizan una operación aritmética y luego asignan el resultado a la variable.
+
+   Ejemplo:
+   ```javascript
+   let a = 10;
+   a += 5; // a ahora es 15
+   ```
+
+3. **Operadores de Comparación**:
+   - `==`: Comprueba si dos valores son iguales (sin comprobar el tipo de datos).
+   - `===`: Comprueba si dos valores son iguales (comprobando el tipo de datos).
+   - `!=`: Comprueba si dos valores no son iguales (sin comprobar el tipo de datos).
+   - `!==`: Comprueba si dos valores no son iguales (comprobando el tipo de datos).
+   - `>`, `<`: Compara si un valor es mayor o menor que otro.
+   - `>=`, `<=`: Compara si un valor es mayor o igual o menor o igual que otro.
+
+   Ejemplo:
+   ```javascript
+   let x = 5;
+   let y = '5';
+   x == y; // true (compara valores)
+   x === y; // false (compara valores y tipos de datos)
+   ```
+
+4. **Operadores Lógicos**:
+   - `&&` (y): Retorna `true` si ambas expresiones son verdaderas.
+   - `||` (o): Retorna `true` si al menos una de las expresiones es verdadera.
+   - `!` (no): Invierte el valor de verdad de una expresión.
+
+   Ejemplo:
+   ```javascript
+   let a = true;
+   let b = false;
+   a && b; // false
+   a || b; // true
+   !a; // false
+   ```
+
+5. **Operadores de Concatenación**:
+   - `+`: Concatena cadenas de texto.
+
+   Ejemplo:
+   ```javascript
+   let str1 = 'Hola, ';
+   let str2 = 'mundo!';
+   let resultado = str1 + str2; // resultado = 'Hola, mundo!'
+   ```
+
+6. **Operadores de Ternario**:
+   - `condición ? expresión1 : expresión2`: Evalúa una condición y devuelve `expresión1` si es verdadera o `expresión2` si es falsa.
+
+   Ejemplo:
+   ```javascript
+   let edad = 18;
+   let mensaje = edad >= 18 ? 'Eres mayor de edad' : 'Eres menor de edad';
+   ```
+
+7. **Operadores de Bitwise** (para manipulación de bits):
+   - `&` (AND a nivel de bits)
+   - `|` (OR a nivel de bits)
+   - `^` (XOR a nivel de bits)
+   - `~` (NOT a nivel de bits)
+   - `<<` (Desplazamiento a la izquierda)
+   - `>>` (Desplazamiento a la derecha)
+   - `>>>` (Desplazamiento sin signo a la derecha)
+
+8. **Operadores de Instancia**:
+   - `instanceof`: Comprueba si un objeto es una instancia de una clase o constructor.
+
+   Ejemplo:
+   ```javascript
+   let objeto = [];
+   objeto instanceof Array; // true
+   ```
+
+Estos son los operadores fundamentales en JavaScript. Puedes utilizarlos en combinación para realizar diversas operaciones y lógica en tus programas.

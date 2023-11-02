@@ -1,0 +1,85 @@
+---
+title: Events and event handling en JavaScript
+date: '2023-11-02'
+tags: ['JavaScript', 'Key Concept', 'Events']
+draft: false
+summary: 'Son aspectos fundamentales en JavaScript, especialmente cuando se trata de la interacción del usuario con una página web'
+---
+
+Los Eventos y manejo de eventos son aspectos fundamentales en JavaScript, especialmente cuando se trata de la interacción del usuario con una página web. Aquí tienes una explicación completa sobre eventos y cómo manejarlos en JavaScript:
+
+### ¿Qué son los eventos en JavaScript?
+
+Los eventos son acciones o sucesos que ocurren en una página web, como hacer clic en un botón, mover el mouse, enviar un formulario, presionar una tecla, entre otros. JavaScript permite detectar y responder a estos eventos, lo que hace que una página web sea interactiva y dinámica.
+
+### Tipos de eventos comunes:
+
+1. **Eventos del ratón**:
+   - `click`: Se dispara cuando se hace clic en un elemento.
+   - `mouseover` y `mouseout`: Se activan cuando el puntero del ratón entra y sale de un elemento.
+   - `mousedown` y `mouseup`: Ocurren cuando se presiona y se suelta un botón del ratón sobre un elemento.
+
+2. **Eventos del teclado**:
+   - `keydown` y `keyup`: Se generan cuando se presionan y se sueltan teclas del teclado.
+
+3. **Eventos de formulario**:
+   - `submit`: Se desencadena al enviar un formulario.
+   - `change`: Ocurre cuando el valor de un campo de entrada cambia.
+
+4. **Eventos de ventana**:
+   - `load`: Se activa cuando la página se carga por completo.
+   - `resize`: Sucede cuando se cambia el tamaño de la ventana del navegador.
+   - `scroll`: Ocurre cuando se desplaza la página.
+
+5. **Eventos de tiempo**:
+   - `setTimeout` y `setInterval`: Permite programar acciones para que ocurran después de cierto tiempo.
+
+### Manejo de eventos en JavaScript:
+
+Para manejar eventos en JavaScript, puedes seguir estos pasos:
+
+1. **Seleccionar el elemento**: Primero, selecciona el elemento HTML al que deseas agregar un evento. Puedes hacerlo utilizando `document.getElementById`, `document.querySelector`, o cualquier otra forma de selección de elementos.
+
+2. **Asignar un controlador de eventos**: Esto implica decirle a JavaScript qué función debe ejecutarse cuando ocurra el evento. Puedes hacerlo de varias formas:
+
+   - **Añadir un controlador directamente en HTML**:
+
+     ```html
+     <button onclick="miFuncion()">Haz clic</button>
+     ```
+
+   - **Añadir un controlador en JavaScript**:
+
+     ```javascript
+     const miBoton = document.getElementById('miBoton');
+     miBoton.addEventListener('click', function() {
+       // Código que se ejecutará al hacer clic en el botón
+     });
+     ```
+
+3. **Definir la función del controlador**: La función que definas se ejecutará cuando ocurra el evento. Puedes realizar cualquier acción que desees en esta función, como cambiar el contenido de la página o realizar cálculos.
+
+4. **Eliminar el controlador de eventos (opcional)**: Puedes eliminar un controlador de eventos si ya no es necesario, utilizando `removeEventListener`.
+
+```javascript
+miBoton.removeEventListener('click', miFuncion);
+```
+
+### Ejemplo de manejo de eventos:
+
+```html
+<button id="miBoton">Haz clic</button>
+<script>
+  const miBoton = document.getElementById('miBoton');
+  
+  function miFuncion() {
+    alert('Hiciste clic en el botón');
+  }
+
+  miBoton.addEventListener('click', miFuncion);
+</script>
+```
+
+En este ejemplo, cuando haces clic en el botón, se llama a la función `miFuncion`, que muestra una alerta.
+
+Los eventos y su manejo son esenciales para crear interactividad en tus aplicaciones web. Puedes utilizarlos para responder a las acciones del usuario y proporcionar una experiencia más dinámica en tu sitio web.

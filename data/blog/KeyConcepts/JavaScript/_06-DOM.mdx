@@ -1,0 +1,51 @@
+---
+title: Document Object Model (DOM)
+date: '2023-11-02'
+tags: ['JavaScript', 'Key Concept', 'Document Objet Model (DOM)']
+draft: false
+summary: 'Es un concepto fundamental en JavaScript y en el desarrollo web en general'
+---
+
+El DOM representa la estructura de un documento HTML o XML como un árbol de objetos, lo que permite a JavaScript acceder y manipular los elementos y contenido de una página web. Aquí los aspectos clave del DOM en JavaScript:
+
+1. **Árbol del DOM**:
+   - El DOM es una representación jerárquica de la estructura de un documento web.
+   - Comienza con el objeto `document` que representa toda la página.
+
+2. **Nodos**:
+   - Los elementos HTML, atributos, texto y otros elementos del documento son nodos en el árbol del DOM.
+   - Los nodos pueden ser de varios tipos, incluyendo elementos (element nodes), atributos (attribute nodes), texto (text nodes), y más.
+
+3. **Acceso a nodos**:
+   - Puedes acceder a los nodos del DOM usando métodos y propiedades de JavaScript. Algunos ejemplos comunes son:
+     - `document.getElementById('id')`: Para acceder a un elemento por su ID.
+     - `document.querySelector('selector')`: Para seleccionar un elemento usando selectores CSS.
+     - `element.getElementsByTagName('tag')`: Para obtener todos los elementos de un tipo específico dentro de un elemento.
+     - `element.childNodes`: Para obtener una lista de nodos hijos.
+     - `element.parentNode`: Para acceder al nodo padre.
+
+4. **Manipulación del DOM**:
+   - Puedes cambiar el contenido, estructura y estilo de un documento web a través del DOM.
+   - Ejemplos de manipulación incluyen:
+     - Cambiar el contenido de un elemento: `element.innerHTML = 'nuevo contenido'`.
+     - Añadir o eliminar elementos: `element.appendChild(nuevoElemento)`, `element.removeChild(elementoExistente)`.
+     - Cambiar atributos: `element.setAttribute('atributo', 'nuevoValor')`.
+
+5. **Eventos**:
+   - Puedes adjuntar controladores de eventos a elementos del DOM para responder a interacciones del usuario.
+   - Ejemplos de eventos son `click`, `mouseover`, `submit`, y muchos más.
+   - Para adjuntar un controlador de eventos: `elemento.addEventListener('evento', función)`.
+
+6. **Creación de elementos**:
+   - Puedes crear nuevos elementos en el DOM y agregarlos a la página.
+   - Por ejemplo, `document.createElement('etiqueta')` crea un nuevo elemento.
+
+7. **Recorrido del DOM**:
+   - Puedes navegar por el árbol del DOM para acceder a elementos y sus relaciones.
+   - Esto es útil para realizar tareas como la búsqueda de elementos específicos o la navegación a través de nodos hermanos.
+
+8. **Document Object Model Level (DOM Level)**:
+   - El DOM se organiza en niveles que representan diferentes estándares y funcionalidades. DOM Level 1, DOM Level 2, DOM Level 3, etc.
+   - Cada nivel agrega funcionalidades y mejoras al DOM.
+
+El DOM es esencial para la interacción con el contenido de una página web y para la creación de aplicaciones web dinámicas. Puedes usar JavaScript para acceder a elementos HTML, cambiar su contenido, responder a eventos del usuario y crear experiencias interactivas en la web.

@@ -1,0 +1,132 @@
+---
+title: Functions en JavaScript
+date: '2023-11-02'
+tags: ['JavaScript', 'Key Concept', 'Functions']
+draft: false
+summary: 'Las funciones son un concepto fundamental en JavaScript.'
+---
+
+Las funciones son un concepto fundamental en JavaScript. Aquí tienes una descripción completa sobre funciones en JavaScript:
+
+### Declaración de Funciones
+En JavaScript, puedes declarar funciones de varias maneras:
+
+1. **Declaración de función:** La forma más común de declarar una función es con la palabra clave `function`. Por ejemplo:
+
+   ```javascript
+   function miFuncion() {
+       // Código de la función
+   }
+   ```
+
+2. **Expresión de función:** También puedes definir funciones como expresiones. Esto es útil cuando deseas asignar una función a una variable o pasarla como argumento a otra función:
+
+   ```javascript
+   const miFuncion = function() {
+       // Código de la función
+   };
+   ```
+
+3. **Funciones flecha (Arrow functions):** Las funciones flecha son una forma concisa de escribir funciones en JavaScript. Son especialmente útiles para funciones anónimas y funciones de una sola expresión:
+
+   ```javascript
+   const miFuncion = () => {
+       // Código de la función
+   };
+   ```
+
+### Parámetros y Argumentos
+Las funciones pueden aceptar parámetros, que son valores que se pasan a la función cuando se llama. Estos parámetros se utilizan en el cuerpo de la función para realizar operaciones. Por ejemplo:
+
+```javascript
+function suma(a, b) {
+    return a + b;
+}
+
+const resultado = suma(3, 5); // resultado es 8
+```
+
+En este caso, `a` y `b` son parámetros de la función `suma`, y 3 y 5 son argumentos pasados a la función.
+
+### Valor de Retorno
+Las funciones en JavaScript pueden devolver un valor utilizando la palabra clave `return`. Esto permite que la función calcule un resultado y lo entregue al código que la llamó. Por ejemplo:
+
+```javascript
+function cuadrado(x) {
+    return x * x;
+}
+
+const resultado = cuadrado(4); // resultado es 16
+```
+
+### Ámbito (Scope) de las Variables
+Las variables declaradas dentro de una función tienen un ámbito local, lo que significa que solo son accesibles dentro de esa función. Esto se conoce como ámbito de función. Por ejemplo:
+
+```javascript
+function miFuncion() {
+    const variableLocal = 42;
+    console.log(variableLocal); // Esto funciona
+}
+
+console.log(variableLocal); // Esto generará un error, variableLocal no está definida aquí
+```
+
+### Funciones Anidadas
+Puedes definir funciones dentro de otras funciones. Las funciones anidadas tienen acceso a las variables de la función contenedora. Esto se llama cierre (closure) y es un concepto poderoso en JavaScript:
+
+```javascript
+function exterior() {
+    const x = 10;
+
+    function interior(y) {
+        return x + y;
+    }
+
+    return interior;
+}
+
+const funcionAnidada = exterior();
+console.log(funcionAnidada(5)); // Esto imprimirá 15
+```
+
+### Funciones como Objeto de Primera Clase
+En JavaScript, las funciones son objetos de primera clase, lo que significa que puedes pasar funciones como argumentos a otras funciones, asignar funciones a variables y devolver funciones desde otras funciones. Esto es fundamental para la programación funcional en JavaScript.
+
+```javascript
+function operacion(func, a, b) {
+    return func(a, b);
+}
+
+function suma(x, y) {
+    return x + y;
+}
+
+function resta(x, y) {
+    return x - y;
+}
+
+console.log(operacion(suma, 3, 2)); // 5
+console.log(operacion(resta, 3, 2)); // 1
+```
+
+### Funciones Flecha
+Las funciones flecha son una forma más concisa de definir funciones y tienen algunas diferencias en su comportamiento con respecto a las funciones tradicionales. Son comunes en JavaScript moderno y se ven de la siguiente manera:
+
+```javascript
+const suma = (a, b) => a + b;
+```
+
+### Funciones Recursivas
+En JavaScript, una función puede llamarse a sí misma, lo que se conoce como recursión. Esto es útil para resolver problemas que se pueden dividir en casos más pequeños y similares.
+
+```javascript
+function factorial(n) {
+    if (n === 0) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+```
+
+Estos son los conceptos básicos sobre funciones en JavaScript. Son fundamentales para la programación en este lenguaje y te permiten organizar y reutilizar tu código de manera efectiva.

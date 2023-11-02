@@ -1,0 +1,99 @@
+---
+title: Prototypes and inheritance in JavaScript
+date: '2023-11-02'
+tags: ['JavaScript', 'Key Concept', 'Prototypes and Inheritance']
+draft: false
+summary: 'Los prototipos y la herencia en JavaScript son conceptos fundamentales para entender cómo funcionan los objetos en este lenguaje'
+---
+
+Los prototipos y la herencia en JavaScript son conceptos fundamentales para entender cómo funcionan los objetos en este lenguaje. Aquí tienes una explicación detallada:
+
+## Prototipos en JavaScript:
+
+### 1. Objetos en JavaScript:
+   - En JavaScript, todo es un objeto o se basa en un objeto.
+   - Los objetos pueden tener propiedades y métodos.
+
+### 2. Prototipo:
+   - Cada objeto en JavaScript tiene una propiedad especial llamada `prototype`.
+   - El `prototype` es otro objeto al que el objeto actual hace referencia para buscar propiedades y métodos si no los encuentra en sí mismo.
+
+### 3. Funciones constructoras:
+   - Las funciones en JavaScript pueden actuar como constructores para crear objetos.
+   - Puedes definir un constructor personalizado y agregar propiedades y métodos a través de su `prototype`.
+
+Ejemplo:
+
+```javascript
+function Persona(nombre, edad) {
+  this.nombre = nombre;
+  this.edad = edad;
+}
+
+Persona.prototype.saludar = function() {
+  console.log(`Hola, soy ${this.nombre}`);
+};
+
+const persona1 = new Persona('Juan', 30);
+persona1.saludar(); // Imprime "Hola, soy Juan"
+```
+
+## Herencia en JavaScript:
+
+### 1. Herencia de prototipos:
+   - En JavaScript, la herencia se logra a través de la cadena de prototipos.
+   - Un objeto hereda propiedades y métodos de su prototipo.
+
+### 2. `Object.create()`:
+   - Puedes crear un nuevo objeto con un prototipo específico utilizando `Object.create()`.
+
+Ejemplo:
+
+```javascript
+const persona2 = Object.create(persona1);
+console.log(persona2.nombre); // Hereda el nombre de persona1
+```
+
+### 3. `extends` (ES6):
+   - A partir de ECMAScript 6 (ES6), puedes usar la palabra clave `extends` para crear clases que heredan propiedades y métodos de otra clase.
+
+Ejemplo:
+
+```javascript
+class Estudiante extends Persona {
+  constructor(nombre, edad, curso) {
+    super(nombre, edad);
+    this.curso = curso;
+  }
+  estudiar() {
+    console.log(`${this.nombre} está estudiando ${this.curso}`);
+  }
+}
+
+const estudiante1 = new Estudiante('Maria', 25, 'Matemáticas');
+estudiante1.saludar(); // Hereda el método de la clase Persona
+estudiante1.estudiar(); // Método propio de Estudiante
+```
+
+### 4. `super` (ES6):
+   - `super` se usa dentro de clases hijas para llamar a métodos del prototipo de la clase padre.
+
+Ejemplo:
+
+```javascript
+class Empleado extends Persona {
+  constructor(nombre, edad, salario) {
+    super(nombre, edad);
+    this.salario = salario;
+  }
+  saludar() {
+    super.saludar(); // Llama al método de la clase Persona
+    console.log(`Tengo un salario de ${this.salario}`);
+  }
+}
+
+const empleado1 = new Empleado('Carlos', 35, 50000);
+empleado1.saludar(); // Llama al método sobreescrito en Empleado
+```
+
+La herencia en JavaScript es un concepto poderoso que te permite crear estructuras de objetos reutilizables y mantener un código organizado. Puedes usarla para compartir propiedades y métodos entre objetos relacionados.

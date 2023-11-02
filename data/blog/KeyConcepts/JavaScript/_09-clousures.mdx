@@ -1,0 +1,52 @@
+---
+title: Closures
+date: '2023-11-02'
+tags: ['JavaScript', 'Key Concept', 'Closures']
+draft: false
+summary: 'Los cierres (closures) son un concepto fundamental en JavaScript y son esenciales para comprender cómo funciona el alcance de las variables en este lenguaje'
+---
+
+Los cierres (closures) son un concepto fundamental en JavaScript y son esenciales para comprender cómo funciona el alcance de las variables en este lenguaje. Aquí tienes una explicación detallada sobre cierres en JavaScript:
+
+1. **Definición de un cierre (closure)**:
+   
+   Un cierre es una función que "recuerda" el ámbito en el que fue creada, incluso después de que esa función haya finalizado su ejecución. En otras palabras, un cierre permite que una función interna acceda a las variables de una función externa, incluso después de que la función externa haya terminado su ejecución.
+
+2. **Creación de cierres**:
+
+   Los cierres se crean cuando una función interna se define dentro de otra función y esa función interna hace referencia a variables de la función externa. Por ejemplo:
+
+   ```javascript
+   function exterior() {
+       let variableExterna = 'Soy una variable externa';
+       
+       function interior() {
+           console.log(variableExterna); // La función interior forma un cierre sobre variableExterna
+       }
+
+       return interior;
+   }
+
+   const miCierre = exterior(); // miCierre es ahora un cierre
+   miCierre(); // Imprimirá "Soy una variable externa"
+   ```
+
+   En este ejemplo, la función `interior` forma un cierre que mantiene acceso a la variable `variableExterna` incluso después de que la función `exterior` haya terminado de ejecutarse.
+
+3. **Usos de los cierres**:
+
+   Los cierres son útiles en varios escenarios, como:
+
+   - **Encapsulación de datos**: Puedes utilizar cierres para ocultar variables y métodos dentro de un ámbito de función, creando un entorno privado para tus datos.
+   
+   - **Manejo de eventos**: Los cierres son comunes en el manejo de eventos, donde una función interna (cierre) se utiliza como manejador de eventos y puede acceder a variables de la función externa.
+
+   - **Callbacks y promesas**: Los cierres son esenciales para trabajar con callbacks y promesas, ya que permiten que las funciones asincrónicas accedan a variables fuera de su propio ámbito.
+
+4. **Importante recordar**:
+
+   - Los cierres pueden consumir memoria si mantienen referencias a grandes objetos o estructuras de datos. Es importante liberar esas referencias cuando ya no se necesitan para evitar posibles problemas de fuga de memoria.
+
+   - Los cierres son una característica poderosa, pero deben usarse con cuidado para evitar complicar el código innecesariamente.
+
+En resumen, los cierres son una parte fundamental de la programación en JavaScript y son ampliamente utilizados en situaciones donde se necesita mantener un contexto de datos o estado a lo largo del tiempo. Comprender cómo funcionan los cierres te permitirá escribir código más eficiente y flexible en JavaScript.

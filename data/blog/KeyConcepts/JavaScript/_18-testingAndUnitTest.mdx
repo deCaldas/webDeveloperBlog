@@ -1,0 +1,59 @@
+---
+title: Unit testing en JavaScript
+date: '2023-11-02'
+tags: ['JavaScript', 'Key Concept', 'Unit Testing']
+draft: false
+summary: 'Las pruebas unitarias en JavaScript son esenciales para garantizar que tu código funcione correctamente y se comporte como se espera'
+---
+
+Aquí todo sobre testing y pruebas unitarias en JavaScript:
+
+**¿Qué son las pruebas unitarias?**
+
+Las pruebas unitarias son una parte fundamental del desarrollo de software que se centran en evaluar unidades individuales de código, como funciones o métodos, para asegurarse de que funcionen correctamente. El objetivo es identificar y solucionar problemas en el código de manera temprana y sistemática.
+
+**Herramientas comunes para pruebas unitarias en JavaScript:**
+
+1. **Jest**: Jest es un popular marco de pruebas desarrollado por Facebook. Es ampliamente utilizado y es conocido por su facilidad de configuración y su capacidad de realizar pruebas de forma rápida y sencilla.
+
+2. **Mocha**: Mocha es otro marco de pruebas muy popular que proporciona una amplia flexibilidad y opciones de personalización. Se combina frecuentemente con bibliotecas de aserciones como Chai y se utiliza en conjunto con herramientas como Sinon para pruebas de espionaje y simulación.
+
+3. **Jasmine**: Jasmine es un marco de pruebas que se centra en el comportamiento. Es conocido por su sintaxis legible y se usa a menudo para realizar pruebas de comportamiento (BDD, Behavior-Driven Development).
+
+**Pasos para realizar pruebas unitarias en JavaScript:**
+
+1. **Configuración**: Configura el entorno de pruebas utilizando una herramienta como Jest. Esto implica definir cómo se ejecutarán las pruebas y dónde se encontrarán los archivos de prueba.
+
+2. **Escribir pruebas**: Crea pruebas individuales para las funciones o módulos que deseas probar. Estas pruebas deben verificar que el código se comporte como se espera en diferentes situaciones.
+
+3. **Ejecutar pruebas**: Ejecuta las pruebas y observa los resultados. Las pruebas deben pasar sin errores para garantizar que el código funcione correctamente.
+
+4. **Asertos (Assertions)**: Utiliza asertos para verificar que el código produce resultados esperados. Los asertos son declaraciones que evalúan si una condición es verdadera o falsa. Por ejemplo, puedes usar `expect` en Jest o `assert` en Mocha para definir asertos.
+
+5. **Pruebas de borde (Edge Cases)**: Asegúrate de que las pruebas cubran situaciones extremas o inusuales que el código pueda encontrar.
+
+6. **Cobertura de código**: Utiliza herramientas como Istanbul para medir la cobertura de código de tus pruebas. Esto te ayuda a identificar áreas del código que no se están probando.
+
+**Ejemplo de prueba unitaria en Jest:**
+
+Supongamos que tienes una función simple que suma dos números:
+
+```javascript
+function sumar(a, b) {
+  return a + b;
+}
+```
+
+Puedes escribir una prueba para esta función en Jest de la siguiente manera:
+
+```javascript
+test('Suma dos números', () => {
+  expect(sumar(2, 3)).toBe(5);
+  expect(sumar(0, 0)).toBe(0);
+  expect(sumar(-1, 1)).toBe(0);
+});
+```
+
+Esta prueba verifica que la función `sumar` da los resultados esperados en diferentes situaciones.
+
+Las pruebas unitarias son una parte esencial del desarrollo de software, ya que te permiten mantener la calidad y la fiabilidad de tu código a medida que lo desarrollas y lo modificas con el tiempo.

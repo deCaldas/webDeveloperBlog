@@ -1,0 +1,95 @@
+---
+title: Control Structures en JavaScript
+date: '2023-11-02'
+tags: ['JavaScript', 'Key Concept', 'Control Structures']
+draft: false
+summary: 'Son fundamentales para controlar el flujo de ejecución de un programa.'
+---
+
+Las Estructuras de control en JavaScript son fundamentales para controlar el flujo de ejecución de un programa. Aquí tienes una explicación detallada sobre las estructuras de control en JavaScript:
+
+1. **Estructura condicional `if`**:
+   - El `if` se utiliza para realizar una prueba lógica y ejecutar un bloque de código si la condición es verdadera.
+   - Puede incluir una cláusula `else` que se ejecutará si la condición es falsa.
+
+   ```javascript
+   if (condicion) {
+       // Código a ejecutar si la condición es verdadera
+   } else {
+       // Código a ejecutar si la condición es falsa
+   }
+   ```
+
+2. **Estructura de selección múltiple `switch`**:
+   - `switch` permite evaluar una expresión y ejecutar diferentes bloques de código según el valor de la expresión.
+
+   ```javascript
+   switch (expresion) {
+       case valor1:
+           // Código si expresion es igual a valor1
+           break;
+       case valor2:
+           // Código si expresion es igual a valor2
+           break;
+       default:
+           // Código a ejecutar si no coincide con ninguno de los casos
+   }
+   ```
+
+3. **Estructura de repetición `for`**:
+   - El bucle `for` se utiliza para ejecutar un bloque de código un número específico de veces.
+   
+   ```javascript
+   for (inicialización; condición; iteración) {
+       // Código a ejecutar en cada iteración
+   }
+   ```
+
+4. **Estructura de repetición `while`**:
+   - El bucle `while` se ejecuta mientras una condición sea verdadera.
+
+   ```javascript
+   while (condicion) {
+       // Código a ejecutar mientras la condición sea verdadera
+   }
+   ```
+
+5. **Estructura de repetición `do...while`**:
+   - Similar al bucle `while`, pero garantiza que el bloque de código se ejecutará al menos una vez, ya que la condición se evalúa después de la ejecución.
+
+   ```javascript
+   do {
+       // Código a ejecutar al menos una vez
+   } while (condicion);
+   ```
+
+6. **Estructura de control `for...in`**:
+   - Se utiliza para iterar sobre las propiedades de un objeto.
+
+   ```javascript
+   for (variable in objeto) {
+       // Código a ejecutar para cada propiedad del objeto
+   }
+   ```
+
+7. **Estructura de control `for...of`**:
+   - Similar a `for...in`, pero se utiliza para iterar sobre elementos iterables como arreglos y cadenas.
+
+   ```javascript
+   for (variable of iterable) {
+       // Código a ejecutar para cada elemento del iterable
+   }
+   ```
+
+8. **Estructuras de control anidadas**:
+   - Puedes anidar estructuras de control dentro de otras para crear lógica más compleja.
+
+   ```javascript
+   if (condicion1) {
+       if (condicion2) {
+           // Código si ambas condiciones son verdaderas
+       }
+   }
+   ```
+
+Estas son las estructuras de control básicas en JavaScript que te permiten tomar decisiones, repetir acciones y controlar el flujo de tu programa. Puedes combinarlas y utilizarlas de manera creativa para resolver problemas más complejos en el desarrollo web y otras aplicaciones.

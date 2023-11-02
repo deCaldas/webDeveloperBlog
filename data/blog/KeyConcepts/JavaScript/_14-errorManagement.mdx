@@ -1,0 +1,98 @@
+---
+title: Error Handling in JavaScript
+date: '2023-11-02'
+tags: ['JavaScript', 'Key Concept', 'Error Handling']
+draft: false
+summary: 'La gestión de errores en JavaScript es una parte fundamental de la programación, ya que te permite anticipar y manejar problemas inesperados que puedan surgir durante la ejecución de tu código'
+---
+
+A continuación, todo sobre la gestión de errores en JavaScript.
+
+### Tipos de Errores en JavaScript:
+
+1. **Errores de Sintaxis**: Estos errores ocurren cuando el código no sigue la sintaxis válida de JavaScript y, por lo tanto, no se puede ejecutar. Ejemplos comunes incluyen olvidar un punto y coma o cerrar paréntesis.
+
+2. **Errores de Referencia**: Estos errores se producen cuando intentas acceder a una variable o función que no está definida o no está en el ámbito actual.
+
+3. **Errores en Tiempo de Ejecución**: Estos errores ocurren durante la ejecución del código y pueden deberse a operaciones inválidas, como dividir por cero o llamar a una función inexistente.
+
+### Uso de `try...catch` para Manejar Errores:
+
+La estructura principal para manejar errores en JavaScript es el bloque `try...catch`. Aquí está cómo funciona:
+
+```javascript
+try {
+  // Código que podría generar un error
+} catch (error) {
+  // Manejo del error
+}
+```
+
+- El código dentro del bloque `try` se ejecuta.
+- Si se produce un error en el bloque `try`, el control se transfiere al bloque `catch`.
+- El objeto `error` (o cualquier otro nombre que elijas) contendrá información sobre el error, como su tipo y mensaje.
+
+### Ejemplo de `try...catch`:
+
+```javascript
+try {
+  let x = 10;
+  let y = x / 0; // Genera un error de división por cero
+} catch (error) {
+  console.error('Se ha producido un error:', error);
+}
+```
+
+### Lanzar Errores (Throwing Errors):
+
+Puedes lanzar errores manualmente en JavaScript utilizando la declaración `throw`. Esto te permite personalizar y señalar errores específicos en tu código.
+
+```javascript
+try {
+  let edad = 15;
+  if (edad < 18) {
+    throw new Error('Debes ser mayor de edad.');
+  }
+} catch (error) {
+  console.error('Error:', error.message);
+}
+```
+
+### Finalización de Tareas con `finally`:
+
+Puedes utilizar el bloque `finally` después de `try...catch` para ejecutar código independientemente de si se ha producido un error o no.
+
+```javascript
+try {
+  // Código que podría generar un error
+} catch (error) {
+  // Manejo del error
+} finally {
+  // Código que se ejecutará siempre
+}
+```
+
+### Errores Personalizados:
+
+Puedes crear tus propias clases de error personalizadas en JavaScript extendiendo la clase `Error`. Esto es útil cuando necesitas lanzar errores específicos para tus aplicaciones.
+
+```javascript
+class MiErrorPersonalizado extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'MiErrorPersonalizado';
+  }
+}
+
+try {
+  throw new MiErrorPersonalizado('Este es mi error personalizado.');
+} catch (error) {
+  console.error('Error:', error.name, error.message);
+}
+```
+
+### Depuración con `console.error()`:
+
+Cuando manejas errores, es común utilizar `console.error()` para imprimir información sobre el error en la consola del navegador. Esto facilita la depuración y el diagnóstico de problemas.
+
+La gestión de errores en JavaScript es esencial para escribir código robusto y resistente. Al comprender y aplicar los conceptos mencionados, podrás anticipar y manejar errores de manera efectiva en tus aplicaciones web.
