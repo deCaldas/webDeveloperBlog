@@ -1,10 +1,10 @@
 const headerNavLinks = [
-  { href: 'https://deCaldas.github.io/home', title: 'Homepage' },
   { href: '/', title: 'Latest'},
   { href: '/blog', title: 'All Post' },
-  { href: '/tags', title: 'Tags' },
+  { href: '/about', title: 'About This' },
   { href: '/projects', title: 'Projects' },
-  { href: '/about', title: 'About the Author' },
+  { href: '/tags', title: 'Tags' },
+  { href: 'https://deCaldas.github.io/home', title: 'Homepage' },
 ]
 
 export default headerNavLinks

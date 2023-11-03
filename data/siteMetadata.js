@@ -3,16 +3,24 @@ const siteMetadata = {
   title: 'Web Developer Blog',
   author: 'De Caldas',
   headerTitle: 'Web Developer Blog',
-  description: 'A blog created with a focus on Full Stack JavaScript web development',
+  description: 'A blog created with focus on Full Stack JavaScript web development',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://deCaldas.github.io/home',
-/* **
-*  siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
-*  siteLogo: '/static/images/logo.png',
-*  socialBanner: '/static/images/twitter-card.png',
-*  mastodon: 'https://mastodon.social/@mastodonuser', 
-* **/
+  
+  /** ** Acá hay que modificar la url según el nombre del repo en GitHub porque aun falta por crear **
+    * 
+    * siteRepo: 'https://github.com/decaldas/tailwind-nextjs-starter-blog', 
+    * 
+  * */
+  
+  /* ** Para cuando tengamos el Imagotipo y demás imagen empresarial del negocio de desarrollo web De Caldas **
+    *
+    *  siteLogo: '/static/images/logo.png',
+    *  socialBanner: '/static/images/twitter-card.png',
+    *   
+  * **/
+
   email: 'decaldas.digital@yahoo.com',
   github: 'https://github.com/deCaldas',
   twitter: 'https://twitter.com/d_caldasCaridad/',
