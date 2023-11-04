@@ -45,10 +45,15 @@ export async function generateMetadata({
   }
   const ogImages = imageList.map((img) => {
     return {
-      url: img.includes('http') ? img : siteMetadata.siteUrl + img,
+      url: img && img.includes('http') ? img : siteMetadata.siteUrl + img,
+      /* ** me encantaría ver funcionando esta función try...catch en alguna parte **
+      try {
+        url: img.includes('http') ? img : siteMetadata.siteUrl + img,
+      } catch (e) {
+        // Manejar el error aquí
+      } */
     }
   })
-
   return {
     title: post.title,
     description: post.summary,
