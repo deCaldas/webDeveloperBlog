@@ -1,0 +1,80 @@
+---
+title: AJAX (Asynchronous JavaScript and XML)
+date: '2023-11-06'
+tags: ['JavaScript', 'Key Concept', 'AJAX']
+draft: false
+summary: 'It is a programming technique that allows web applications to send and receive data from the server asynchronously, without needing to reload the entire page'
+---
+
+AJAX (Asynchronous JavaScript and XML) es una técnica que permite la comunicación asíncrona con el servidor desde una página web. Aunque el nombre incluye "XML," hoy en día se utiliza comúnmente para trabajar con datos en formato JSON o incluso texto simple. Aquí, una guía sobre AJAX y comunicación con el servidor:
+
+1. **Fundamentos de AJAX**:
+
+   AJAX permite realizar solicitudes al servidor y recibir respuestas sin necesidad de recargar la página completa. Esto proporciona una experiencia de usuario más fluida.
+
+2. **Objeto XMLHttpRequest**:
+
+   El núcleo de AJAX es el objeto `XMLHttpRequest`, que proporciona una forma de interactuar con el servidor desde JavaScript. Puedes crear una instancia de este objeto para realizar solicitudes y manejar respuestas.
+
+   ```javascript
+   var xhr = new XMLHttpRequest();
+   ```
+
+3. **Tipos de Solicitudes HTTP**:
+
+   Puedes utilizar AJAX para realizar varios tipos de solicitudes HTTP, como GET, POST, PUT, DELETE, etc. El tipo de solicitud depende de lo que necesites hacer.
+
+4. **Realizar una Solicitud AJAX**:
+
+   Para realizar una solicitud, configura el objeto `XMLHttpRequest` y luego envía la solicitud al servidor:
+
+   ```javascript
+   xhr.open('GET', 'miarchivo.txt', true);
+   xhr.send();
+   ```
+
+5. **Manejo de Respuestas**:
+
+   Debes configurar el objeto `XMLHttpRequest` para manejar la respuesta del servidor. Esto generalmente se hace utilizando el evento `onreadystatechange` y comprobando el estado de la solicitud.
+
+   ```javascript
+   xhr.onreadystatechange = function() {
+     if (xhr.readyState === 4 && xhr.status === 200) {
+       // Manejar la respuesta aquí
+     }
+   };
+   ```
+
+6. **Trabajar con Datos en Formato JSON**:
+
+   Puedes enviar y recibir datos en formato JSON utilizando AJAX. A menudo, el servidor devolverá datos en JSON, que puedes analizar y utilizar en tu página web.
+
+   ```javascript
+   var data = JSON.parse(xhr.responseText);
+   ```
+
+7. **Gestionar Errores**:
+
+   Es importante manejar posibles errores en las solicitudes AJAX, como problemas de red o errores en el servidor. Puedes utilizar `try...catch` para capturar excepciones.
+
+8. **Seguridad y CORS**:
+
+   Es importante comprender las políticas de seguridad, como la Política de Origen de Recursos Compartidos (CORS), que pueden afectar a las solicitudes AJAX. Debes configurar el servidor para permitir solicitudes desde dominios específicos.
+
+9. **Librerías y Frameworks**:
+
+   Aunque puedes trabajar directamente con `XMLHttpRequest`, muchas personas prefieren utilizar librerías como jQuery o el método `fetch()` para simplificar las solicitudes AJAX.
+
+10. **Promesas y Async/Await**:
+
+    JavaScript moderno ofrece características como promesas y async/await que hacen que el código AJAX sea más legible y fácil de mantener.
+
+11. **Seguridad y Protección contra Inyección**:
+
+    Al manejar datos del usuario o enviar datos al servidor, es importante tener en cuenta la seguridad y protegerse contra la inyección de código malicioso.
+
+12. **Pruebas y Depuración**:
+
+    Utiliza las herramientas de desarrollo del navegador para depurar solicitudes y respuestas AJAX. Esto te ayudará a encontrar problemas en tu código.
+
+Esta guía proporciona una visión general de AJAX y la comunicación con el servidor. Para obtener más detalles y ejemplos concretos, te recomiendo consultar tutoriales y recursos en línea, ya que AJAX es una técnica fundamental en el desarrollo web moderno.

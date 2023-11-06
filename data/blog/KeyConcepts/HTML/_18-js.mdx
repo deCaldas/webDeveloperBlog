@@ -1,0 +1,230 @@
+---
+title: JavaScript in HTML
+date: '2023-11-06'
+tags: ['HTML', 'JavaScript', 'Key Concept']
+draft: false
+summary: 'JavaScript is a programming language widely used to add interactivity and dynamic functionality to HTML web pages'
+---
+
+JavaScript es un lenguaje de programación ampliamente utilizado para agregar interactividad y funcionalidad dinámica a las páginas web HTML. A continuación, una introducción a los conceptos clave de JavaScript en HTML:
+
+1. **Incorporación de JavaScript en HTML**:
+   
+   Puedes incluir JavaScript en un documento HTML de varias maneras:
+   
+   - Utiliza la etiqueta `<script>` para incrustar código JavaScript en tu HTML. Puedes colocarla en la sección `<head>` o al final del `<body>`. Ejemplo:
+
+     ```html
+     <!DOCTYPE html>
+     <html>
+     <head>
+       <title>Mi Página con JavaScript</title>
+       <script>
+         function saludar() {
+           alert('Hola, mundo!');
+         }
+       </script>
+     </head>
+     <body>
+       <button onclick="saludar()">Saludar</button>
+     </body>
+     </html>
+     ```
+
+   - Puedes vincular a archivos JavaScript externos con la etiqueta `<script src="nombrearchivo.js"></script>`.
+Claro, la incorporación de JavaScript en HTML es un aspecto fundamental para agregar interactividad y funcionalidad dinámica a tus páginas web. Aquí te enseñaré todo lo que necesitas saber al respecto:
+
++ **La etiqueta `<script>`**:
+
+   La etiqueta `<script>` se utiliza para incrustar código JavaScript en un documento HTML. Puedes colocarla en dos ubicaciones principales en tu documento:
+
+   - **Dentro del `<head>`**: Puedes colocar la etiqueta `<script>` en la sección `<head>` de tu documento. Esto se hace generalmente para cargar scripts que necesitan estar disponibles antes de que la página se renderice. Sin embargo, puede bloquear la renderización de la página, por lo que es importante usar la atributo `async` o `defer` si es necesario para evitar este bloqueo.
+
+     ```html
+     <html>
+     <head>
+       <title>Mi Página con JavaScript</title>
+       <script src="mi-script.js" defer></script>
+     </head>
+     <body>
+       <!-- Contenido de la página -->
+     </body>
+     </html>
+     ```
+
+   - **Al final del `<body>`**: Una práctica común es colocar la etiqueta `<script>` al final del `<body>`. Esto permite que el contenido de la página se cargue primero y luego el JavaScript, lo que acelera la renderización de la página. Esta es la forma más común de incluir JavaScript en tus páginas web.
+
+     ```html
+     <html>
+     <head>
+       <title>Mi Página con JavaScript</title>
+     </head>
+     <body>
+       <!-- Contenido de la página -->
+       <script src="mi-script.js"></script>
+     </body>
+     </html>
+     ```
+
+2. **Atributos de la etiqueta `<script>`**:
+
+   - `src`: Este atributo se utiliza para especificar la ubicación del archivo JavaScript externo que se debe cargar. Debes proporcionar la URL o la ruta relativa al archivo.
+   - `async`: Cuando se usa `async`, el navegador no espera a que el script se cargue y se ejecute antes de continuar con el análisis del HTML. Esto permite una carga asincrónica del script.
+   - `defer`: Cuando se usa `defer`, el script se carga de manera asincrónica, pero se ejecuta después de que el análisis HTML se complete, lo que garantiza que los elementos HTML posteriores estén disponibles para el script.
+
+3. **Contenido en línea**:
+
+   También puedes incluir código JavaScript directamente dentro de las etiquetas `<script>` sin usar el atributo `src`, como se mostró en los dos ejemplos anteriores.
+
+4. **Mejores prácticas**:
+
+   - Minimiza la cantidad de JavaScript en línea en tu HTML para mantener tu código limpio y mantenible.
+   - Organiza tu código en archivos JavaScript separados para una mejor gestión y reutilización.
+   - Utiliza la etiqueta `defer` para scripts que deben ejecutarse después de que se haya analizado el HTML.
+   - Asegúrate de que tu código JavaScript sea eficiente y esté libre de errores para no afectar negativamente el rendimiento de tu página web.
+
+_Los atributos `async` y `defer` son técnicas que se utilizan al incorporar scripts en una página web para evitar el bloqueo de la renderización de la página mientras se cargan los scripts. Ambos atributos permiten que los scripts se carguen de manera asincrónica, lo que significa que no bloquean la renderización del HTML. Sin embargo, hay diferencias clave entre ellos:_
+
++ **`async`**:
+
+   - Cuando se agrega el atributo `async` a la etiqueta `<script>`, el navegador descargará y ejecutará el script de forma asincrónica tan pronto como esté disponible.
+   - No garantiza el orden de ejecución de varios scripts en la página. El primero en descargarse y estar listo se ejecutará primero.
+   - Útil para scripts que no dependen del orden de ejecución o que no requieren acceso inmediato al DOM.
+   - Puede utilizarse para scripts de terceros que no afectan significativamente la funcionalidad principal de la página.
+
+   Ejemplo de uso:
+
+   ```html
+   <script src="mi-script.js" async></script>
+   ```
+
++ **`defer`**:
+
+   - Cuando se agrega el atributo `defer` a la etiqueta `<script>`, el navegador descargará el script de forma asincrónica, pero lo ejecutará después de que se complete el análisis del HTML.
+   - Mantiene el orden de ejecución de los scripts en el orden en que aparecen en la página.
+   - Útil para scripts que dependen del orden de ejecución o que requieren acceso al DOM, ya que garantiza que el DOM esté completamente disponible cuando se ejecuta el script.
+   - Recomendado para scripts que están integrados en la página y son esenciales para su funcionamiento.
+
+   Ejemplo de uso:
+
+   ```html
+   <script src="mi-script.js" defer></script>
+   ```
+
+Es importante considerar cuándo y cómo se cargan los scripts en tu página web, ya que esto puede afectar significativamente el rendimiento y la experiencia del usuario. Al utilizar `async` y `defer`, puedes lograr una mejor optimización del tiempo de carga y evitar bloquear la renderización de la página. La elección entre `async` y `defer` depende de los requisitos específicos de tus scripts y de cómo se integran en tu página.
+
+5. **Funciones en JavaScript**:
+
+   Puedes definir funciones en JavaScript para reutilizar código. Ejemplo:
+
+   ```javascript
+   function sumar(a, b) {
+     return a + b;
+   }
+   ```
+
+En HTML, las funciones JavaScript que se colocan dentro de la etiqueta `<head>` del documento generalmente se utilizan para definir funciones, cargar bibliotecas o realizar tareas que deben ejecutarse antes de que se cargue todo el contenido visible de la página. Aquí te explico algunos aspectos clave sobre las funciones JavaScript en la etiqueta `<head>`:
+
++ **Definición de Funciones**:
+
+   Puedes definir funciones en el `<head>` de tu documento HTML. Estas funciones pueden ser llamadas desde cualquier parte del documento, incluido el cuerpo de la página. Por ejemplo:
+
+   ```html
+   <!DOCTYPE html>
+   <html>
+   <head>
+     <title>Mi Página con Funciones</title>
+     <script>
+       function saludar() {
+         alert('Hola, mundo!');
+       }
+     </script>
+   </head>
+   <body>
+     <button onclick="saludar()">Saludar</button>
+   </body>
+   </html>
+   ```
+
+   En este ejemplo, la función `saludar` se define en el `<head>` y se llama desde un botón en el cuerpo de la página.
+
++ **Carga de Bibliotecas Externas**:
+
+   Puedes incluir enlaces a bibliotecas JavaScript externas, como jQuery o Bootstrap, en la etiqueta `<head>`. Esto permite utilizar funcionalidades adicionales proporcionadas por esas bibliotecas en el cuerpo de la página. Ejemplo:
+
+   ```html
+   <head>
+     <script src="jquery.js"></script>
+   </head>
+   ```
+
+   Luego, puedes utilizar las funciones y características de jQuery en el cuerpo del documento.
+
++ **Ejecución de Tareas de Configuración**:
+
+   Las funciones en el `<head>` también se utilizan para realizar tareas de configuración, como la inicialización de variables, la carga de datos iniciales o la configuración de eventos que deben estar disponibles antes de que el contenido de la página se cargue por completo.
+
++ **Control de Eventos Onload**:
+
+   Puedes usar la función `window.onload` para asegurarte de que ciertas tareas se ejecuten después de que todo el contenido de la página se haya cargado. Por ejemplo:
+
+   ```html
+   <script>
+     window.onload = function() {
+       // Código que se ejecutará después de que la página se cargue por completo.
+     };
+   </script>
+   ```
+
++ **Estrategias de Carga Asíncrona**:
+
+   En algunas situaciones, puedes utilizar estrategias de carga asincrónica para cargar contenido de forma dinámica en el `<head>` antes de que la página se renderice por completo. Esto puede incluir la carga de estilos, fuentes o datos adicionales.
+
+Recuerda que es importante equilibrar la colocación de funciones en el `<head>` con el rendimiento de la página. Si tienes demasiado JavaScript en el `<head>`, la carga de la página puede volverse lenta. En general, es una buena práctica mantener el JavaScript esencial en el `<head>` y dejar las funciones más específicas en el cuerpo del documento, cerca de donde se utilizarán.
+
+6. **Eventos y Manipulación del DOM**:
+
+   JavaScript se utiliza comúnmente para responder a eventos del usuario, como clics de botón o envíos de formularios. Puedes acceder y manipular elementos del DOM (Document Object Model) usando JavaScript. Ejemplo:
+
+   ```javascript
+   document.getElementById('miBoton').addEventListener('click', function() {
+     alert('Botón clicado');
+   });
+   ```
+
+Claro, los eventos y la manipulación del DOM (Document Object Model) son aspectos fundamentales de JavaScript en HTML para hacer que tus páginas web sean interactivas y respondan a las acciones del usuario. Aquí tienes una guía completa:
+
+**Eventos en JavaScript:**
+
++ **¿Qué es un evento?**
+   
+   Los eventos son acciones o sucesos que ocurren en una página web, como un clic del ratón, una pulsación de tecla, una carga de página, un cambio de tamaño de ventana, etc.
+
++ **Tipos de Eventos:**
+   
+   - **Eventos de ratón**: Ejemplos incluyen `click`, `mouseover`, `mouseout`, `mousedown`, `mouseup`, etc.
+   - **Eventos de teclado**: Como `keydown`, `keyup`, `keypress`.
+   - **Eventos de formulario**: Tales como `submit`, `change`, `focus`, `blur`.
+   - **Eventos de carga**: Como `load`, `DOMContentLoaded`, `unload`.
+   - **Eventos de ventana**: Como `resize`, `scroll`.
+   - Y muchos más.
+
++ **Asignar Eventos:**
+
+   Puedes asignar eventos a elementos HTML de varias maneras:
+
+   - A través de atributos HTML:
+
+     ```html
+     <button onclick="miFuncion()">Haz clic</button>
+     ```
+
+   - Usando `addEventListener` en JavaScript:
+
+     ```javascript
+     document.getElementById('miBoton').addEventListener('click', function() {
+       // Código a ejecutar cuando se hace clic en el botón
+     });
+     ```
+
+La incorporación de JavaScript en HTML es esencial para crear sitios web dinámicos e interactivos. Al comprender cómo y cuándo incorporar JavaScript, puedes mejorar la experiencia del usuario en tu sitio web.

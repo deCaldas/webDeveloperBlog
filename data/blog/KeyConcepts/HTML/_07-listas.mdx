@@ -1,0 +1,80 @@
+---
+title: Lists (<ul>, <ol>, <li>) in HTML
+date: '2023-11-06'
+tags: ['HTML', 'Lists', 'Key Concept']
+draft: false
+summary: 'HTML lists are an effective way to present information in an organized way on your website'
+---
+
+Todo acerca de las listas en HTML, que se crean utilizando los elementos `<ul>`, `<ol>`, y `<li>`.
+
+1. **Listas no ordenadas (`<ul>`)**: 
+   
+   Las listas no ordenadas se utilizan para mostrar elementos en una lista sin ningún orden específico. Los elementos se muestran con viñetas. Aquí tienes un ejemplo:
+
+   ```html
+   <ul>
+       <li>Elemento 1</li>
+       <li>Elemento 2</li>
+       <li>Elemento 3</li>
+   </ul>
+   ```
+
+   En este caso, los elementos "Elemento 1", "Elemento 2" y "Elemento 3" se mostrarán con viñetas, como viñetas de puntos por defecto.
+
+2. **Listas ordenadas (`<ol>`)**: 
+
+   Las listas ordenadas se utilizan cuando los elementos deben mostrarse en un orden específico, como con números o letras. Los elementos se enumeran automáticamente. Aquí tienes un ejemplo:
+
+   ```html
+   <ol>
+       <li>Primer elemento</li>
+       <li>Segundo elemento</li>
+       <li>Tercer elemento</li>
+   </ol>
+   ```
+
+   En este caso, los elementos se enumerarán automáticamente como "1. Primer elemento," "2. Segundo elemento," "3. Tercer elemento."
+
+3. **Elementos de lista (`<li>`)**: 
+
+   Los elementos de lista `<li>` se utilizan para definir los elementos individuales dentro de una lista, ya sea una lista ordenada o no ordenada. Cada `<li>` contiene un elemento de la lista. Puedes anidar listas dentro de otras listas si es necesario. Aquí tienes un ejemplo:
+
+   ```html
+   <ul>
+       <li>Elemento 1</li>
+       <li>Elemento 2
+           <ul>
+               <li>Subelemento 1</li>
+               <li>Subelemento 2</li>
+           </ul>
+       </li>
+       <li>Elemento 3</li>
+   </ul>
+   ```
+
+   En este ejemplo, "Elemento 2" tiene su propia lista no ordenada anidada con dos subelementos.
+
+4. **Atributos de tipo de lista (`type`)**:
+
+   Puedes especificar el tipo de numeración o viñetas en las listas ordenadas mediante el atributo `type`. Por ejemplo:
+
+   - `type="1"` (por defecto): Números arábigos (1, 2, 3, ...).
+   - `type="A"`: Letras mayúsculas (A, B, C, ...).
+   - `type="a"`: Letras minúsculas (a, b, c, ...).
+   - `type="I"`: Números romanos mayúsculos (I, II, III, ...).
+   - `type="i"`: Números romanos minúsculos (i, ii, iii, ...).
+
+   Por ejemplo:
+
+   ```html
+   <ol type="A">
+       <li>Elemento A</li>
+       <li>Elemento B</li>
+       <li>Elemento C</li>
+   </ol>
+   ```
+
+   Esto mostrará una lista ordenada con letras mayúsculas en lugar de números.
+
+Puedes personalizar su apariencia utilizando CSS para adaptarlas a tus necesidades de diseño.

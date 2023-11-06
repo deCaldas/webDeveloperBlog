@@ -1,0 +1,68 @@
+---
+title: Videos (<video>) in HTML
+date: '2023-11-06'
+tags: ['HTML', 'Video', 'Key Concept']
+draft: false
+summary: 'The <img> element in HTML is essential for displaying images on your web pages'
+---
+
+La etiqueta `<video>` en HTML se utiliza para insertar y mostrar contenido de video en una página web. Aquí tienes una descripción completa de cómo usarla y los atributos relacionados:
+
+### Uso básico de la etiqueta `<video>`:
+```html
+<video src="nombre-del-video.mp4" controls></video>
+```
+
+- `<video>`: La etiqueta de inicio.
+- `src`: El atributo que especifica la URL del archivo de video que se va a reproducir.
+- `controls`: Un atributo booleano que agrega controles de reproducción (reproducir, pausar, volumen, etc.) al reproductor de video.
+
+### Atributos comunes:
+
+1. **`src`**: Especifica la URL del archivo de video que se va a reproducir. Puede ser una URL absoluta o relativa.
+
+2. **`controls`**: Como se mencionó, agrega los controles de reproducción al reproductor de video.
+
+3. **`width` y `height`**: Estos atributos definen el ancho y alto del reproductor de video. Son opcionales, pero útiles para controlar el tamaño del video en la página.
+
+4. **`poster`**: Define una imagen de portada que se muestra antes de que el usuario inicie la reproducción del video. Es útil para dar una vista previa visual del contenido del video.
+
+5. **`preload`**: Puede ser `"auto"`, `"metadata"`, o `"none"`. Controla si el video se pre-carga cuando se carga la página. `"auto"` carga el video completamente, `"metadata"` solo carga información sobre el video, y `"none"` no carga el video hasta que el usuario haga clic para reproducirlo.
+
+6. **`autoplay`**: Un atributo booleano que indica si el video debe comenzar a reproducirse automáticamente cuando se carga la página.
+
+7. **`loop`**: Un atributo booleano que hace que el video se repita continuamente después de que termine la reproducción.
+
+8. **`muted`**: Un atributo booleano que silencia el video de manera predeterminada.
+
+### Formatos de video compatibles:
+
+El formato de video recomendado es MP4 con códec H.264. Sin embargo, para garantizar la compatibilidad en diferentes navegadores y dispositivos, puedes proporcionar múltiples fuentes de video utilizando las etiquetas `<source>` dentro de la etiqueta `<video>`:
+
+```html
+<video controls width="400" height="300">
+  <source src="video.mp4" type="video/mp4">
+  <source src="video.webm" type="video/webm">
+  Tu navegador no soporta la etiqueta de video.
+</video>
+```
+
+En este ejemplo, se proporcionan dos formatos de video, MP4 y WebM, para aumentar la compatibilidad.
+
+### Eventos JavaScript:
+
+Puedes controlar la reproducción del video y responder a eventos utilizando JavaScript. Algunos eventos comunes son `play`, `pause`, `ended`, `timeupdate`, etc. Puedes agregar controladores de eventos para realizar acciones específicas cuando ocurran estos eventos.
+
+```javascript
+const video = document.querySelector('video');
+
+video.addEventListener('play', () => {
+  // Se ejecuta cuando se inicia la reproducción.
+});
+
+video.addEventListener('pause', () => {
+  // Se ejecuta cuando se pausa la reproducción.
+});
+```
+
+La etiqueta `<video>` es una herramienta poderosa para incrustar contenido de video en tus páginas web y puede personalizarse aún más con CSS y JavaScript según tus necesidades específicas.

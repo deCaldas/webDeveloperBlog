@@ -1,0 +1,68 @@
+---
+title: Links (<a>) in HTML
+date: '2023-11-06'
+tags: ['HTML', 'Links', 'Key Concept']
+draft: false
+summary: 'Links are essential for web navigation and allow users to interact with the content of a page and access additional resources'
+---
+
+Aquí, toda la información importante sobre los enlaces (`<a>`) en HTML.
+
+**Los enlaces (`<a>`) en HTML**:
+
+Los enlaces, representados por la etiqueta `<a>`, son elementos fundamentales en HTML que permiten a los usuarios navegar de una página web a otra, acceder a recursos externos o moverse dentro de la misma página. Aquí hay detalles clave sobre los enlaces en HTML:
+
+**Sintaxis básica**:
+```html
+<a href="URL_del_destino">Texto del enlace</a>
+```
+
+- `href` (Hypertext Reference): El atributo `href` especifica la URL del destino al que se vinculará el enlace. Puede ser una URL absoluta, una URL relativa o una referencia interna.
+
+- `Texto del enlace`: El texto que se muestra en la página como el enlace. Por ejemplo, "Ir a Google" es el texto del enlace en `<a href="https://www.google.com">Ir a Google</a>`.
+
+**Tipos de enlaces**:
+
+1. **Enlaces externos**: Se utilizan para vincular a páginas web externas. Ejemplo:
+   ```html
+   <a href="https://www.ejemplo.com">Sitio de Ejemplo</a>
+   ```
+
+2. **Enlaces internos**: Se utilizan para vincular a secciones dentro de la misma página web. Para ello, se usa una referencia interna (anclaje). Ejemplo:
+   ```html
+   <a href="#seccion">Ir a la Sección</a>
+   ```
+   Donde se define un marcador en la sección deseada: `<a id="seccion"></a>`.
+
+3. **Enlaces de correo electrónico**: Permiten a los usuarios enviar un correo electrónico al hacer clic en el enlace. Ejemplo:
+   ```html
+   <a href="mailto:correo@ejemplo.com">Enviar correo</a>
+   ```
+
+4. **Enlaces a archivos**: Se utilizan para vincular a archivos para su descarga. Ejemplo:
+   ```html
+   <a href="documento.pdf">Descargar PDF</a>
+   ```
+
+**Destino del enlace**:
+
+- `_self` (valor predeterminado): Abre el enlace en la misma ventana o pestaña.
+- `_blank`: Abre el enlace en una nueva ventana o pestaña del navegador.
+- `_parent`: Abre el enlace en el marco principal (útil en marcos o iframes).
+- `_top`: Abre el enlace en la ventana principal, reemplazando cualquier marco o iframe.
+
+**Otros atributos**:
+
+- `target`: Permite especificar el destino del enlace, como `_blank` para abrirlo en una nueva ventana.
+- `title`: Proporciona información adicional sobre el enlace que se muestra como un mensaje emergente cuando se coloca el cursor sobre el enlace.
+
+**Ejemplos**:
+
+```html
+<a href="https://www.ejemplo.com" target="_blank" title="Visitar Ejemplo">Sitio de Ejemplo</a>
+<a href="#seccion">Ir a la Sección</a>
+<a href="mailto:correo@ejemplo.com">Enviar correo</a>
+<a href="documento.pdf">Descargar PDF</a>
+```
+
+Los enlaces son esenciales para la navegación web y permiten a los usuarios interactuar con el contenido de una página y acceder a recursos adicionales. Es importante usarlos de manera efectiva para mejorar la experiencia del usuario en tu sitio web.

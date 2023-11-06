@@ -1,0 +1,95 @@
+---
+title: Forms (<form>) in HTML
+date: '2023-11-06'
+tags: ['HTML', 'Forms', 'Key Concept']
+draft: false
+summary: 'HTML forms are crucial elements for interacting with users and collecting data on a web page'
+---
+
+Los formularios HTML son elementos cruciales para interactuar con los usuarios y recopilar datos en una página web. Aquí te enseñaré todo acerca de los formularios en HTML:
+
+### Elemento `<form>`
+El elemento `<form>` se utiliza para crear un formulario en HTML. Aquí están los aspectos clave:
+
+1. **Atributos importantes**:
+   - `action`: Especifica la URL a la que se enviarán los datos del formulario cuando se envía. Puede ser una dirección web o una ruta local en el servidor.
+   - `method`: Define el método HTTP a utilizar para enviar los datos del formulario. Los métodos comunes son `GET` (para datos en la URL) y `POST` (para datos en el cuerpo de la solicitud HTTP).
+   - `enctype`: Controla cómo se codificarán los datos del formulario antes de enviarlos al servidor. Los valores comunes son `application/x-www-form-urlencoded` (predeterminado), `multipart/form-data` (para cargar archivos), y `text/plain`.
+
+```html
+<form action="/procesar.php" method="post">
+  <!-- Contenido del formulario se coloca aquí -->
+</form>
+```
+
+### Elementos de entrada
+Dentro del formulario, puedes utilizar varios elementos de entrada para recopilar diferentes tipos de datos:
+
+1. **Campo de texto (`<input type="text">`):** Permite al usuario ingresar texto.
+
+2. **Contraseña (`<input type="password">`):** Similar al campo de texto, pero los caracteres se ocultan.
+
+3. **Área de texto (`<textarea>`):** Permite al usuario ingresar texto largo o comentarios.
+
+4. **Casilla de verificación (`<input type="checkbox">`):** Permite seleccionar múltiples opciones.
+
+5. **Botones de radio (`<input type="radio">`):** Permite seleccionar una opción de un conjunto de opciones.
+
+6. **Selección (`<select>`):** Permite al usuario seleccionar una opción de una lista desplegable.
+
+7. **Botón (`<input type="submit">`):** Se utiliza para enviar el formulario.
+
+8. **Botón de restablecimiento (`<input type="reset">`):** Borra los datos del formulario.
+
+9. **Elementos ocultos (`<input type="hidden">`):** Almacenan datos ocultos que se envían con el formulario.
+
+### Etiquetas `<label>`
+Para mejorar la usabilidad, es recomendable usar etiquetas `<label>` para describir los campos del formulario. Esto permite a los usuarios saber qué se espera de cada campo.
+
+```html
+<label for="nombre">Nombre:</label>
+<input type="text" id="nombre" name="nombre">
+```
+
+### Atributos `name`
+Cada elemento de entrada debe tener un atributo `name`, que se utiliza para identificar el valor del campo cuando se envía el formulario al servidor.
+
+```html
+<input type="text" id="nombre" name="nombre">
+```
+
+### Grupos de elementos
+Puedes agrupar elementos de entrada utilizando el elemento `<fieldset>` y proporcionar una leyenda descriptiva utilizando `<legend>`.
+
+```html
+<fieldset>
+  <legend>Información Personal</legend>
+  <!-- Elementos de entrada van aquí -->
+</fieldset>
+```
+
+### Ejemplo de formulario completo
+Aquí tienes un ejemplo completo de un formulario HTML que incluye varios tipos de campos:
+
+```html
+<form action="/procesar.php" method="post">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" name="nombre"><br>
+
+  <label for="email">Correo Electrónico:</label>
+  <input type="text" id="email" name="email"><br>
+
+  <label for="contrasena">Contraseña:</label>
+  <input type="password" id="contrasena" name="contrasena"><br>
+
+  <fieldset>
+    <legend>Preferencias de Notificación</legend>
+    <input type="checkbox" id="suscripcion" name="suscripcion" value="si">
+    <label for="suscripcion">Deseo recibir noticias por correo</label><br>
+  </fieldset>
+
+  <input type="submit" value="Enviar">
+</form>
+```
+
+Este es un formulario básico, pero puedes personalizarlo y extenderlo según tus necesidades. Cuando se envía, los datos se pueden procesar en el servidor utilizando un lenguaje de programación, como PHP, Python o Node.js.

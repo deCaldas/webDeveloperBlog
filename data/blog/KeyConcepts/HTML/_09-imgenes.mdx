@@ -1,0 +1,64 @@
+---
+title: Images (<img>) in HTML
+date: '2023-11-06'
+tags: ['HTML', 'Images', 'Key Concept']
+draft: false
+summary: 'The <img> element in HTML is essential for displaying images on your web pages'
+---
+
+Aquí, información detallada sobre cómo utilizar el elemento `<img>` en HTML para mostrar imágenes en tus páginas web:
+
+El elemento `<img>` se utiliza para insertar imágenes en una página web. Aquí están los aspectos clave para comprender su uso:
+
+1. **Sintaxis básica**:
+   
+   Para insertar una imagen en tu página web, utiliza la etiqueta `<img>` y el atributo `src` (fuente) para especificar la ubicación de la imagen. La ubicación puede ser una URL (dirección web) o una ruta de archivo local.
+
+   ```html
+   <img src="URL_o_ruta_de_archivo" alt="Texto alternativo">
+   ```
+
+   - `src`: Este atributo especifica la ubicación de la imagen. Puede ser una URL completa o una ruta relativa a la ubicación del archivo HTML.
+   - `alt`: El atributo "alt" proporciona un texto alternativo que se muestra si la imagen no se puede cargar o para usuarios con discapacidad visual. Es importante incluir este atributo para fines de accesibilidad.
+
+2. **Especificación del tamaño**:
+
+   Puedes controlar el tamaño de la imagen en la página utilizando los atributos `width` (ancho) y `height` (alto). Estos atributos toman valores en píxeles.
+
+   ```html
+   <img src="imagen.jpg" alt="Descripción de la imagen" width="300" height="200">
+   ```
+
+   Es recomendable especificar el tamaño para evitar que la página se reorganice mientras se carga la imagen.
+
+3. **Imágenes responsivas**:
+
+   Para que las imágenes se ajusten automáticamente al tamaño de la pantalla, puedes utilizar la propiedad `width` con un valor del 100% y omitir el atributo `height`. Esto hará que la imagen se ajuste al ancho del contenedor en el que se encuentra.
+
+   ```html
+   <img src="imagen.jpg" alt="Descripción de la imagen" style="width: 100%;">
+   ```
+
+4. **Formatos de imagen**:
+
+   HTML admite varios formatos de imagen, como JPEG, PNG y GIF. Elige el formato adecuado según la naturaleza de la imagen (fotografías, gráficos, imágenes con transparencia, etc.).
+
+5. **Ubicación de la imagen**:
+
+   La ubicación de la imagen se puede especificar de las siguientes maneras:
+
+   - **Ruta absoluta**: Especifica la dirección completa de la imagen, como una URL externa.
+   - **Ruta relativa**: Especifica la ubicación de la imagen en relación con la ubicación del archivo HTML actual.
+   - **Ruta de archivo local**: Si la imagen se encuentra en la misma carpeta que tu archivo HTML, puedes usar una ruta de archivo relativa.
+
+6. **Otros atributos**:
+
+   El elemento `<img>` admite varios otros atributos, como `title` para proporcionar información adicional sobre la imagen, `border` para agregar un borde a la imagen y más.
+
+```html
+<img src="imagen.jpg" alt="Descripción de la imagen" title="Título de la imagen" border="1">
+```
+
+Recuerda que es importante incluir el atributo `alt` para garantizar la accesibilidad de tu página. Las imágenes deben tener un propósito significativo, y el texto alternativo debe describir esa finalidad en caso de que la imagen no se cargue o sea invisible para algunos usuarios.
+
+En resumen, el elemento `<img>` en HTML es esencial para mostrar imágenes en tus páginas web. Asegúrate de especificar correctamente la ubicación, el tamaño y el texto alternativo de las imágenes para brindar una experiencia de usuario óptima.

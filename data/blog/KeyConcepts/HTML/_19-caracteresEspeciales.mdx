@@ -1,0 +1,52 @@
+---
+title: Special characters and HTML entities
+date: '2023-11-06'
+tags: ['JavaScript', 'Key Concept']
+draft: false
+summary: 'Special characters and HTML entities are essential to display symbols and special characters on your web pages and avoid interpretation problems in the browser'
+---
+
+Los caracteres especiales y entidades HTML son elementos importantes cuando trabajas con HTML, ya que te permiten mostrar caracteres que de otra manera tendrían un significado especial en el lenguaje de marcado. Aquí te enseñaré todo acerca de los caracteres especiales y las entidades HTML.
+
+**Caracteres Especiales:**
+En HTML, algunos caracteres tienen un significado especial y no se pueden usar directamente en el texto. Esto se debe a que estos caracteres se utilizan para la sintaxis de HTML, como `<`, `>`, `&`. Si quieres mostrar estos caracteres en tu página web, debes utilizar entidades HTML o códigos de escape. Aquí hay algunos ejemplos de caracteres especiales comunes:
+
+1. `<` (Pico paréntesis o Menor que): Para mostrar este símbolo en tu página, debes usar `&lt;` o `&#60;`.
+
+2. `>` (Pico paréntesis o Mayor que): Para mostrar este símbolo en tu página, debes usar `&gt;` o `&#62;`.
+
+3. `&` (Ampersand): Para mostrar este símbolo en tu página, debes usar `&amp;` o `&#38;`.
+
+4. `"` (Comillas dobles): Aunque las comillas dobles generalmente no necesitan ser escapadas, si las estás utilizando en un atributo HTML, puedes usar `&quot;` o `&#34;`.
+
+5. `'` (Comillas simples): Similar a las comillas dobles, puedes usar `&apos;` o `&#39;` si las necesitas en un atributo HTML.
+
+**Entidades HTML:**
+Las entidades HTML son códigos especiales que representan caracteres especiales en HTML. Además de los caracteres mencionados anteriormente, hay entidades HTML para muchos otros caracteres especiales y símbolos. Algunas entidades HTML comunes incluyen:
+
+1. `&copy;`: Representa el símbolo de derechos de autor ©.
+
+2. `&reg;`: Representa el símbolo de marca registrada ®.
+
+3. `&euro;`: Representa el símbolo del euro €.
+
+4. `&deg;`: Representa el símbolo de grados °.
+
+5. `&frac12;`: Representa la fracción ½.
+
+6. `&times;`: Representa el símbolo de multiplicación ×.
+
+7. `&divide;`: Representa el símbolo de división ÷.
+
+**Ejemplos de Uso:**
+Para utilizar una entidad HTML, simplemente incluye el código de entidad en tu código HTML. Por ejemplo, si deseas mostrar el símbolo de derechos de autor en tu página, usarías `&copy;` de la siguiente manera:
+
+```html
+&copy; 2023 Mi Empresa. Todos los derechos reservados.
+```
+
+Esto se mostrará en el navegador como: © 2023 Mi Empresa. Todos los derechos reservados.
+
+Las entidades HTML son útiles cuando necesitas mostrar caracteres especiales o símbolos en tu página web sin que el navegador los interprete de manera incorrecta.
+
+En resumen, los caracteres especiales y las entidades HTML son esenciales para mostrar símbolos y caracteres especiales en tus páginas web y evitar problemas de interpretación en el navegador. Puedes usar estas entidades para mostrar caracteres como `<`, `>`, `&` y muchos otros en tu contenido HTML.

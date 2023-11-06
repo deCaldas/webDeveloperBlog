@@ -1,0 +1,45 @@
+---
+title: Attribute data-* in HTML
+date: '2023-11-06'
+tags: ['HTML', 'Attributes', 'data-*']
+draft: false
+summary: 'Attributes in HTML are additional values used to configure or modify HTML elements'
+---
+
+Los atributos personalizados por "data-*" de etiquetas HTML son una característica de HTML5 que permite almacenar información adicional sobre un elemento HTML sin tener que usar atributos no estándar, propiedades del DOM o métodos especiales. Estos atributos se pueden acceder y modificar desde JavaScript y CSS, lo que facilita la creación de efectos dinámicos e interactivos. La sintaxis de estos atributos es simple: se debe usar el prefijo "data-" seguido del nombre que se quiera dar al atributo. Por ejemplo:
+
+```html
+<div id="miDiv" data-color="rojo" data-tamaño="grande">Este es mi div</div>
+```
+
+En este caso, se han creado dos atributos personalizados por "data-*" para el elemento div: data-color y data-tamaño, que almacenan los valores "rojo" y "grande" respectivamente. Para acceder a estos atributos desde JavaScript, se puede usar el método getAttribute() con el nombre completo del atributo, o la propiedad dataset del elemento, que devuelve un objeto con los nombres y valores de los atributos personalizados. Por ejemplo:
+
+```js
+var miDiv = document.getElementById("miDiv");
+miDiv.getAttribute("data-color"); // "rojo"
+miDiv.dataset.color; // "rojo"
+miDiv.getAttribute("data-tamaño"); // "grande"
+miDiv.dataset.tamaño; // "grande"
+```
+
+Para acceder a estos atributos desde CSS, se puede usar la función attr() con el nombre completo del atributo, o los selectores de atributos con el prefijo "data-". Por ejemplo:
+
+```css
+#miDiv::after {
+  content: attr(data-color) " " attr(data-tamaño); // "rojo grande"
+}
+
+[data-color="rojo"] {
+  color: red; // el texto del div será rojo
+}
+
+[data-tamaño="grande"] {
+  font-size: 2em; // el tamaño de la fuente del div será grande
+}
+```
+
+Los atributos personalizados por "data-*" son muy útiles para almacenar información que no tiene una representación visual o que cambia constantemente, como los datos de un juego, las preferencias de un usuario o el estado de un elemento. Sin embargo, no se deben usar para almacenar información que debería ser visible y accesible, como el contenido o el título de un elemento, ya que las tecnologías de asistencia no pueden acceder a ellos. Para más información sobre los atributos personalizados por "data-*" de etiquetas HTML, puedes consultar los siguientes recursos:
+
+- [Uso de atributos de datos - Aprende desarrollo web | MDN](https://developer.mozilla.org/es/docs/Learn/HTML/Howto/Use_data_attributes)
+- [data-* - HTML: Lenguaje de etiquetas de hipertexto | MDN](https://developer.mozilla.org/es/docs/Web/HTML/Global_attributes/data-%2A)
+- [Atributos personalizados en HTML5 con data-* - Xitrus](https://xitrus.es/blog/124/Atributos_personalizados_en_HTML5_con_data-*)

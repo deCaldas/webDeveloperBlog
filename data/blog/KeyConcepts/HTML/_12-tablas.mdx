@@ -1,0 +1,73 @@
+---
+title: Tables (<table>, <tr>, <td>, <th>) in HTML
+date: '2023-11-06'
+tags: ['HTML', 'Tables', 'Key Concept']
+draft: false
+summary: 'Tables in HTML are elements that allow you to organize data in rows and columns'
+---
+
+Las tablas en HTML son elementos que te permiten organizar datos en filas y columnas. A continuación, te enseñaré todo acerca de las etiquetas `<table>`, `<tr>`, `<td>`, y `<th>` que se utilizan para crear tablas en HTML:
+
+1. **Elemento `<table>`**:
+   - La etiqueta `<table>` se utiliza para crear una tabla en HTML.
+   - Puedes agregar atributos al elemento `<table>` para especificar características como el borde de la tabla, el ancho, el espaciado, etc.
+
+   Ejemplo de una tabla simple:
+   ```html
+   <table border="1">
+       <!-- Filas y columnas se agregan aquí -->
+   </table>
+   ```
+
+2. **Elemento `<tr>` (Fila de la tabla)**:
+   - La etiqueta `<tr>` se utiliza para crear filas dentro de una tabla.
+   - Las filas contienen una serie de celdas (`<td>` o `<th>`).
+
+   Ejemplo de una fila:
+   ```html
+   <tr>
+       <!-- Celdas se agregan aquí -->
+   </tr>
+   ```
+
+3. **Elemento `<td>` (Celda de datos)**:
+   - La etiqueta `<td>` se utiliza para representar una celda de datos en una fila de la tabla.
+   - Contiene el contenido de la celda.
+
+   Ejemplo de una celda de datos:
+   ```html
+   <td>Dato de la celda</td>
+   ```
+
+4. **Elemento `<th>` (Celda de encabezado)**:
+   - La etiqueta `<th>` se utiliza para representar una celda de encabezado en una fila de la tabla.
+   - Se utiliza para etiquetar o nombrar las columnas o filas, y generalmente se muestra en negrita y centrado.
+
+   Ejemplo de una celda de encabezado:
+   ```html
+   <th>Encabezado de la columna</th>
+   ```
+
+A continuación, un ejemplo completo de una tabla en HTML con una fila de encabezados y datos:
+
+```html
+<table border="1">
+    <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Ciudad</th>
+    </tr>
+    <tr>
+        <td>Juan</td>
+        <td>25</td>
+        <td>México</td>
+    </tr>
+    <tr>
+        <td>Maria</td>
+        <td>30</td>
+        <td>Madrid</td>
+    </tr>
+</table>
+```
+
+En este ejemplo, hemos creado una tabla con tres columnas (Nombre, Edad, Ciudad) y dos filas de datos. Las celdas de encabezado se han etiquetado con `<th>`, mientras que las celdas de datos se han etiquetado con `<td>`. La atributo `border="1"` se ha utilizado para agregar un borde a la tabla con fines ilustrativos. Puedes personalizar aún más el estilo de la tabla utilizando CSS y otros atributos HTML según tus necesidades.

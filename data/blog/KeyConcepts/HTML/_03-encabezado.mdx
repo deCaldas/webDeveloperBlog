@@ -1,0 +1,71 @@
+---
+title: Header (<head>) in HTML
+date: '2023-11-06'
+tags: ['HTML', 'Header', 'Key Concept']
+draft: false
+summary: 'The header in HTML is used to provide essential information about a web page'
+---
+
+El encabezado en HTML se utiliza para proporcionar información esencial sobre una página web, como su título, vinculación a hojas de estilo, metadatos y enlaces a otros recursos. Aquí te enseñaré todo acerca del encabezado en HTML, que se define dentro del elemento `<head>` de un documento HTML:
+
+1. **Título de la Página (`<title>`)**: El elemento `<title>` se utiliza para definir el título de la página, que se muestra en la barra de título del navegador y es importante para la optimización de motores de búsqueda (SEO). Ejemplo:
+
+    ```html
+    <title>Mi Página Web</title>
+    ```
+
+2. **Metaetiquetas (`<meta>`)**: Las metaetiquetas se utilizan para proporcionar metadatos sobre la página, como la codificación de caracteres, descripción, palabras clave y autor. Un ejemplo de la etiqueta de codificación de caracteres:
+
+    ```html
+    <meta charset="UTF-8">
+    ```
+
+3. **Enlace a Hojas de Estilo (`<link>`)**: Se utiliza para vincular la página HTML a una hoja de estilo CSS externa. Esto permite aplicar estilos al contenido de la página. Ejemplo:
+
+    ```html
+    <link rel="stylesheet" type="text/css" href="estilos.css">
+    ```
+
+4. **Favicons (`<link rel="icon">`)**: Para definir el ícono de la página web que se muestra en la pestaña del navegador. Ejemplo:
+
+    ```html
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    ```
+
+5. **Hoja de Estilos Interna (`<style>`)**: Si no deseas vincular una hoja de estilo externa, puedes definir estilos internamente utilizando la etiqueta `<style>` dentro del encabezado. Ejemplo:
+
+    ```html
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+    </style>
+    ```
+
+6. **JavaScript Externo (`<script>`)**: Para vincular scripts de JavaScript externos a la página. Puedes incluirlos en el encabezado o al final del cuerpo para mejorar el rendimiento de carga de la página. Ejemplo:
+
+    ```html
+    <script src="script.js"></script>
+    ```
+
+7. **Metadescripción (`<meta name="description">`)**: Proporciona una descripción breve de la página que puede utilizarse en los resultados de búsqueda. Ejemplo:
+
+    ```html
+    <meta name="description" content="Una descripción breve de la página web">
+    ```
+
+8. **Palabras Clave (`<meta name="keywords">`)**: Define palabras clave relacionadas con la página. Aunque no es tan importante para SEO como solía ser, algunas personas todavía lo utilizan. Ejemplo:
+
+    ```html
+    <meta name="keywords" content="HTML, CSS, JavaScript, desarrollo web">
+    ```
+
+9. **Autor (`<meta name="author">`)**: Indica el autor de la página. Ejemplo:
+
+    ```html
+    <meta name="author" content="Tu Nombre">
+    ```
+
+10. **Otros Metadatos Personalizados**: Puedes crear tus propios metadatos personalizados para proporcionar información adicional sobre la página según tus necesidades.
+
+El encabezado en HTML es crucial para definir cómo se presenta y se comporta una página web, y también es importante para mejorar su visibilidad en los motores de búsqueda. Cada elemento del encabezado cumple una función específica y contribuye a la experiencia del usuario y al SEO de la página.

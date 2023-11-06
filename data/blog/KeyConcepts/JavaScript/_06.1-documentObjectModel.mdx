@@ -1,0 +1,62 @@
+---
+title: DOM Manipulation with JavaScript
+date: '2023-11-06'
+tags: ['HTML', 'DOM', 'JavaScript']
+draft: false
+summary: 'Basics of Events and DOM Manipulation with JavaScript in HTML'
+---
+
+**Manipulación del DOM con JavaScript:**
+
+1. **¿Qué es el DOM?**
+
+   El DOM es una representación en memoria de la estructura de un documento HTML. Permite acceder y manipular los elementos de una página web mediante JavaScript.
+
+2. **Acceso a Elementos del DOM:**
+
+   Puedes seleccionar elementos del DOM utilizando métodos como `getElementById`, `getElementsByClassName`, `getElementsByTagName`, `querySelector`, `querySelectorAll`, etc.
+
+   ```javascript
+   var miElemento = document.getElementById('miID');
+   ```
+
+3. **Modificación de Elementos:**
+
+   Puedes modificar propiedades y contenido de elementos del DOM:
+
+   ```javascript
+   var miElemento = document.getElementById('miID');
+   miElemento.innerHTML = 'Nuevo contenido';
+   miElemento.style.color = 'blue';
+   ```
+
+4. **Creación de Elementos:**
+
+   Puedes crear nuevos elementos y agregarlos al DOM:
+
+   ```javascript
+   var nuevoElemento = document.createElement('div');
+   nuevoElemento.textContent = 'Nuevo elemento';
+   document.body.appendChild(nuevoElemento);
+   ```
+
+5. **Eliminación de Elementos:**
+
+   Puedes eliminar elementos del DOM:
+
+   ```javascript
+   var elementoAEliminar = document.getElementById('elementoEliminar');
+   elementoAEliminar.parentNode.removeChild(elementoAEliminar);
+   ```
+
+6. **Navegación en el DOM:**
+
+   Puedes navegar por la estructura del DOM para acceder a elementos relacionados:
+
+   ```javascript
+   var lista = document.querySelector('ul');
+   var primerElemento = lista.firstElementChild;
+   var siguienteElemento = primerElemento.nextElementSibling;
+   ```
+
+Estos son conceptos básicos sobre eventos y manipulación del DOM con JavaScript en HTML. Puedes utilizarlos para crear aplicaciones web interactivas y dinámicas. La práctica y la experimentación son clave para mejorar tus habilidades en este aspecto.
