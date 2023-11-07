@@ -1,0 +1,119 @@
+---
+title: Selectors in CSS
+date: '2023-11-07'
+tags: ['CSS', 'Selectors', 'Key Concept']
+draft: false
+summary: 'By combining these selectors, you can create precise style rules and apply styles to specific elements in your HTML documents'
+---
+
+Los selectores en CSS son patrones que se utilizan para seleccionar y aplicar estilos a elementos específicos en un documento HTML. Aquí, algunos selectores de CSS:
+
+1. **Selector Universal (`*`)**: Selecciona todos los elementos en el documento HTML. Puedes usarlo para aplicar estilos globales.
+
+```css
+* {
+  color: red;
+}
+```
+
+2. **Selector de Tipo**: Selecciona todos los elementos de un tipo específico, como encabezados (`h1`, `p`, `a`, etc.).
+
+```css
+h1 {
+  font-size: 24px;
+}
+```
+
+3. **Selector de Clase**: Selecciona elementos que tienen un atributo `class` específico. Se definen con un punto `.` seguido del nombre de la clase.
+
+```css
+.button {
+  background-color: blue;
+}
+```
+
+4. **Selector de ID**: Selecciona un elemento con un atributo `id` específico. Se definen con un numeral `#` seguido del nombre del ID.
+
+```css
+#header {
+  font-weight: bold;
+}
+```
+
+5. **Selector de Descendencia**: Selecciona elementos que son descendientes de otro elemento. Se utiliza un espacio entre los selectores.
+
+```css
+ul li {
+  list-style-type: square;
+}
+```
+
+6. **Selector de Hijo Directo**: Selecciona elementos que son hijos directos de otro elemento. Se utiliza el signo `>` entre los selectores.
+
+```css
+ul > li {
+  font-weight: bold;
+}
+```
+
+7. **Selector de Atributo**: Selecciona elementos que tienen un atributo específico. Se define con corchetes `[ ]` y el nombre del atributo.
+
+```css
+input[type="text"] {
+  border: 1px solid gray;
+}
+```
+
+8. **Selector de Pseudo-Clase**: Selecciona elementos en estados específicos, como `:hover` para elementos cuando el cursor se coloca sobre ellos.
+
+```css
+a:hover {
+  text-decoration: underline;
+}
+```
+
+9. **Selector de Pseudo-Elemento**: Selecciona partes específicas de un elemento, como `::before` para agregar contenido antes de un elemento.
+
+```css
+p::before {
+  content: "Nota: ";
+}
+```
+
+10. **Selector de Clase Múltiple**: Selecciona elementos que tienen múltiples clases. Se definen sin espacio entre los nombres de clase.
+
+```css
+.button.primary {
+  background-color: blue;
+}
+```
+
+11. **Selector de Negación (`:not()`)**: Selecciona elementos que no coinciden con un selector específico.
+
+```css
+p:not(.special) {
+  font-style: italic;
+}
+```
+
+12. **Selector de Atributo con Valor Parcial (`[attribute*=value]`)**: Selecciona elementos cuyo atributo contiene un valor específico en cualquier parte del atributo.
+
+```css
+a[href*="example"] {
+  color: orange;
+}
+```
+
+13. **Selector de Primera y Última Clase (`:first-child` y `:last-child`)**: Selecciona el primer y último elemento de un tipo específico dentro de su contenedor.
+
+```css
+ul li:first-child {
+  font-weight: bold;
+}
+
+ul li:last-child {
+  font-style: italic;
+}
+```
+
+Estos son algunos de los selectores más comunes en CSS. Combinando estos selectores, puedes crear reglas de estilo precisas y aplicar estilos a elementos específicos en tus documentos HTML.

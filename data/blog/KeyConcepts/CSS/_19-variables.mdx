@@ -1,0 +1,50 @@
+---
+title: CSS Variables (Custom Variables)
+date: '2023-11-07'
+tags: ['CSS', 'Custom Variables', 'Key Concept']
+draft: false
+summary: 'CSS variables are a powerful tool for making your style sheets more flexible and maintainable by allowing you to define reusable values and dynamically adjust the styles of your websites'
+---
+
+Las variables CSS, también conocidas como variables personalizadas, son un poderoso mecanismo que te permite definir valores reutilizables en tus hojas de estilo CSS. Aquí, una explicación detallada de cómo funcionan las variables CSS:
+
+1. **Declaración de una variable CSS**:
+   Para declarar una variable CSS, utiliza el prefijo `--` seguido de un nombre descriptivo para tu variable. Por ejemplo:
+
+   ```css
+   :root {
+     --color-primary: #3498db;
+     --font-size-base: 16px;
+   }
+   ```
+
+   En este ejemplo, hemos declarado dos variables: `--color-primary` y `--font-size-base`. El `:root` selector es la pseudoclase que representa el elemento raíz, que en este caso es el documento HTML.
+
+2. **Uso de variables CSS**:
+   Puedes utilizar variables CSS en cualquier lugar de tu hoja de estilo donde normalmente usarías un valor. Para acceder a una variable, utilízala con la función `var()` y pasa el nombre de la variable como argumento. Por ejemplo:
+
+   ```css
+   .button {
+     background-color: var(--color-primary);
+     font-size: var(--font-size-base);
+   }
+   ```
+
+   En este caso, las variables `--color-primary` y `--font-size-base` se utilizan para establecer el color de fondo y el tamaño de fuente de los elementos con la clase `.button`.
+
+3. **Herencia y alcance**:
+   Las variables CSS se comportan como cualquier otra propiedad CSS y siguen las reglas de herencia. Si una variable se declara en un elemento padre, se heredará por los elementos secundarios. Sin embargo, también puedes declarar variables en ámbitos más específicos, como dentro de un selector particular, para limitar su alcance.
+
+4. **Modificación dinámica**:
+   Una de las ventajas clave de las variables CSS es que puedes modificar su valor dinámicamente en tiempo de ejecución utilizando JavaScript. Esto es útil para crear temas cambiantes o ajustar estilos en respuesta a acciones del usuario.
+
+   ```javascript
+   document.documentElement.style.setProperty('--color-primary', '#ff5733');
+   ```
+
+   Este código JavaScript cambia el valor de `--color-primary` a `#ff5733`, lo que afectará a todos los elementos que utilicen esta variable.
+
+5. **Compatibilidad del navegador**:
+   La mayoría de los navegadores modernos admiten variables CSS, pero es importante tener en cuenta que las versiones más antiguas pueden no ser compatibles. Si necesitas compatibilidad con navegadores más antiguos, considera el uso de preprocesadores CSS, como Sass o Less, que ofrecen características similares.
+
+En resumen, las variables CSS son una herramienta poderosa para hacer que tus hojas de estilo sean más flexibles y mantenibles al permitirte definir valores reutilizables y ajustar dinámicamente los estilos de tus sitios web. Son especialmente útiles en diseños web más grandes y proyectos complejos.

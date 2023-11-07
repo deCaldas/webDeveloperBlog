@@ -1,0 +1,49 @@
+---
+title: Flexbox with CSS
+date: '2023-11-07'
+tags: ['CSS', 'Box Model', 'Key Concept']
+draft: false
+summary: 'Flexbox is a versatile tool for designing web interfaces and is widely used today due to its ability to simplify complex designs'
+---
+
+Los Modelos de Caja Flexibles (Flexbox) en CSS son una técnica de diseño que permite organizar y alinear elementos de manera eficiente en un contenedor, incluso cuando tienen tamaños variables o desconocidos. Flexbox se utiliza comúnmente para crear diseños de una sola dimensión, como filas o columnas, y es especialmente útil para diseñar diseños flexibles y responsivos. Aquí, una descripción detallada de los conceptos clave de Flexbox:
+
+1. **Contenedor y elementos flexibles**:
+   - El contenedor se define utilizando la propiedad `display: flex` o `display: inline-flex`.
+   - Los elementos hijos del contenedor se convierten en "elementos flexibles" y se organizan dentro del contenedor según las reglas de Flexbox.
+
+2. **Eje principal y eje transversal**:
+   - En un contenedor flex, hay dos ejes: el eje principal y el eje transversal.
+   - El eje principal es la dirección en la que se colocan los elementos flexibles, ya sea en fila o columna.
+   - El eje transversal es perpendicular al eje principal.
+
+3. **Propiedades del contenedor**:
+   - `flex-direction`: Define la dirección en la que se colocarán los elementos, puede ser `row`, `row-reverse`, `column`, o `column-reverse`.
+   - `justify-content`: Controla la alineación de los elementos a lo largo del eje principal.
+   - `align-items`: Alinea los elementos a lo largo del eje transversal.
+   - `align-content`: Alinea filas o columnas de elementos cuando hay espacio adicional en el contenedor.
+
+4. **Propiedades de los elementos flexibles**:
+   - `flex-grow`: Determina cuánto espacio adicional debe ocupar un elemento en relación con otros elementos.
+   - `flex-shrink`: Define cuánto se reduce un elemento si no hay suficiente espacio.
+   - `flex-basis`: Establece el tamaño base de un elemento antes de que se distribuya el espacio adicional.
+   - `flex`: Una propiedad abreviada que combina `flex-grow`, `flex-shrink` y `flex-basis`.
+
+5. **Orden de los elementos**:
+   - La propiedad `order` permite cambiar el orden de los elementos dentro del contenedor sin cambiar el orden en el HTML.
+
+6. **Alineación avanzada**:
+   - `align-self`: Permite anular la alineación definida por `align-items` para un elemento individual.
+   - `justify-self`: Se utiliza para alinear elementos en el eje principal cuando hay espacio adicional.
+   - `align-self` y `justify-self` funcionan en elementos individuales dentro del contenedor.
+
+7. **Espacio entre elementos**:
+   - `gap`: Define el espacio entre los elementos flexibles (similar a `margin` pero sin afectar el espacio exterior del contenedor).
+
+8. **Diseño responsivo con Flexbox**:
+   - Flexbox es una herramienta poderosa para crear diseños responsivos, ya que los elementos pueden ajustarse automáticamente en función del espacio disponible en el contenedor.
+
+9. **Compatibilidad con navegadores**:
+   - La mayoría de los navegadores modernos admiten Flexbox, pero es importante considerar la compatibilidad con versiones antiguas utilizando prefijos específicos del navegador y soluciones de respaldo si es necesario.
+
+Flexbox es una herramienta versátil para diseñar interfaces web y es ampliamente utilizada en la actualidad debido a su capacidad para simplificar diseños complejos. Puedes experimentar con Flexbox en proyectos personales o ejercicios para familiarizarte con su funcionamiento.

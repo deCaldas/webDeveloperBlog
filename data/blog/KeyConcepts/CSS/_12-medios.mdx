@@ -1,0 +1,75 @@
+---
+title: Media Queries in CSS
+date: '2023-11-07'
+tags: ['CSS', 'Media Queries', 'Key Concept']
+draft: false
+summary: 'Media Queries are a powerful tool to create web designs adaptable to different devices and contexts'
+---
+
+Los Media Queries son una parte fundamental de CSS que te permiten adaptar tus estilos a diferentes tamaños de pantalla y dispositivos. Aquí, una explicación completa de los Media Queries en CSS:
+
+**¿Qué son los Media Queries?**
+Los Media Queries son una característica de CSS3 que permiten aplicar estilos CSS basados en las características del dispositivo o del medio en el que se está mostrando la página web. Esto incluye cosas como el ancho de la pantalla, la orientación, la resolución y más. Los Media Queries son esenciales para crear diseños web responsivos que se adapten a diferentes dispositivos y tamaños de pantalla.
+
+**Sintaxis básica de Media Queries:**
+La sintaxis de una Media Query es la siguiente:
+
+```css
+@media type and (característica) {
+  /* Estilos a aplicar si se cumple la Media Query */
+}
+```
+
+- `@media`: Es la regla que indica que se está utilizando una Media Query.
+- `type`: Es opcional y se refiere al tipo de medio, como "screen" (pantalla), "print" (impresión) o "all" (todos los medios).
+- `característica`: Es donde defines las condiciones bajo las cuales se aplicarán los estilos. Esto puede incluir el ancho de la pantalla, la orientación, la resolución y más.
+- Los estilos dentro de las llaves `{}` se aplicarán si se cumple la condición especificada.
+
+**Ejemplos de Media Queries:**
+Aquí hay algunos ejemplos de Media Queries comunes:
+
+1. **Media Query para Pantallas Pequeñas (Responsive):**
+   ```css
+   @media screen and (max-width: 768px) {
+     /* Estilos para pantallas con un ancho máximo de 768px */
+   }
+   ```
+
+2. **Media Query para Impresión:**
+   ```css
+   @media print {
+     /* Estilos para la impresión */
+   }
+   ```
+
+3. **Media Query para Pantallas en Modo Paisaje:**
+   ```css
+   @media screen and (orientation: landscape) {
+     /* Estilos para pantallas en modo paisaje */
+   }
+   ```
+
+4. **Media Query para Pantallas de Alta Resolución (Retina):**
+   ```css
+   @media screen and (min-resolution: 2dppx) {
+     /* Estilos para pantallas de alta resolución */
+   }
+   ```
+
+**Operadores en Media Queries:**
+En las Media Queries, puedes usar operadores para definir condiciones más específicas. Algunos operadores comunes incluyen:
+
+- `and`: Combina múltiples condiciones. Por ejemplo, `@media screen and (max-width: 768px) and (orientation: portrait)`.
+- `not`: Niega una condición. Por ejemplo, `@media not screen`.
+- `only`: Evita que las versiones antiguas de Internet Explorer apliquen los estilos. Por ejemplo, `@media only screen and (min-width: 1024px)`.
+
+**Utilizando Media Queries en HTML:**
+Para aplicar Media Queries en tu HTML, puedes vincular diferentes hojas de estilo CSS a través de elementos `link` con la propiedad `media`. Por ejemplo:
+
+```html
+<link rel="stylesheet" href="estilos.css" media="screen and (max-width: 768px)">
+```
+
+Esto garantiza que la hoja de estilo `estilos.css` se aplique solo en pantallas con un ancho máximo de 768px.
+
+Los Media Queries son una herramienta poderosa para crear diseños web adaptables a diferentes dispositivos y contextos. Puedes personalizar tus estilos según las necesidades de tus usuarios, lo que es esencial en el desarrollo web moderno.

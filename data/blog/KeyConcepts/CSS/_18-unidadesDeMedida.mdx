@@ -1,0 +1,61 @@
+---
+title: Units of Measurement in CSS
+date: '2023-11-07'
+tags: ['CSS', 'Units of Measurement', 'Key Concept']
+draft: false
+summary: 'Measurement units in CSS are essential to define sizes and positions of elements in your web designs'
+---
+
+Las unidades de medida en CSS son esenciales para definir tamaños y posiciones de elementos en tus diseños web. Aquí, las unidades de medida más comunes utilizadas en CSS:
+
+1. **Píxeles (px)**:
+   - Ejemplo: `font-size: 16px;`
+   - Los píxeles son la unidad de medida más común en CSS.
+   - Un píxel es la unidad más pequeña en una pantalla y se utiliza para definir tamaños de fuentes, dimensiones de elementos y posiciones.
+
+2. **Porcentajes (%)**:
+   - Ejemplo: `width: 50%;`
+   - Los porcentajes se basan en el tamaño del elemento padre.
+   - Son útiles para crear diseños responsivos, ya que se ajustan automáticamente al tamaño del contenedor padre.
+
+3. **Em (em)**:
+   - Ejemplo: `margin: 1em;`
+   - El em es relativo al tamaño de la fuente del elemento padre.
+   - Un valor de `1em` es igual al tamaño de fuente del elemento padre.
+
+4. **Rem (rem)**:
+   - Ejemplo: `padding: 2rem;`
+   - El rem es similar al em, pero es relativo al tamaño de fuente del elemento raíz (normalmente, el elemento `<html>`).
+   - Es útil para crear diseños más predecibles, ya que no depende de anidamientos.
+
+5. **Viewport Width (vw)**:
+   - Ejemplo: `width: 50vw;`
+   - El vw es relativo al ancho de la ventana gráfica del navegador.
+   - Un valor de `1vw` es igual al 1% del ancho de la ventana.
+
+6. **Viewport Height (vh)**:
+   - Ejemplo: `height: 80vh;`
+   - El vh es relativo a la altura de la ventana gráfica del navegador.
+   - Un valor de `1vh` es igual al 1% de la altura de la ventana.
+
+7. **Viewport Min (vmin)**:
+   - Ejemplo: `min-width: 20vmin;`
+   - El vmin toma el valor más pequeño entre vw y vh.
+   - Es útil para garantizar que un elemento sea visible en la pantalla sin importar su orientación.
+
+8. **Viewport Max (vmax)**:
+   - Ejemplo: `max-height: 40vmax;`
+   - El vmax toma el valor más grande entre vw y vh.
+   - Es útil para garantizar que un elemento no se vuelva demasiado grande en ninguna dirección.
+
+9. **Centímetros (cm), Milímetros (mm), Pulgadas (in), Picas (pc), y Puntos (pt)**:
+   - Estas unidades son unidades absolutas de longitud y no se escalan con el tamaño de fuente o la ventana.
+   - A menudo se utilizan para definir tamaños de impresión y no se recomiendan para diseños web.
+
+10. **Grados (deg), Radianes (rad) y Gradientes (grad)**:
+    - Estas unidades se utilizan para definir ángulos y giros en propiedades como `rotate` en transformaciones CSS.
+
+11. **Unidades fraccionarias (fr)**:
+    - Estas unidades se utilizan en propiedades como `grid-template-columns` o `grid-template-rows` en CSS Grid Layout para definir proporciones en un diseño de cuadrícula.
+
+Estas son algunas de las unidades de medida más comunes en CSS. La elección de la unidad adecuada depende del contexto y de tus necesidades de diseño. A menudo, es útil combinar diferentes unidades para lograr diseños flexibles y responsivos.

@@ -1,0 +1,90 @@
+---
+title: Borders with CSS
+date: '2023-11-07'
+tags: ['CSS', 'Borders', 'Key Concept']
+draft: false
+summary: 'You can combine these properties and experiment with different styles, thicknesses and colors to achieve the desired border effect in your HTML elements'
+---
+
+Los bordes en CSS son una parte esencial del diseño web, ya que te permiten definir cómo se verán y se comportarán los bordes de los elementos HTML. Aquí, todo acerca de los bordes con CSS, desde cómo establecer su estilo hasta su grosor y color.
+
+## Propiedades de los Bordes en CSS
+
+### 1. `border-style`:
+Define el estilo del borde. Puedes elegir entre valores como `solid` (sólido), `dashed` (guiones), `dotted` (punteado), `double` (doble línea) y otros.
+
+### 2. `border-width`:
+Establece el grosor del borde. Puedes especificarlo en píxeles, ems, porcentajes u otras unidades de medida.
+
+### 3. `border-color`:
+Determina el color del borde. Puedes usar nombres de colores, códigos hexadecimales o valores RGB.
+
+### 4. `border`:
+Es una propiedad abreviada que combina `border-style`, `border-width` y `border-color` en un solo lugar. Por ejemplo: `border: 2px solid red;`.
+
+### 5. `border-radius`:
+Crea esquinas redondeadas en lugar de bordes rectos. Puedes definir el radio de las esquinas con esta propiedad. Por ejemplo: `border-radius: 10px;`.
+
+### 6. `border-image`:
+Permite usar una imagen en lugar de un color para el borde. Puedes definir una imagen, su recorte y repetición en esta propiedad.
+
+## Ejemplos Prácticos
+
+### Borde Simple:
+```css
+border-style: solid;
+border-width: 2px;
+border-color: red;
+```
+
+### Borde Abreviado:
+```css
+border: 2px solid red;
+```
+
+### Borde Redondeado:
+```css
+border-radius: 10px;
+```
+
+### Borde con Imagen:
+```css
+border-image: url('border-image.png') 30 round;
+```
+
+### Borde en Todos los Lados:
+Puedes aplicar bordes a los cuatro lados de un elemento de la siguiente manera:
+
+```css
+border-top: 2px solid red;
+border-right: 1px dashed blue;
+border-bottom: 3px solid green;
+border-left: 1px dotted orange;
+```
+
+## Aplicación en HTML
+
+Puedes aplicar estas propiedades directamente en las etiquetas HTML o, de manera más común, en una hoja de estilos externa o interna. Aquí hay un ejemplo en HTML:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .box {
+      width: 200px;
+      height: 100px;
+      border: 2px solid red;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+</body>
+</html>
+```
+
+En este ejemplo, se crea una caja con un borde sólido de 2 píxeles de ancho, de color rojo y con esquinas redondeadas.
+
+Esto es solo una introducción a los bordes en CSS. Puedes combinar estas propiedades y experimentar con diferentes estilos, grosores y colores para lograr el efecto de borde deseado en tus elementos HTML.

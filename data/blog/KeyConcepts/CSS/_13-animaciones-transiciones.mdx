@@ -1,0 +1,73 @@
+---
+title: Animations and Transitions with CSS
+date: '2023-11-07'
+tags: ['CSS', 'Animations and Transitions', 'Key Concept']
+draft: false
+summary: 'Animations and transitions with CSS are powerful tools to add interactivity and dynamism to your website'
+---
+
+Las animaciones y transiciones con CSS son poderosas herramientas para agregar interactividad y dinamismo a tu sitio web. Aquí, una explicación detallada sobre ambas:
+
+## Transiciones con CSS:
+
+Las transiciones permiten suavizar el cambio de un estado a otro en un elemento HTML, como un botón que cambia de color cuando se coloca el cursor sobre él. Las propiedades clave para definir transiciones son:
+
+1. `transition-property`: Define qué propiedad o propiedades CSS experimentarán la transición, como `color`, `width`, `height`, etc.
+
+2. `transition-duration`: Establece la duración de la transición en segundos o milisegundos.
+
+3. `transition-timing-function`: Controla cómo se acelera o desacelera la transición. Puedes utilizar valores como `linear`, `ease`, `ease-in`, `ease-out`, o incluso funciones de temporización personalizadas.
+
+4. `transition-delay`: Define un retraso antes de que comience la transición.
+
+Ejemplo de uso de transiciones:
+
+```css
+.button {
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+
+.button:hover {
+  background-color: #FF5733;
+}
+```
+
+## Animaciones con CSS:
+
+Las animaciones te permiten crear efectos más complejos y controlados en los elementos HTML. Para crear una animación, debes definir una serie de "keyframes" que describen cómo cambia el estilo del elemento en diferentes momentos. Las propiedades clave para definir animaciones son:
+
+1. `@keyframes`: Define los momentos clave de la animación y cómo cambian los estilos en cada uno.
+
+2. `animation-name`: Especifica el nombre de los keyframes a utilizar.
+
+3. `animation-duration`: Establece la duración de la animación en segundos o milisegundos.
+
+4. `animation-timing-function`: Controla la temporización de la animación, similar a `transition-timing-function`.
+
+5. `animation-delay`: Define un retraso antes de que comience la animación.
+
+6. `animation-iteration-count`: Determina cuántas veces se repetirá la animación, puede ser un número o `infinite`.
+
+7. `animation-direction`: Indica si la animación se ejecutará hacia adelante (`normal`), hacia atrás (`reverse`), o en bucle alternativo (`alternate`).
+
+8. `animation-fill-mode`: Controla cómo se aplicarán los estilos antes y después de la animación. Puede ser `forwards`, `backwards`, `both`, o `none`.
+
+Ejemplo de uso de animaciones:
+
+```css
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinner {
+  animation-name: spin;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+```
+
+Recuerda que CSS es una herramienta muy versátil para animaciones y transiciones, y puedes combinar estas propiedades y técnicas para lograr efectos más complejos. Además, ten en cuenta la compatibilidad con navegadores y considera utilizar preprocesadores de CSS como Sass o bibliotecas de animación como CSS animations para facilitar la creación de animaciones y transiciones.

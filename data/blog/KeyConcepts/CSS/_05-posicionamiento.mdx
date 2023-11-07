@@ -1,0 +1,44 @@
+---
+title: Positioning with CSS
+date: '2023-11-07'
+tags: ['CSS', 'Positioning', 'Key Concept']
+draft: false
+summary: 'Practice and experimentation are key to perfecting your CSS positioning skills'
+---
+
+El posicionamiento en CSS es fundamental para controlar dónde y cómo se muestran los elementos en una página web. Hay varios valores y propiedades que afectan al posicionamiento de elementos. Aquí, una visión completa del posicionamiento en CSS:
+
+1. **Position Property (Propiedad de posición)**:
+   - `static`: Esta es la posición predeterminada de los elementos y no se ven afectados por las propiedades de posicionamiento. Los elementos en posición estática se muestran en el orden en que aparecen en el HTML.
+   - `relative`: Los elementos posicionados de forma relativa se desplazan en relación con su posición original. Puedes usar propiedades como `top`, `right`, `bottom` y `left` para ajustar su posición.
+   - `absolute`: Los elementos posicionados de forma absoluta se desplazan con respecto a su elemento padre más cercano que tenga una posición distinta a `static`. Esto es útil para crear capas superpuestas.
+   - `fixed`: Los elementos con posición fija se mantienen en una ubicación fija en la ventana del navegador, incluso cuando se desplaza la página.
+
+2. **Float Property (Propiedad de flotación)**:
+   - `float`: Originalmente utilizado para el diseño de columnas, permite que un elemento flote a la izquierda o a la derecha de su contenedor y el contenido fluye alrededor de él.
+
+3. **Display Property (Propiedad de visualización)**:
+   - `display`: Controla cómo se muestra un elemento en el flujo del documento. Algunos valores comunes son `block`, `inline`, `inline-block`, `flex`, `grid`, y más. Cada valor afecta la forma en que se apilan y se muestran los elementos.
+
+4. **Z-Index Property (Propiedad de índice Z)**:
+   - `z-index`: Controla la superposición de elementos posicionados. Los elementos con un valor de `z-index` más alto estarán por encima de los elementos con un valor más bajo. Esta propiedad se aplica a elementos posicionados con valores distintos de `static`.
+
+5. **Positioning Contexts (Contextos de posicionamiento)**:
+   - Algunos valores de posición, como `relative` y `absolute`, crean un nuevo contexto de posicionamiento. Esto significa que los elementos posicionados dentro de ellos se ajustan en función de su contenedor más cercano con una posición que no sea `static`.
+
+6. **Clear Property (Propiedad de limpieza)**:
+   - `clear`: Esta propiedad se utiliza para evitar que los elementos flotantes se superpongan. Puedes aplicarla a elementos que deben aparecer debajo de elementos flotantes.
+
+7. **Overflow Property (Propiedad de desbordamiento)**:
+   - `overflow`: Controla cómo se maneja el contenido que desborda los límites de un elemento, como un div. Puedes usar valores como `auto`, `hidden`, `scroll` o `visible`.
+
+8. **Positioning Tricks (Trucos de posicionamiento)**:
+   - A menudo, se utilizan trucos de posicionamiento para lograr diseños específicos, como el centro vertical y horizontal de un elemento, mediante el uso de `position: absolute` y `transform`.
+
+9. **Position: Sticky (Posición pegajosa)**:
+   - `position: sticky` permite que un elemento se comporte como `relative` hasta que alcanza una ubicación específica en la ventana, momento en el que se vuelve `fixed`.
+
+10. **Unidades de Medida y Coordenadas**:
+    - Para ajustar la posición de un elemento, puedes utilizar valores como píxeles (px), porcentajes (%), ems (em), etc.
+
+Dominar el posicionamiento en CSS es esencial para crear diseños web efectivos y atractivos. Es importante entender cómo estas propiedades interactúan entre sí y cómo pueden usarse para controlar el diseño de tu sitio web. La práctica y la experimentación son clave para perfeccionar tus habilidades de posicionamiento en CSS.
