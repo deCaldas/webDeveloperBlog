@@ -1,0 +1,74 @@
+---
+title: React Modal Window
+date: '2023-11-09'
+tags: ['JavaScript', 'React', 'Modal Window']
+draft: false
+summary: 'In React, you can create custom modal windows using components and state'
+---
+
+Las ventanas modales son componentes comunes en las aplicaciones web que se utilizan para mostrar contenido adicional o interactuar con el usuario sin necesidad de navegar a una nueva página. En React, puedes crear ventanas modales personalizadas utilizando componentes y estado. Aquí, una guía básica para crear ventanas modales en React:
+
+**1. Crear un componente de ventana modal:**
+
+Primero, crea un nuevo componente de ventana modal. Puedes hacerlo como un componente funcional o de clase. A continuación, te muestro un ejemplo de un componente funcional de ventana modal básico:
+
+```jsx
+import React from 'react';
+
+function Modal(props) {
+  return (
+    <div className={`modal ${props.show ? 'active' : ''}`}>
+      <div className="modal-content">
+        {props.children}
+      </div>
+    </div>
+  );
+}
+
+export default Modal;
+```
+
+Este componente de ventana modal toma una propiedad `show` que indica si la ventana modal debe mostrarse y un contenido que se pasa como hijos.
+
+**2. Establecer el estado para controlar la ventana modal:**
+
+En el componente que contiene la ventana modal, debes establecer el estado para controlar si la ventana modal está visible o no. Por ejemplo:
+
+```jsx
+import React, { useState } from 'react';
+import Modal from './Modal';
+
+function App() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  return (
+    <div>
+      <button onClick={openModal}>Abrir Ventana Modal</button>
+      <Modal show={modalIsOpen}>
+        <h2>Contenido de la Ventana Modal</h2>
+        <button onClick={closeModal}>Cerrar Ventana Modal</button>
+      </Modal>
+    </div>
+  );
+}
+
+export default App;
+```
+
+**3. Controlar la visibilidad de la ventana modal:**
+
+El estado `modalIsOpen` controla la visibilidad de la ventana modal. Cuando el usuario hace clic en el botón "Abrir Ventana Modal", se llama a `openModal` y se establece el estado en `true`. Cuando el usuario hace clic en el botón "Cerrar Ventana Modal" dentro de la ventana modal, se llama a `closeModal` y se establece el estado en `false`.
+
+**4. Estilizar la ventana modal:**
+
+En el ejemplo anterior, se utiliza una clase `modal` y CSS para mostrar u ocultar la ventana modal. Debes aplicar estilos CSS para personalizar la apariencia y el diseño de tu ventana modal según tus necesidades.
+
+Con estos pasos, has creado una ventana modal simple en React. Puedes personalizarla y agregar más características según tus requisitos, como animaciones, transiciones, y la capacidad de mostrar diferentes contenidos dentro de la ventana modal. También puedes explorar librerías y paquetes de terceros, como `react-modal`, que ofrecen funcionalidad adicional para ventanas modales en React.

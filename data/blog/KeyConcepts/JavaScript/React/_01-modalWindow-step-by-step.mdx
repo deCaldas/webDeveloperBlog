@@ -1,0 +1,135 @@
+---
+title: The step by step of modal windows in React
+date: '2023-11-09'
+tags: ['JavaScript', 'React', 'Modal Window']
+draft: false
+summary: 'Make sure you have a React development environment set up before you begin'
+---
+
+Crear ventanas modales en React implica varios pasos. Aquí, una guía paso a paso a través del proceso de creación de una ventana modal simple desde cero. Utilizaremos React y CSS para lograrlo.
+
+**Paso 1: Configuración del proyecto**
+
+Asegúrate de tener un proyecto de React configurado. Puedes usar "Create Next App" o configurar tu propio entorno. 
+
+**Paso 2: Crear componentes**
+
+Crea los componentes necesarios para tu ventana modal. En este ejemplo, crearemos dos componentes: `App.js` y `Modal.js`.
+
+**Paso 3: Definir la ventana modal**
+
+Dentro de `Modal.js`, define la estructura de la ventana modal. Utiliza CSS para estilizarla.
+
+**Ejemplo:**
+
+```jsx
+// Modal.js
+import React from 'react';
+import '../css/modal.css';
+
+function Modal(props) {
+  return (
+    <div className={`modal ${props.show ? 'active' : ''}`}>
+      <div className="modal-content">
+        <span className="close" onClick={props.onClose}>&times;</span>
+        {props.children}
+      </div>
+    </div>
+  );
+}
+
+export default Modal;
+```
+
+**Paso 4: Estilo CSS**
+
+Crea un archivo CSS (`Modal.css`) para aplicar estilos a la ventana modal. 
+
+**Ejemplo:**
+
+```css
+.modal {
+display: none;
+position: fixed;
+z-index: 1;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal.active {
+display: block;
+}
+
+.modal-content {
+background-color: #fefefe;
+margin: 15% auto;
+padding: 20px;
+border: 3px solid #888;
+width: 50%;
+text-align: center;
+color: rgba(0, 0, 0, 0.5);
+position: relative;
+}
+
+.close {
+position: absolute;
+top: 10px;
+right: 10px;
+font-size: 20px;
+cursor: pointer;
+}
+```
+
+**Paso 5: Usar la ventana modal en App.js**
+
+En `App.js`, puedes utilizar el componente `Modal` e incorporarlo en tu aplicación. Controla su visibilidad mediante el estado.
+
+```jsx
+// App.js
+"use client"
+ 
+import React, { useState } from 'react';
+import Modal from '../../components/modal';
+
+function App() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  return (
+    <div>
+      <button onClick={openModal}>Abrir Ventana Modal</button>
+      <Modal show={modalIsOpen} onClose={closeModal}>
+        <h2>Contenido de la Ventana Modal</h2>
+        <p>Hola mundo. Acá desde una ventana modal</p>
+        <br />
+        <button onClick={closeModal}>Cerrar Ventana Modal</button>
+      </Modal>
+    </div>
+  );
+}
+
+export default App;
+```
+
+**Paso 6: Ejecutar la aplicación**
+
+Asegúrate de que estés en el directorio de tu proyecto y ejecuta la aplicación React.
+
+```bash
+npm run dev
+```
+
+Esto abrirá la aplicación en tu navegador. Cuando hagas clic en el botón "Abrir Ventana Modal", la ventana modal se mostrará, y al hacer clic en el botón "Cerrar Ventana Modal" o en el icono de cierre, la ventana modal se ocultará.
+
+¡Eso es todo! Has creado una ventana modal simple en React. Puedes personalizarla y agregar más características, como animaciones o contenido dinámico, según tus necesidades.
