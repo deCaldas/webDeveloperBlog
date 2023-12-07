@@ -1,0 +1,116 @@
+---
+title: Comments And Documentation en JavaScript
+date: '2023-11-13'
+tags: ['JavaScript', 'Key Concept', 'Comments And Documentation']
+draft: false
+summary: 'These tools help maintain up-to-date documentation and make it easier for other developers to understand the code'
+---
+
+Comentarios y documentación son elementos cruciales en el desarrollo de software. Aquí te doy una visión completa sobre cómo funcionan en JavaScript:
+
+### Comentarios en JavaScript:
+
+Los comentarios en JavaScript son utilizados para proporcionar información adicional en el código fuente. Estos comentarios son ignorados durante la ejecución y son solo para los desarrolladores.
+
+1. **Comentarios de una línea:**
+   ```javascript
+   // Esto es un comentario de una línea
+   ```
+
+2. **Comentarios de múltiples líneas:**
+   ```javascript
+   /*
+   Esto es un comentario
+   de múltiples líneas
+   */
+   ```
+
+3. **Comentarios en línea al final de una instrucción:**
+   ```javascript
+   const x = 5; // Esto es un comentario al final de la instrucción
+   ```
+
+### Documentación en JavaScript:
+
+La documentación es una forma más estructurada de comentar el código, proporcionando información detallada sobre cómo usar y entender funciones, métodos y clases.
+
+#### JSDoc:
+
+JSDoc es un estándar para documentar código JavaScript utilizando comentarios especiales que comienzan con `/**` en lugar de `/*`.
+
+1. **Documentación básica:**
+   ```javascript
+   /**
+    * Función que suma dos números.
+    * @param {number} a - El primer número.
+    * @param {number} b - El segundo número.
+    * @returns {number} La suma de a y b.
+    */
+   function suma(a, b) {
+     return a + b;
+   }
+   ```
+
+2. **Documentación para objetos:**
+   ```javascript
+   /**
+    * Representa a una persona.
+    * @typedef {Object} Persona
+    * @property {string} nombre - El nombre de la persona.
+    * @property {number} edad - La edad de la persona.
+    */
+
+   /**
+    * Función que saluda a una persona.
+    * @param {Persona} persona - La persona a saludar.
+    */
+   function saludar(persona) {
+     console.log(`Hola, ${persona.nombre}!`);
+   }
+   ```
+
+3. **Documentación para clases:**
+   ```javascript
+   /**
+    * Clase que representa a un coche.
+    * @class
+    */
+   class Coche {
+     /**
+      * Crea un coche.
+      * @constructor
+      * @param {string} modelo - El modelo del coche.
+      * @param {string} color - El color del coche.
+      */
+     constructor(modelo, color) {
+       this.modelo = modelo;
+       this.color = color;
+     }
+
+     /**
+      * Arranca el coche.
+      */
+     arrancar() {
+       console.log(`${this.modelo} arrancando...`);
+     }
+   }
+   ```
+
+#### Herramientas de Generación de Documentación:
+
+- **JSDoc**: Es una herramienta que toma comentarios JSDoc y genera documentación en formato HTML.
+  
+  Ejemplo de uso en la línea de comandos:
+  ```bash
+  jsdoc tuArchivo.js
+  ```
+
+- **ESDoc**: Otra herramienta de generación de documentación para JavaScript.
+
+  Ejemplo de instalación y uso con npm:
+  ```bash
+  npm install -g esdoc
+  esdoc
+  ```
+
+Estas herramientas ayudan a mantener una documentación actualizada y facilitan la comprensión del código para otros desarrolladores. Recuerda que una buena documentación mejora la colaboración y la mantenibilidad del código.

@@ -1,0 +1,111 @@
+---
+title: Chakra UI
+date: '2023-11-13'
+tags: ['CSS', 'libraries-and-frameworks', 'React-js']
+draft: false
+summary: 'Introduction to key aspects'
+---
+
+Una introducción a Chakra UI en JavaScript. Chakra UI es una biblioteca de componentes de interfaz de usuario diseñada para facilitar la construcción de interfaces de usuario modernas y estilizadas en React.
+
+### 1. **Instalación:**
+Primero, necesitas instalar Chakra UI en tu proyecto. Puedes hacer esto utilizando npm o yarn. Aquí está un ejemplo usando npm:
+
+```bash
+npm install @chakra-ui/react @emotion/react @emotion/styled framer-motion
+```
+
+### 2. **Configuración:**
+Luego, necesitas configurar Chakra UI en tu aplicación. Esto generalmente se hace en el archivo principal de tu aplicación, por ejemplo, en `_app.js` si estás utilizando Next.js.
+
+```javascript
+// _app.js
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "../path-to-your-theme"; // Puedes importar o definir tu propio tema
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <ChakraProvider theme={theme}>
+      <Component {...pageProps} />
+    </ChakraProvider>
+  );
+}
+
+export default MyApp;
+```
+
+### 3. **Uso de Componentes:**
+Ahora puedes empezar a utilizar los componentes proporcionados por Chakra UI en tus componentes React. Aquí tienes un ejemplo básico utilizando algunos componentes comunes:
+
+```javascript
+import { Box, Heading, Button } from "@chakra-ui/react";
+
+function MyComponent() {
+  return (
+    <Box p={4}>
+      <Heading size="lg" mb={4}>
+        Mi Página
+      </Heading>
+      <Button colorScheme="teal">Hacer clic</Button>
+    </Box>
+  );
+}
+
+export default MyComponent;
+```
+
+### 4. **Estilos y Temas:**
+Chakra UI utiliza Emotion para la gestión de estilos. Puedes personalizar estilos y colores utilizando temas. Puedes definir tu propio tema o modificar el tema predeterminado de Chakra. Aquí hay un ejemplo:
+
+```javascript
+// theme.js
+import { extendTheme } from "@chakra-ui/react";
+
+const theme = extendTheme({
+  colors: {
+    brand: {
+      50: "#ecefff",
+      // ... otras variaciones
+      900: "#001146",
+    },
+  },
+});
+
+export default theme;
+```
+
+### 5. **Responsive Design:**
+Chakra UI facilita el diseño receptivo utilizando la propiedad `boxSize` y la función `useBreakpointValue`. Aquí hay un ejemplo:
+
+```javascript
+import { Box } from "@chakra-ui/react";
+
+function ResponsiveBox() {
+  const boxSize = useBreakpointValue({ base: "100%", md: "50%", lg: "25%" });
+
+  return <Box boxSize={boxSize}>Contenido</Box>;
+}
+```
+
+### 6. **Manejo de Formularios:**
+Chakra UI proporciona componentes y utilidades convenientes para trabajar con formularios. Aquí hay un ejemplo:
+
+```javascript
+import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+
+function MyForm() {
+  return (
+    <form>
+      <FormControl>
+        <FormLabel>Nombre:</FormLabel>
+        <Input type="text" />
+      </FormControl>
+      <Button type="submit" colorScheme="teal" mt={4}>
+        Enviar
+      </Button>
+    </form>
+  );
+}
+```
+
+Estos son solo algunos ejemplos básicos para empezar con Chakra UI en JavaScript. Puedes explorar la documentación oficial para obtener más información y detalles sobre los componentes y características disponibles: [Chakra UI Docs](https://chakra-ui.com/docs/getting-started).
