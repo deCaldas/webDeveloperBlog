@@ -4,15 +4,10 @@ const siteMetadata = {
   author: 'De Caldas',
   headerTitle: 'Web Developer Blog',
   description: 'A blog created with focus on Full Stack JavaScript web development',
-  language: 'en-us',
+  language: 'es-co',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://deCaldas.github.io/home',
-  
-  /** ** Acá hay que modificar la url según el nombre del repo en GitHub porque aun falta por crear **
-    * 
-    * siteRepo: 'https://github.com/decaldas/tailwind-nextjs-starter-blog', 
-    * 
-  * */
+  siteUrl: 'https://deCaldas.github.io/webDeveloperBlog', 
+  siteRepo: 'https://github.com/decaldas/webDeveloperBlog', 
   
   /* ** Para cuando tengamos el Imagotipo y demás imagen empresarial del negocio de desarrollo web De Caldas **
     *
@@ -25,7 +20,7 @@ const siteMetadata = {
   github: 'https://github.com/deCaldas',
   twitter: 'https://twitter.com/d_caldasCaridad/',
   linkedin: 'https://www.linkedin.com/in/torocardo/',
-  locale: 'en-US',
+  locale: 'es-CO',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.

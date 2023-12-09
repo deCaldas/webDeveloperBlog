@@ -65,7 +65,9 @@ module.exports = () => {
     eslint: {
       dirs: ['app', 'components', 'layouts', 'scripts'],
     },
+    output: "export",
     images: {
+      unoptimized: true,
       domains: ['picsum.photos'],
     },
     async headers() {
