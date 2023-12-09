@@ -23,14 +23,6 @@ Para usar este proyecto, debes seguir los siguientes pasos:
 - Vuelve a la página de GitHub y accede a la sección Pages de los Settings del repositorio. Selecciona la rama `gh-pages` para habilitar GitHub Pages. Espera unos minutos hasta que se complete el despliegue.
 - Accede a la URL que te proporciona GitHub Pages para ver tu blog en vivo. Por defecto, será algo como `https://<tu-usuario>.github.io/<tu-repositorio>`.
 
-## Contribuir
-
-Si quieres contribuir a este proyecto, puedes hacerlo de las siguientes formas:
-
-- Reportar errores o sugerir mejoras abriendo un issue en el repositorio del proyecto.
-- Enviar un pull request con tus cambios o nuevas funcionalidades al repositorio del proyecto.
-- Compartir el proyecto con otros desarrolladores web que puedan estar interesados en él.
-
 ## Licencia
 
 Este proyecto está licenciado bajo la licencia MIT, lo que significa que puedes usarlo, modificarlo y distribuirlo libremente, siempre que incluyas el archivo de licencia original y des crédito al autor. El autor del proyecto es **[Timothy Lin](https://www.timlrx.com)**, un desarrollador web apasionado por el aprendizaje continuo.

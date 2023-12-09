@@ -1,0 +1,52 @@
+---
+title: <picture> element in HTML
+date: '2023-11-06'
+tags: ['HTML', 'Images', 'Key Concept']
+draft: false
+summary: 'The <picture> element in HTML is used to provide multiple image sources for a <img> element'
+---
+
+El elemento `<picture>` en HTML se utiliza para proporcionar varias fuentes de imágenes para un elemento `<img>`. Permite a los desarrolladores especificar diferentes imágenes según las condiciones de visualización, como el tamaño de la pantalla o la resolución, mejorando así la adaptabilidad y el rendimiento de la página. Aquí hay una descripción detallada del elemento `<picture>`:
+
+### Estructura Básica:
+```html
+<picture>
+  <!-- Fuente principal -->
+  <source srcset="ruta-imagen-webp.webp" type="image/webp">
+  <source srcset="ruta-imagen-jpg.jpg" type="image/jpeg">
+
+  <!-- Imagen predeterminada para navegadores que no admiten el elemento <picture> -->
+  <img src="ruta-imagen-jpg.jpg" alt="Descripción de la imagen">
+</picture>
+```
+
+### Componentes Principales:
+
+1. **`<source>`**: Se utiliza para definir las fuentes de imagen alternativas. Puedes proporcionar varias fuentes `<source>` dentro del elemento `<picture>`, y el navegador elegirá la primera fuente compatible.
+
+   - **`srcset`**: Especifica la ruta de la imagen y puede contener una lista de fuentes separadas por comas. Cada fuente puede tener un tamaño y densidad específicos, permitiendo al navegador seleccionar la más adecuada.
+
+   - **`type`**: Define el tipo de archivo de la imagen. Esto ayuda al navegador a seleccionar la fuente adecuada según el tipo de archivo que pueda manejar.
+
+2. **`<img>`**: Este es el elemento de imagen predeterminado que se mostrará si el navegador no admite el elemento `<picture>`. También se utiliza como fuente predeterminada si ninguna de las fuentes `<source>` es compatible.
+
+   - **`src`**: Especifica la ruta de la imagen. Se utiliza si ninguna de las fuentes `<source>` es compatible.
+
+   - **`alt`**: Proporciona un texto alternativo para la imagen, útil para accesibilidad y cuando la imagen no se puede cargar.
+
+### Ejemplo Práctico:
+
+```html
+<picture>
+  <source srcset="imagen-grande.webp" type="image/webp" media="(min-width: 800px)">
+  <source srcset="imagen-pequeña.webp" type="image/webp">
+  <source srcset="imagen-grande.jpg" type="image/jpeg" media="(min-width: 800px)">
+  <source srcset="imagen-pequeña.jpg" type="image/jpeg">
+  
+  <img src="imagen-pequeña.jpg" alt="Descripción de la imagen">
+</picture>
+```
+
+En este ejemplo, se proporcionan dos fuentes webp y dos fuentes jpeg. Dependiendo del tamaño de la pantalla, el navegador seleccionará la fuente adecuada. Si el ancho de la pantalla es igual o mayor a 800 píxeles, se elegirán las fuentes grandes, de lo contrario, se utilizarán las fuentes pequeñas.
+
+El uso del elemento `<picture>` es especialmente útil para sitios web que buscan optimizar la carga de imágenes y mejorar la experiencia del usuario en diferentes dispositivos y condiciones de visualización.

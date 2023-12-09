@@ -1,0 +1,104 @@
+---
+title: Emotion
+date: '2023-11-13'
+tags: ['CSS', 'libraries-and-frameworks', 'React-js']
+draft: false
+summary: 'Introduction to key aspects'
+---
+
+Emotion es una biblioteca popular de estilos en JavaScript que se utiliza en Chakra UI para la gestión de estilos en React. Proporciona una forma efectiva y fácil de trabajar con estilos en línea y estilos globales. Aquí, una guía básica sobre cómo funciona Emotion:
+
+### 1. **Instalación:**
+Emotion generalmente se instala junto con Chakra UI, pero también puedes instalarlo por separado si es necesario:
+
+```bash
+npm install @emotion/react @emotion/styled
+```
+
+### 2. **Estilos en Línea:**
+Emotion permite escribir estilos directamente en línea en tu componente. Esto se logra mediante el uso de la función `css`. Aquí hay un ejemplo básico:
+
+```javascript
+import { css } from "@emotion/react";
+
+const estilo = css`
+  color: red;
+  font-size: 16px;
+`;
+
+function MiComponente() {
+  return <div css={estilo}>Hola Mundo</div>;
+}
+```
+
+### 3. **Estilos Dinámicos:**
+Puedes utilizar expresiones de JavaScript dentro de tus estilos para hacerlos dinámicos. Aquí hay un ejemplo con una variable:
+
+```javascript
+import { css } from "@emotion/react";
+
+const colorPrimario = "blue";
+
+const estilo = css`
+  color: ${colorPrimario};
+  font-size: 16px;
+`;
+```
+
+### 4. **Estilos Globales:**
+Emotion también permite la creación de estilos globales utilizando el componente `Global`:
+
+```javascript
+import { Global, css } from "@emotion/react";
+
+const estilosGlobales = css`
+  body {
+    background-color: #f0f0f0;
+  }
+`;
+
+function MiApp() {
+  return (
+    <>
+      <Global styles={estilosGlobales} />
+      <div>Contenido de la aplicación</div>
+    </>
+  );
+}
+```
+
+### 5. **Objetos de Estilo:**
+Emotion también proporciona una forma de definir estilos utilizando objetos de estilo. Aquí hay un ejemplo:
+
+```javascript
+import { css } from "@emotion/react";
+
+const estilo = css({
+  color: "green",
+  fontSize: "18px",
+});
+```
+
+### 6. **Selectors Anidados:**
+Emotion permite el uso de selectores anidados para escribir estilos más concisos:
+
+```javascript
+import { css } from "@emotion/react";
+
+const estilo = css`
+  h1 {
+    color: red;
+    font-size: 24px;
+  }
+
+  p {
+    color: blue;
+    font-size: 16px;
+  }
+`;
+```
+
+### 7. **Tema con Emotion y Chakra UI:**
+Chakra UI utiliza Emotion para la gestión de estilos y permite la personalización de estilos utilizando temas. Puedes definir temas personalizados y utilizarlos en tus componentes de Chakra UI.
+
+Espero que esta breve guía te haya dado una visión general de cómo se utiliza Emotion, especialmente en el contexto de Chakra UI. Para obtener más detalles y opciones avanzadas, te recomendaría consultar la documentación oficial de Emotion: [Emotion Docs](https://emotion.sh/docs/introduction).
