@@ -70,14 +70,14 @@ module.exports = () => {
       unoptimized: true,
       domains: ['picsum.photos'],
     },
-    async headers() {
+/*     async headers() {
       return [
         {
           source: '/(.*)',
           headers: securityHeaders,
         },
       ]
-    },
+    }, */
     webpack: (config, options) => {
       config.module.rules.push({
         test: /\.svg$/,
