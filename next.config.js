@@ -58,7 +58,6 @@ const securityHeaders = [
  * @type {import('next/dist/next-server/server/config').NextConfig}
  **/
 
-
 module.exports = () => {
   const plugins = [withContentlayer, withBundleAnalyzer]
   const isProd = process.env.NODE_ENV === "production";
