@@ -66,6 +66,7 @@ module.exports = () => {
       dirs: ['app', 'components', 'layouts', 'scripts'],
     },
     output: "export",
+    distDir: "dist",
     images: {
       unoptimized: true,
       domains: ['picsum.photos'],
