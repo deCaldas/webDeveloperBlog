@@ -35,8 +35,6 @@ export default function AuthorLayout({ children, content }: Props) {
             <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
             <div className="text-gray-500 dark:text-gray-400">{company}</div>
             <div className="flex space-x-3 pt-6">
-              {/* Me gustaría insertar un hiperenlace a mi Homepage decaldas.github.io/home */}
-              {/* <SocialIcon kind="homepage" href={homepage} /> */}
               <SocialIcon kind="mail" href={`mailto:${email}`} />
               <SocialIcon kind="github" href={github} />
               <SocialIcon kind="linkedin" href={linkedin} />
