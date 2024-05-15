@@ -1,14 +1,14 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title: 'Web Developer Blog',
-  author: 'De Caldas',
+  author: 'Diego Whiskey',
   headerTitle: 'Web Developer Blog',
   description: 'A blog created with focus on Full Stack JavaScript web development',
   language: 'es-co',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://deCaldas.github.io/webDeveloperBlog', 
-  siteRepo: 'https://github.com/decaldas/webDeveloperBlog', 
-  
+  siteUrl: 'https://deCaldas.github.io/webDeveloperBlog',
+  siteRepo: 'https://github.com/decaldas/webDeveloperBlog',
+
   /* ** Para cuando tengamos el Imagotipo y demás imagen empresarial del negocio de desarrollo web De Caldas **
     *
     *  siteLogo: '/static/images/logo.png',
@@ -19,7 +19,7 @@ const siteMetadata = {
   email: 'decaldas.digital@yahoo.com',
   github: 'https://github.com/deCaldas',
   twitter: 'https://twitter.com/d_caldasCaridad/',
-  linkedin: 'https://www.linkedin.com/in/torocardo/',
+  linkedin: 'https://www.linkedin.com/in/diegowhiskey/',
   locale: 'es-CO',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
