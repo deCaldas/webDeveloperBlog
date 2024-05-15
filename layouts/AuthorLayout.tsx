@@ -15,9 +15,11 @@ export default function AuthorLayout({ children, content }: Props) {
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <h1 className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="About this">
-              About this
+          <h1
+            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            aria-label="About this"
+          >
+            About this
           </h1>
         </div>
         <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
