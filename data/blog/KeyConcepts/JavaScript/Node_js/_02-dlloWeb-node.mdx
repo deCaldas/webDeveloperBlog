@@ -1,0 +1,596 @@
+---
+title: Web Development with Node.js
+date: '2024-31-05'
+tags: ['JavaScript', 'feature', 'Node']
+draft: false
+summary: 'HTTP Servers and Modules. Databases. Authentication and Authorization. Y Application Deployment.'
+---
+
+**Desarrollo web con Node.js**
+
+* **Servidores HTTP:**
+    * Creación de servidores HTTP básicos
+    * Manejo de peticiones y respuestas
+    * Rutas y métodos HTTP
+* **Frameworks populares para Node.js:**
+    * Comparación de los 5 frameworks mas populares para Node.js
+        * Express.js: Framework popular para Node.js
+            * Manejo de rutas y middleware
+            * Plantillas de vista (ejs, pug, etc.)
+* **Bases de datos:**
+    * Conexión a bases de datos NoSQL (MongoDB)
+        * Modelado de datos con Mongoose
+        * Realización de CRUD (Crear, Leer, Actualizar, Eliminar)
+    * Conexión a bases de datos SQLite
+        * Modelado de datos
+        * Realización de CRUD (Crear, Leer, Actualizar, Eliminar)
+* **Autenticación y autorización:**
+    * Implementación de autenticación básica
+    * Tokenización JWT (Json Web Token)
+    * Estrategias de autorización
+* **Despliegue de aplicaciones:**
+    * Node.js en la nube (Heroku, AWS, etc.)
+    * Entornos de producción y desarrollo
+    * Monitoreo y registro de aplicaciones
+
+## Servidores HTTP en Node.js
+
+### Creación de servidores HTTP básicos
+
+En Node.js, la creación de servidores HTTP se realiza utilizando el módulo `http`. Este módulo proporciona funciones para crear un servidor, escuchar peticiones y enviar respuestas.
+
+Para crear un servidor HTTP básico, sigue estos pasos:
+
+1. Importar el módulo `http`:
+
+```javascript
+const http = require('http');
+```
+
+2. Crear una función para manejar peticiones:
+
+```javascript
+const handleRequest = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'text/plain' });
+  response.write('Hola desde Node.js!');
+  response.end();
+};
+```
+
+3. Crear un servidor y asignarle la función de manejo de peticiones:
+
+```javascript
+const server = http.createServer(handleRequest);
+```
+
+4. Escuchar peticiones en un puerto específico:
+
+```javascript
+server.listen(3000, () => {
+  console.log('Servidor escuchando en el puerto 3000');
+});
+```
+
+En este ejemplo, el servidor escucha peticiones en el puerto 3000 y envía un mensaje simple como respuesta.
+
+### Manejo de peticiones y respuestas
+
+Las peticiones HTTP contienen información sobre la solicitud realizada, como la URL, el método HTTP (GET, POST, etc.) y los encabezados. Las respuestas HTTP contienen el código de estado de la solicitud (200, 404, etc.) y el cuerpo de la respuesta, que puede ser texto, HTML, JSON u otro tipo de datos.
+
+En Node.js, el objeto `request` representa la petición y el objeto `response` representa la respuesta. Puedes acceder a la información de la petición mediante las propiedades del objeto `request` y enviar la respuesta utilizando los métodos del objeto `response`.
+
+### Rutas y métodos HTTP
+
+Las rutas HTTP identifican el recurso solicitado en el servidor. Los métodos HTTP especifican el tipo de operación que se desea realizar sobre el recurso.
+
+Para definir rutas en Node.js, puedes utilizar el método `use()` del objeto `server`. Por ejemplo, para manejar la ruta `/` con el método GET, puedes utilizar el siguiente código:
+
+```javascript
+server.use('/', (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'text/plain' });
+  response.write('Ruta raíz');
+  response.end();
+});
+```
+
+En este ejemplo, el servidor enviará el mensaje "Ruta raíz" cuando se realice una petición GET a la ruta `/`.
+
+**Recursos adicionales:**
+
+* [https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
+* [https://www.digitalocean.com/community/tutorials/how-to-create-a-web-server-in-node-js-with-the-http-module](https://www.digitalocean.com/community/tutorials/how-to-create-a-web-server-in-node-js-with-the-http-module)
+
+##### Próximo paso
+
+Los servidores HTTP básicos son la base para el desarrollo web con Node.js. En el próximo paso, exploraremos cómo utilizar frameworks populares como Express.js para crear aplicaciones web más complejas.
+
+## Módulos HTTP en Node.js
+
+En Node.js, los módulos HTTP son paquetes de código que facilitan la creación de servidores web y el manejo de solicitudes y respuestas HTTP. Estos módulos proporcionan funciones para crear servidores, escuchar conexiones entrantes, procesar peticiones y enviar respuestas.
+
+### Funciones básicas de un módulo HTTP
+
+* **Crear un servidor:** Inicia un servidor HTTP que escucha en un puerto específico.
+* **Procesar peticiones:** Recibe y analiza las peticiones HTTP enviadas por los clientes.
+* **Manejar rutas:** Asocia URLs a funciones controladoras para procesar peticiones específicas.
+* **Enviar respuestas:** Envía respuestas HTTP al cliente, incluyendo código de estado, encabezados y contenido.
+
+### Módulos HTTP populares
+
+* **http:** Módulo integrado en Node.js que proporciona funciones básicas para crear servidores HTTP.
+* **Express.js:** Framework popular que amplía las funcionalidades del módulo http, ofreciendo una estructura MVC (Modelo-Vista-Controlador) y herramientas para desarrollar aplicaciones web completas.
+* **Fastify:** Framework ligero y de alto rendimiento que ofrece una alternativa a Express.js, con una API más minimalista y enfocada en la eficiencia.
+
+## Frameworks Populares para node.js
+
+**Tabla de comparación:**
+
+| Framework | Características principales |
+|---|---|
+| Express.js | Ligero, flexible, gran comunidad |
+| Fastify | Alto rendimiento, modular, experiencia del desarrollador, TypeScript |
+| Nest.js | Orientado a objetos, escalable, TypeScript |
+| Koa.js | Alto rendimiento, API expresiva |
+| Hapi.js | Seguridad, documentación, facilidad de uso |
+
+**Otros frameworks que puedes considerar:**
+
+* **Meteor.js**: Un framework para desarrollo full-stack que permite crear aplicaciones web en tiempo real.
+* **LoopBack**: Un framework para crear APIs RESTful y microservicios.
+* **AdonisJS**: Un framework completo para desarrollar aplicaciones web modernas y escalables.
+
+## Desarrollo web con Node.js: Express.js
+
+### Express.js: Framework popular para Node.js
+
+* Manejo de rutas y middleware
+* Plantillas de vista (ejs, pug, etc.)
+
+Express.js es un framework minimalista y flexible para el desarrollo web con Node.js. Proporciona una amplia gama de funcionalidades para crear aplicaciones web escalables y mantenibles.
+
+Para utilizar Express.js, primero debes instalarlo:
+
+```
+npm install express
+```
+
+Una vez instalado, puedes importar el módulo Express en tu script:
+
+```javascript
+const express = require('express');
+```
+
+El objeto `express()` representa la aplicación Express. Puedes utilizar sus métodos para definir rutas, manejar peticiones y enviar respuestas.
+
+### Manejo de rutas y middleware
+
+Express.js utiliza el método `route()` para definir rutas y el método `use()` para definir middleware. El middleware es un tipo de función que se ejecuta antes de que se maneje una ruta específica.
+
+Para definir una ruta con Express.js, utiliza la siguiente sintaxis:
+
+```javascript
+app.route('/ruta').method(function(request, response) {
+  // Código para manejar la petición
+});
+```
+
+Por ejemplo, para manejar la ruta `/` con el método GET, puedes utilizar el siguiente código:
+
+```javascript
+app.get('/', (request, response) => {
+  response.send('Hola desde Express.js!');
+});
+```
+
+### Plantillas de vista (ejs, pug, etc.)
+
+Las plantillas de vista permiten generar contenido dinámico para las páginas web. Express.js admite una variedad de motores de plantillas, como EJS, Pug y Handlebars.
+
+Para utilizar un motor de plantillas en Express.js, primero debes instalarlo:
+
+```
+npm install ejs
+```
+
+Una vez instalado, puedes configurar el motor de plantillas en tu aplicación Express:
+
+```javascript
+app.set('view engine', 'ejs');
+```
+
+Y luego, puedes renderizar plantillas de vista utilizando el método `render()`:
+
+```javascript
+app.get('/', (request, response) => {
+  response.render('index', { data: 'Hola desde EJS!' });
+});
+```
+
+**Recursos adicionales:**
+
+* [https://expressjs.com/](https://expressjs.com/)
+* [https://ejs.co/](https://ejs.co/)
+* [https://pugjs.org/](https://pugjs.org/)
+
+> Express.js es una herramienta fundamental para el desarrollo web con Node.js. 
+
+##### Próximo paso
+
+En el próximo paso, exploraremos cómo crear una base de datos para tu aplicación web y cómo realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) con Node.js y MongoDB.
+
+## Bases de datos en Node.js
+
+### Conexión a bases de datos NoSQL (MongoDB)
+
+MongoDB es una base de datos NoSQL popular que almacena datos en forma de documentos JSON. Para conectarte a MongoDB desde Node.js, puedes utilizar el módulo `mongoose`:
+
+```
+npm install mongoose
+```
+
+Una vez instalado, puedes establecer la conexión a tu base de datos MongoDB:
+
+```javascript
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/mi-base-de-datos', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+```
+
+### Modelado de datos con Mongoose
+
+Mongoose proporciona una capa de abstracción para trabajar con MongoDB. Permite definir modelos de datos que representan la estructura de tus documentos.
+
+Para definir un modelo de datos, utiliza la función `model()` de Mongoose:
+
+```javascript
+const userSchema = new mongoose.Schema({
+  nombre: String,
+  correo: String,
+  edad: Number
+});
+
+const User = mongoose.model('User', userSchema);
+```
+
+En este ejemplo, se define un modelo llamado `User` con los campos `nombre`, `correo` y `edad`.
+
+### Realización de CRUD (Crear, Leer, Actualizar, Eliminar)
+
+Mongoose proporciona métodos para realizar operaciones CRUD sobre tus documentos.
+
+* **Crear:** Para crear un nuevo documento, utiliza el método `save()`:
+
+```javascript
+const newUser = new User({
+  nombre: 'Juan',
+  correo: 'juan@ejemplo.com',
+  edad: 30
+});
+
+newUser.save((err, user) => {
+  if (err) console.error(err);
+  else console.log('Usuario creado:', user);
+});
+```
+
+* **Leer:** Para leer documentos, puedes utilizar el método `find()`:
+
+```javascript
+User.find((err, users) => {
+  if (err) console.error(err);
+  else console.log('Usuarios:', users);
+});
+```
+
+* **Actualizar:** Para actualizar un documento, puedes utilizar el método `updateOne()`:
+
+```javascript
+User.updateOne({ _id: '5f1234567890'}, { edad: 31 }, (err, result) => {
+  if (err) console.error(err);
+  else console.log('Usuario actualizado:', result);
+});
+```
+
+* **Eliminar:** Para eliminar un documento, puedes utilizar el método `deleteOne()`:
+
+```javascript
+User.deleteOne({ _id: '5f1234567890'}, (err, result) => {
+  if (err) console.error(err);
+  else console.log('Usuario eliminado:', result);
+});
+```
+
+**Recursos adicionales:**
+
+* [https://mongoosejs.com/](https://mongoosejs.com/)
+* [https://www.mongodb.com/](https://www.mongodb.com/)
+* [https://docs.mongodb.com/](https://docs.mongodb.com/)
+
+##### Próximo paso
+
+En el próximo paso, exploraremos cómo crear una base de datos para tu aplicación web y cómo realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) con Node.js y SQLite.
+
+## Bases de datos SQLite en Node.js
+
+### Conexión a bases de datos SQLite
+
+Para conectar con una base de datos SQLite en Node.js, puedes utilizar el módulo `sqlite3`.
+
+```bash
+npm install sqlite3
+```
+
+Una vez instalado, puedes establecer la conexión a tu base de datos SQLite:
+
+```javascript
+const sqlite3 = require('sqlite3');
+
+const db = new sqlite3.Database('./mi-base-de-datos.sqlite');
+```
+
+En este ejemplo, se crea una conexión a la base de datos `mi-base-de-datos.sqlite` ubicada en el mismo directorio que el archivo JavaScript.
+
+### Modelado de datos
+
+Para modelar tus datos en SQLite, puedes crear tablas con las columnas correspondientes.
+
+**Ejemplo:**
+
+```sql
+CREATE TABLE usuarios (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre TEXT NOT NULL,
+  correo TEXT UNIQUE NOT NULL,
+  edad INTEGER
+);
+```
+
+Esta tabla define una estructura para almacenar información de usuarios, con campos para nombre, correo y edad.
+
+### Realización de CRUD (Crear, Leer, Actualizar, Eliminar)
+
+El módulo `sqlite3` proporciona métodos para realizar operaciones CRUD sobre tus datos.
+
+#### Crear
+
+Para insertar un nuevo registro en una tabla, puedes utilizar el método `run()`:
+
+```javascript
+const statement = `INSERT INTO usuarios (nombre, correo, edad) VALUES (?, ?, ?)`;
+const values = ['Juan', 'juan@example.com', 30];
+
+db.run(statement, values, (err) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log('Usuario creado');
+  }
+});
+```
+
+#### Leer
+
+Para leer datos de una tabla, puedes utilizar el método `get()`:
+
+```javascript
+const statement = `SELECT * FROM usuarios WHERE id = ?`;
+const id = 1;
+
+db.get(statement, [id], (err, row) => {
+  if (err) {
+    console.error(err);
+  } else if (!row) {
+    console.log('Usuario no encontrado');
+  } else {
+    console.log('Usuario:', row);
+  }
+});
+```
+
+#### Actualizar
+
+Para actualizar un registro en una tabla, puedes utilizar el método `run()`:
+
+```javascript
+const statement = `UPDATE usuarios SET nombre = ?, correo = ?, edad = ? WHERE id = ?`;
+const values = ['Pedro', 'pedro@example.com', 31, 1];
+
+db.run(statement, values, (err) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log('Usuario actualizado');
+  }
+});
+```
+
+#### Eliminar
+
+Para eliminar un registro de una tabla, puedes utilizar el método `run()`:
+
+```javascript
+const statement = `DELETE FROM usuarios WHERE id = ?`;
+const id = 2;
+
+db.run(statement, [id], (err) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log('Usuario eliminado');
+  }
+});
+```
+
+### Recursos adicionales
+
+* [https://www.npmjs.com/package/sqlite3](https://www.npmjs.com/package/sqlite3)
+* [https://www.sqlite.org/docs.html](https://www.sqlite.org/docs.html)
+* [https://www.w3schools.blog/sqlite-tutorial](https://www.w3schools.blog/sqlite-tutorial)
+
+Si deseas profundizar en el uso de SQLite con Node.js, puedes explorar temas como:
+
+* **Consultas SQL avanzadas:** Utilizar cláusulas `WHERE`, `ORDER BY`, `JOIN` y otras para realizar consultas más complejas.
+* **Transacciones:** Manejar operaciones de datos que involucran múltiples cambios de manera atómica.
+* **Migraciones de datos:** Implementar mecanismos para actualizar la estructura de la base de datos sin perder datos.
+
+Estos temas te permitirán desarrollar aplicaciones web con Node.js y SQLite más robustas y escalables.
+
+##### Próximo paso
+
+Las bases de datos son un componente esencial de las aplicaciones web. Al combinar Node.js, MongoDB y Mongoose, puedes crear aplicaciones web dinámicas y escalables con almacenamiento de datos persistente. Y al combinar Node.js y SQLite, puedes crear aplicaciones con almacenamiento de datos persistente.
+
+En el próximo paso, exploraremos cómo implementar autenticación y autorización en tu aplicación web con Node.js.
+
+## Autenticación y autorización en Node.js
+
+### Implementación de autenticación básica
+
+La autenticación básica consiste en verificar la identidad del usuario mediante un nombre de usuario y una contraseña. En Node.js, puedes utilizar el módulo `passport` para implementar autenticación básica.
+
+```
+npm install passport
+```
+
+Una vez instalado, configura Passport con la estrategia de autenticación básica:
+
+```javascript
+const passport = require('passport');
+const BasicStrategy = require('passport-http-basic').BasicStrategy;
+
+passport.use(new BasicStrategy((username, password, done) => {
+  // Verificar si el usuario y la contraseña son correctos
+  if (username === 'admin' && password === '123456') {
+    done(null, { username });
+  } else {
+    done(null, false);
+  }
+}));
+```
+
+Luego, puedes proteger rutas utilizando el middleware de autenticación de Passport:
+
+```javascript
+const express = require('express');
+const passport = require('passport');
+
+const app = express();
+
+app.use(passport.initialize());
+
+app.get('/protected', passport.authenticate('basic', { session: false }), (req, res) => {
+  res.send('Ruta protegida: ' + req.user.username);
+});
+```
+
+En este ejemplo, la ruta `/protected` solo es accesible para usuarios autenticados mediante la autenticación básica.
+
+### Tokenización JWT (Json Web Token)
+
+JSON Web Token (JWT) es un estándar para la autenticación segura entre aplicaciones. Permite almacenar información sobre el usuario en un token compacto y seguro.
+
+En Node.js, puedes utilizar el módulo `jsonwebtoken` para generar y verificar tokens JWT:
+
+```
+npm install jsonwebtoken
+```
+
+Para generar un token JWT, utiliza la función `sign()` de la biblioteca `jsonwebtoken`:
+
+```javascript
+const jwt = require('jsonwebtoken');
+
+const token = jwt.sign({ userId: 123 }, 'mi-secreto');
+console.log('Token JWT:', token);
+```
+
+Para verificar un token JWT en una ruta protegida, utiliza la función `verify()` de la biblioteca `jsonwebtoken`. Puedes utilizar el siguiente código:
+
+```javascript
+const express = require('express');
+const jwt = require('jsonwebtoken');
+
+const app = express();
+
+app.get('/protected', (req, res, next) => {
+  const token = req.headers['Authorization'];
+  if (!token) {
+    res.status(401).send('Unauthorized');
+    return;
+  }
+
+  try {
+    const decoded = jwt.verify(token, 'mi-secreto');
+    req.user = decoded;
+    next();
+  } catch (err) {
+    res.status(401).send('Invalid token');
+  }
+});
+```
+
+En este ejemplo, se extrae el token JWT del encabezado `Authorization` de la petición. Si el token es válido, se almacena la información del usuario en el objeto `req.user` y se permite el acceso a la ruta protegida.
+
+### Estrategias de autorización
+
+La autorización se refiere a determinar qué acciones puede realizar un usuario en la aplicación. Existen diferentes estrategias para implementar la autorización, como:
+
+* **Basada en roles:** Asigna roles a los usuarios y define permisos para cada rol.
+* **Basada en atributos:** Permite definir permisos en función de atributos específicos del usuario.
+* **Basada en reglas de negocio:** Define reglas lógicas para determinar si un usuario tiene permiso para realizar una acción.
+
+En Node.js, puedes utilizar módulos como `acl` o `passport` para implementar estrategias de autorización.
+
+**Recursos adicionales:**
+
+* [https://www.npmjs.com/package/passport](https://www.npmjs.com/package/passport)
+* [https://www.npmjs.com/package/jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+* [https://www.npmjs.com/package/acl](https://www.npmjs.com/package/acl)
+
+##### Próximo paso
+
+La autenticación y autorización son aspectos fundamentales para la seguridad en aplicaciones web. Al combinar Node.js, Passport y JWT, puedes implementar un sistema de autenticación y autorización robusto y flexible para tu aplicación web.
+
+En el próximo paso, exploraremos cómo desplegar tu aplicación web Node.js en un servidor de producción.
+
+## Despliegue de aplicaciones Node.js
+
+### Node.js en la nube (Heroku, AWS, etc.)
+
+Existen diversas plataformas en la nube que permiten desplegar aplicaciones Node.js de manera fácil y escalable. Algunas de las opciones más populares incluyen:
+
+**Heroku:** Una plataforma que simplifica el proceso de desplegar y administrar aplicaciones web.
+
+**Amazon Web Services (AWS):** Ofrece una amplia gama de servicios para el desarrollo y despliegue de aplicaciones web, incluyendo servidores virtuales, bases de datos y almacenamiento.
+
+**Google Cloud Platform (GCP):** Otra opción popular con una amplia gama de servicios para el desarrollo y despliegue de aplicaciones web.
+
+### Entornos de producción y desarrollo
+
+Es importante diferenciar entre los entornos de desarrollo y producción. El entorno de desarrollo se utiliza para crear y probar la aplicación, mientras que el entorno de producción es donde se ejecuta la aplicación para los usuarios finales.
+
+Es recomendable utilizar herramientas de control de versiones, como Git, para mantener los cambios sincronizados entre los entornos de desarrollo y producción.
+
+### Monitoreo y registro de aplicaciones
+
+El monitoreo y registro de aplicaciones son esenciales para detectar y solucionar problemas de manera oportuna. Existen herramientas como:
+
+* **PM2:** Permite monitorear y administrar procesos Node.js en producción.
+* **Winston:** Una biblioteca para el registro de eventos en Node.js.
+* **Datadog:** Una plataforma de monitoreo y análisis que brinda información detallada sobre el rendimiento de la aplicación.
+
+**Recursos adicionales:**
+
+* [https://www.heroku.com/](https://www.heroku.com/)
+* [https://aws.amazon.com/](https://aws.amazon.com/)
+* [https://cloud.google.com/](https://cloud.google.com/)
+* [https://www.npmjs.com/package/pm2](https://www.npmjs.com/package/pm2)
+* [https://www.npmjs.com/package/winston](https://www.npmjs.com/package/winston)
+* [https://www.datadog.com/](https://www.datadog.com/)
+
+
+## Conclusión
+
+El desarrollo web con Node.js ofrece una gran flexibilidad y escalabilidad para crear aplicaciones web dinámicas y modernas. Al combinar los conocimientos adquiridos en este curso con las herramientas y plataformas disponibles, podrás desarrollar y desplegar aplicaciones web robustas y seguras.

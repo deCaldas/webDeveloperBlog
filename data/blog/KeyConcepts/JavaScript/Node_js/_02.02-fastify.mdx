@@ -1,0 +1,85 @@
+---
+title: Node.js Fastify Module
+date: '2024-31-05'
+tags: ['JavaScript', 'feature', 'Node']
+draft: false
+summary: 'Fastify it is an excellent choice for building modern web applications and RESTful APIs'
+---
+
+## Estudiando desarrollo web con Node.js y Fastify
+
+### Fastify: Un framework ágil para Node.js
+* Manejo de rutas y middleware
+* Plantillas de vista (ejs, pug, etc.)
+
+Fastify es un framework de Node.js moderno y de alto rendimiento que se destaca por su simplicidad, velocidad y escalabilidad. Es una excelente opción para crear aplicaciones web modernas y APIs RESTful.
+
+Fastify está diseñado para ser uno de los frameworks más rápidos del ecosistema de Node.js. Su arquitectura basada en plugins facilita la creación de aplicaciones escalables y mantenibles. Fastify ofrece una API intuitiva y fácil de usar, y una gran comunidad de desarrolladores. Fastify tiene soporte completo para TypeScript, lo que permite un desarrollo más robusto y mantenible.
+
+A continuación, exploraremos algunos conceptos clave de Fastify:
+
+#### Manejo de Rutas y Middleware
+
+- **Rutas**: Define puntos de entrada a tu aplicación para diferentes acciones. Por ejemplo, puedes crear una ruta para obtener datos de una base de datos o para enviar un formulario.
+- **Middleware**: Son funciones que se ejecutan antes o después de las rutas para realizar tareas comunes, como la validación de datos, el registro de solicitudes o el manejo de errores.
+
+Ejemplo de una ruta con middleware:
+
+```javascript
+const fastify = require('fastify')();
+
+fastify.get('/', { before: async (request, reply) => {
+    // Middleware para registrar la solicitud
+    console.log('Solicitud GET a la raíz');
+  }}, async (request, reply) => {
+    reply.send('Hola desde Fastify!');
+});
+
+fastify.listen(3000, () => {
+  console.log('Servidor Fastify iniciado en el puerto 3000');
+});
+```
+
+En este ejemplo, el middleware se ejecuta antes de la ruta `/`, registra la solicitud en la consola y luego se ejecuta la función de la ruta para enviar una respuesta.
+
+#### Plantillas de vista
+
+Las plantillas de vista permiten generar contenido HTML dinámico para tu aplicación web. Fastify no incluye un motor de plantillas integrado, pero puedes utilizar plugins para integrar soluciones populares como EJS o Pug.
+
+Ejemplo de uso de EJS con Fastify:
+
+```javascript
+const fastify = require('fastify')();
+const ejs = require('ejs');
+
+fastify.register(require('fastify-ejs'));
+
+fastify.get('/', async (request, reply) => {
+  const data = {
+    nombre: 'Fastify',
+    descripcion: 'Un framework rápido y flexible para Node.js'
+  };
+
+  reply.view('index', data); // Renderiza la plantilla index.ejs con los datos
+});
+
+fastify.registerViewEngine('ejs', ejs); // Registra EJS como motor de plantillas
+
+fastify.listen(3000, () => {
+  console.log('Servidor Fastify iniciado en el puerto 3000');
+});
+```
+
+En este ejemplo, se utiliza el plugin `fastify-ejs` para integrar EJS y se registra como motor de plantillas. La ruta `/` renderiza la plantilla `index.ejs` con los datos proporcionados.
+
+### Recursos para aprender Fastify
+
+* **Sitio web de Fastify**: [https://fastify.dev/](https://fastify.dev/)
+* **Documentación de Fastify**: [https://fastify.io/docs/latest/](https://fastify.io/docs/latest/)
+* **Tutoriales de Fastify**: [https://fastify.dev/docs/v4.26.x/Guides/Getting-Started/](https://fastify.dev/docs/v4.26.x/Guides/Getting-Started/)
+* **Guía para principiantes de Fastify**: [https://fastify.dev/docs/latest/Guides/Getting-Started/](https://fastify.dev/docs/latest/Guides/Getting-Started/)
+* **Comunidades de Fastify**: [https://github.com/fastify/fastify/discussions](https://github.com/fastify/fastify/discussions)
+
+**Fastify es una opción moderna y atractiva para el desarrollo web con Node.js. Si buscas rendimiento, modularidad y una experiencia de desarrollo fluida, Fastify es un framework que vale la pena considerar.**
+
+**¡Aprende más sobre Fastify y crea aplicaciones web potentes con Node.js!**

@@ -1,0 +1,131 @@
+---
+title: 'Introducción a Node.js'
+date: '2024-31-05'
+tags: ['JavaScript', 'feature', 'Node']
+draft: false
+summary: 'Basic Concepts and Development Environment.'
+---
+
+## Introducción a Node.js: Conceptos Básicos y Entorno de Desarrollo.
+
+### ¿Qué es Node.js?
+
+Node.js es un entorno de ejecución de JavaScript de código abierto y multiplataforma, construido sobre el motor JavaScript V8 de Chrome. Permite ejecutar código JavaScript fuera del navegador, posibilitando el desarrollo de aplicaciones del lado del servidor con JavaScript.
+
+### Arquitectura de Node.js
+
+Node.js se basa en una arquitectura asincrónica y no bloqueante, lo que significa que puede manejar múltiples tareas simultáneamente sin bloquear el hilo principal. Esto lo hace ideal para desarrollar aplicaciones web escalables y en tiempo real.
+
+Los componentes principales de la arquitectura de Node.js son:
+
+* **Motor V8:** Ejecuta el código JavaScript de manera eficiente.
+* **Módulo de eventos:** Permite manejar eventos de manera asíncrona.
+* **Bucle de eventos:** Procesa eventos y ejecuta callbacks de manera no bloqueante.
+* **API de E/S no bloqueante:** Permite realizar operaciones de entrada y salida sin bloquear el hilo principal.
+
+### Ventajas y desventajas de Node.js
+
+**Ventajas:**
+
+* **Código JavaScript en el lado del servidor:** Permite utilizar el mismo lenguaje para el desarrollo web del lado del cliente y del servidor, simplificando el proceso de desarrollo.
+* **Arquitectura asincrónica y no bloqueante:** Ideal para aplicaciones web escalables y en tiempo real.
+* **Gran ecosistema de módulos:** Amplia comunidad y gran cantidad de módulos disponibles para diferentes tareas.
+* **Código abierto y gratuito:** Permite el desarrollo y la modificación del código fuente libremente.
+
+**Desventajas:**
+
+* **Curva de aprendizaje para principiantes:** Requiere conocimientos básicos de JavaScript y programación asincrónica.
+* **Control de versiones del lenguaje:** El JavaScript utilizado en Node.js puede tener diferencias con el JavaScript del navegador.
+* **Dependencias de módulos:** La estabilidad de la aplicación depende de la estabilidad de los módulos de terceros.
+
+### Entorno de desarrollo
+
+#### Instalación de Node.js
+
+Para instalar Node.js, puedes seguir las instrucciones oficiales en el sitio web: [https://nodejs.org/en/download/package-manager](https://nodejs.org/en/download/package-manager).
+
+#### Uso de la línea de comandos
+
+Node.js se ejecuta principalmente a través de la línea de comandos. Puedes ejecutar scripts JavaScript, instalar módulos y administrar proyectos desde la terminal.
+
+#### Manejo de paquetes con npm
+
+Npm (Node Package Manager) es el gestor de paquetes oficial de Node.js. Permite instalar, actualizar y eliminar módulos de terceros desde el registro público de módulos de Node.js (NPM Registry).
+
+Para instalar un módulo, ejecuta el siguiente comando:
+
+```
+npm install <nombre-del-modulo>
+```
+
+Para actualizar un módulo, ejecuta el siguiente comando:
+
+```
+npm update <nombre-del-modulo>
+```
+
+Para eliminar un módulo, ejecuta el siguiente comando:
+
+```
+npm uninstall <nombre-del-modulo>
+```
+
+**Recursos adicionales:**
+
+* [https://nodejs.org/en](https://nodejs.org/en)
+* [https://docs.npmjs.com/](https://docs.npmjs.com/)
+
+### Programación básica en Node.js
+
+#### Variables, tipos de datos y operadores
+
+En Node.js, las variables se declaran utilizando la palabra clave `var`, `let` o `const`. Cada una tiene una funcionalidad específica:
+
+* `var`: Es la forma tradicional de declarar variables, con alcance global.
+* `let`: Tiene alcance de bloque, lo que significa que solo es accesible dentro del bloque donde se declara.
+* `const`: Similar a `let`, pero la variable no se puede reasignar una vez declarada.
+
+Los tipos de datos básicos en Node.js son:
+
+* `Number`: Números enteros o decimales.
+* `String`: Cadenas de texto.
+* `Boolean`: Valores true o false.
+* `Object`: Objetos que almacenan pares clave-valor.
+* `Array`: Listas ordenadas de valores.
+
+Los operadores básicos en Node.js incluyen:
+
+* **Operadores aritméticos:** +, -, *, /, %
+* **Operadores de comparación:** ==, !=, <, >, <=, >=
+* **Operadores lógicos:** &&, ||, !
+* **Operador de asignación:** =
+
+#### Estructuras de control
+
+Las estructuras de control permiten tomar decisiones y repetir código según condiciones específicas. Las más comunes son:
+
+* **Sentencia if:** Evalúa una condición y ejecuta un bloque de código si se cumple.
+* **Sentencia switch:** Evalúa un valor y ejecuta el bloque de código correspondiente a ese valor.
+* **Bucle for:** Repite un bloque de código un número específico de veces.
+* **Bucle while:** Repite un bloque de código mientras se cumpla una condición.
+* **Bucle for...of:** Recorre los elementos de un objeto iterable (array, string, etc.).
+
+#### Funciones y módulos
+
+Las funciones son bloques de código reutilizables que realizan una tarea específica. Se definen utilizando la palabra clave `function` y se invocan con el nombre de la función seguido de paréntesis y argumentos (si los hay).
+
+Los módulos son archivos JavaScript que contienen funciones y variables que pueden ser utilizados en otros scripts. Se importan utilizando la palabra clave `require` y se accede a sus propiedades y métodos con la notación de punto.
+
+#### Entrada y salida de datos
+
+Node.js proporciona métodos para leer y escribir datos desde la consola, archivos y bases de datos.
+
+* **Entrada desde la consola:** Se utiliza el objeto `process.stdin` para leer datos ingresados por el usuario.
+* **Salida en la consola:** Se utiliza el objeto `console` para imprimir mensajes en la consola.
+* **Entrada/salida de archivos:** Se utiliza el módulo `fs` (file system) para leer y escribir archivos.
+
+**Recursos adicionales:**
+
+* [https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction)
+* [https://www.w3schools.com/nodejs/](https://www.w3schools.com/nodejs/)
+* [https://www.tutorialspoint.com/nodejs/index.htm](https://www.tutorialspoint.com/nodejs/index.htm)
