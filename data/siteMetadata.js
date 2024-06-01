@@ -6,13 +6,15 @@ const siteMetadata = {
   description: 'A blog created with focus on Full Stack JavaScript web development',
   language: 'es-co',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://deCaldas.github.io/webDeveloperBlog',
-  siteRepo: 'https://github.com/decaldas/webDeveloperBlog',
+  siteUrl: 'https://web-developer-blog.vercel.app/',
+  socialBanner: '/static/images/opengrapg-imagotype.png',
+  siteLogo: '/static/images/imagotype.png',
+
+  /* Por si algún día creo un repositorio.
+   siteRepo: 'https://github.com/decaldas/webDeveloperBlog', */
 
   /* ** Para cuando tengamos el Imagotipo y demás imagen empresarial del negocio de desarrollo web De Caldas **
-    *
-    *  siteLogo: '/static/images/logo.png',
-    *  socialBanner: '/static/images/twitter-card.png',
+  *
     *   
   * **/
 
