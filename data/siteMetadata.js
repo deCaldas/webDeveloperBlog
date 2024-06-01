@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'Web Developer Blog',
   author: 'Diego Whiskey',
   headerTitle: 'Web Developer Blog',
-  description: 'A blog created with focus on Full Stack JavaScript web development',
+  description: 'A blog about Full Stack JavaScript web development',
   language: 'es-co',
   theme: 'system', // system, dark or light
   siteUrl: 'https://web-developer-blog.vercel.app/',
