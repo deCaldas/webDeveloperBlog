@@ -1,27 +1,20 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Web Developer Blog',
+  title: 'webDeveloperBlog',
   author: 'Diego Whiskey',
   headerTitle: 'Web Developer Blog',
   description: 'A blog about Full Stack JavaScript web development',
   language: 'es-co',
-  theme: 'system', // system, dark or light
+  theme: 'system, dark or light',
   siteUrl: 'https://web-developer-blog.vercel.app/',
   socialBanner: '/static/images/opengrapg-imagotype.png',
+  siteRepo: 'https://github.com/decaldas/webDeveloperBlog',
   siteLogo: '/static/images/imagotype.png',
-
-  /* Por si algún día creo un repositorio.
-   siteRepo: 'https://github.com/decaldas/webDeveloperBlog', */
-
-  /* ** Para cuando tengamos el Imagotipo y demás imagen empresarial del negocio de desarrollo web De Caldas **
-  *
-    *   
-  * **/
-
   email: 'decaldas.digital@yahoo.com',
   github: 'https://github.com/deCaldas',
   twitter: 'https://twitter.com/d_caldasCaridad/',
   linkedin: 'https://www.linkedin.com/in/diegowhiskey/',
+  youtube: 'https://www.youtube.com/@deCaldas-webDeveloper',
   locale: 'es-CO',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
@@ -74,7 +67,7 @@ const siteMetadata = {
       // example: https://giscus.app/themes/custom_example.css
       themeURL: '',
       // This corresponds to the `data-lang="en"` in giscus's configurations
-      lang: 'en',
+      lang: 'es',
     },
   },
   search: {
@@ -94,3 +87,4 @@ const siteMetadata = {
 }
 
 module.exports = siteMetadata
+
