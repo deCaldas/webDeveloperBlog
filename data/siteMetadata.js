@@ -5,7 +5,7 @@ const siteMetadata = {
   headerTitle: 'Web Developer Blog',
   description: 'A blog about Full Stack JavaScript web development',
   language: 'es-co',
-  theme: 'system, dark or light',
+  theme: 'system', // 'system, dark or light',
   siteUrl: 'https://web-developer-blog.vercel.app/',
   socialBanner: '/static/images/opengrapg-imagotype.png',
   siteRepo: 'https://github.com/decaldas/webDeveloperBlog',
