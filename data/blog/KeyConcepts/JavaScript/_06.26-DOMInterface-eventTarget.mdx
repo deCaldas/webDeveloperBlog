@@ -1,0 +1,366 @@
+---
+title: The `EventTarget` DOM interface
+date: '2024-06-13'
+tags: ['JavaScript', 'DOM', 'EventTarget']
+draft: false
+summary: 'Helpful guide to understanding and using `addEventListener()`, `removeEventListener()` and `dispatchEvent()` in JavaScript Web API.'
+---
+
+## La interfaz DOM `EventTarget`
+
+## EventTarget
+
+`EventTarget` es una interfaz en la API web que implementan objetos capaces de recibir eventos y puede tener oyentes para ellos. Los ejemplos comunes de `EventTarget` incluyen elementos `HTML`, `Document`, y `Window`.
+
+```
+Nota: Esta característica está disponible en Web Workers.
+```
+
+La interfaz `EventTarget` se implementa mediante objetos que pueden recibir eventos y pueden tener oyentes para ellos. En otras palabras, cualquier objetivo de eventos implementa los tres métodos asociados con esta interfaz.
+
+`Element` y sus hijos, así como `Document` y `Window`, son los objetivos de eventos más comunes, pero otros objetos también pueden ser objetivos de eventos. Por ejemplo, `IDBRequest`, `AudioNode` y `AudioContext` también son objetivos de eventos.
+
+Muchos objetivos de eventos (incluidos elementos, documentos y ventanas) también admiten la configuración de controladores de eventos a través de propiedades y atributos `onevent`.
+
+### Constructor
+
+`EventTarget()`
+Crea una nueva instancia de objeto `EventTarget`.
+
+### Métodos de instancia
+
+`EventTarget.addEventListener()`
+> Registra un controlador de eventos de un tipo de evento específico en EventTarget.
+
+`EventTarget.removeEventListener()`
+> Elimina un oyente de eventos de EventTarget.
+
+`EventTarget.dispatchEvent()`
+> Envía un evento a este EventTarget.
+
+___
+#### Método de instancia: `EventTarget.addEventListener()`
+
+### addEventListener()
+
+El método `addEventListener()` es utilizado para adjuntar un manejador de eventos a un objeto `EventTarget`. Este método es preferido sobre el uso de atributos HTML como `onclick` debido a que ofrece una mayor flexibilidad y control.
+
+### Sintaxis
+
+```javascript
+target.addEventListener(type, listener, options);
+```
+
+- **type**: Un `string` que representa el tipo de evento a escuchar (por ejemplo, `"click"`, `"mouseover"`).
+- **listener**: La función que se llama cuando el evento especificado es entregado al objetivo.
+- **options** (opcional): Un objeto que especifica características adicionales sobre el comportamiento del evento.
+
+### Ejemplo básico
+
+```javascript
+const button = document.querySelector('button');
+
+button.addEventListener('click', function() {
+    alert('Button clicked!');
+});
+```
+
+En este ejemplo, se selecciona un botón y se agrega un manejador de eventos para el evento `click`. Cada vez que el botón es clicado, se muestra una alerta.
+
+### Parámetros del método addEventListener
+
+1. **type**:
+    - Especifica el tipo de evento a escuchar, como `"click"`, `"mouseover"`, `"keydown"`, etc.
+
+2. **listener**:
+    - Una función o un objeto que implementa el método `handleEvent`. Esta función recibe un objeto `Event` como argumento cuando se ejecuta.
+
+3. **options** (opcional):
+    - Un objeto opcional que puede tener las siguientes propiedades:
+        - `capture`: Un booleano que indica si el evento debe ser capturado en la fase de captura (`true`) o en la fase de burbujeo (`false`). El valor predeterminado es `false`.
+        - `once`: Un booleano que indica si el manejador debe ser invocado solo una vez después de que se añade. Si es `true`, el manejador se elimina después de invocar.
+        - `passive`: Un booleano que indica que el manejador nunca llamará a `preventDefault()`. Si se establece en `true`, mejora el rendimiento en eventos de desplazamiento.
+
+### Ejemplo con opciones
+
+```javascript
+const button = document.querySelector('button');
+
+function handleClick(event) {
+    alert('Button clicked!');
+    console.log(event);
+}
+
+button.addEventListener('click', handleClick, {
+    capture: false,
+    once: true,
+    passive: true
+});
+```
+
+En este ejemplo:
+- `capture: false`: El evento es manejado durante la fase de burbujeo.
+- `once: true`: El manejador se elimina automáticamente después de la primera invocación.
+- `passive: true`: Se mejora el rendimiento al indicar que `preventDefault()` no será llamado.
+
+### Remover un manejador de eventos
+
+Para remover un manejador de eventos, se utiliza el método `removeEventListener()`:
+
+```javascript
+const button = document.querySelector('button');
+
+function handleClick(event) {
+    alert('Button clicked!');
+}
+
+button.addEventListener('click', handleClick);
+
+// Para remover el manejador
+button.removeEventListener('click', handleClick);
+```
+
+### Ejemplo avanzado: Delegación de eventos
+
+La delegación de eventos es una técnica donde se utiliza un único manejador de eventos para gestionar múltiples elementos secundarios. Esto es especialmente útil para elementos dinámicamente creados.
+
+```javascript
+const container = document.querySelector('.container');
+
+container.addEventListener('click', function(event) {
+    if (event.target.matches('.item')) {
+        alert('Item clicked: ' + event.target.textContent);
+    }
+});
+```
+
+En este ejemplo, un solo manejador de eventos en el contenedor gestiona clics en cualquier elemento con la clase `item`.
+
+### Resumen
+
+- `EventTarget` es la interfaz que representa cualquier objeto que pueda recibir eventos.
+- `addEventListener()` es el método para añadir manejadores de eventos.
+- Se pueden especificar diferentes opciones como `capture`, `once`, y `passive`.
+- La delegación de eventos es una técnica útil para manejar eventos en elementos dinámicos.
+
+Aprender a manejar eventos de manera eficiente es crucial para desarrollar aplicaciones web interactivas y responsivas. Con práctica, tendrás más cómodidad utilizando estas técnicas en tus proyectos.
+
+___
+#### Método de instancia: `EventTarget.removeEventListener()`
+
+La función `removeEventListener()` se utiliza para eliminar un listener de eventos previamente registrado con `addEventListener()`.
+
+### Sintaxis
+
+```javascript
+target.removeEventListener(type, listener, options);
+```
+
+- **target**: El objeto que implementa la interfaz `EventTarget` (por ejemplo, un elemento del DOM).
+- **type**: Una cadena que representa el tipo de evento (por ejemplo, `"click"`, `"mouseover"`).
+- **listener**: La función que se desea eliminar del evento.
+- **options**: Opcional. Un objeto que especifica características adicionales sobre la escucha del evento. Puede ser un booleano o un objeto con las siguientes propiedades:
+  - **capture**: Un booleano que indica si el evento debe ser capturado (fase de captura) o no (fase de burbujeo).
+  - **once**: Un booleano que indica que el listener debe ser invocado al menos una vez después de ser añadido.
+  - **passive**: Un booleano que indica que el listener nunca llamará `preventDefault()`.
+
+### Ejemplo Básico
+
+Vamos a ver un ejemplo básico donde añadimos y luego eliminamos un listener de un evento de clic en un botón:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>removeEventListener Example</title>
+</head>
+<body>
+  <button id="myButton">Click me</button>
+  <script>
+    const button = document.getElementById('myButton');
+
+    function handleClick() {
+      console.log('Button clicked!');
+    }
+
+    // Añadir el listener
+    button.addEventListener('click', handleClick);
+
+    // Eliminar el listener
+    setTimeout(() => {
+      button.removeEventListener('click', handleClick);
+      console.log('Listener removed');
+    }, 5000); // Elimina el listener después de 5 segundos
+  </script>
+</body>
+</html>
+```
+
+En este ejemplo, un listener para el evento de clic se añade a un botón y luego se elimina después de 5 segundos.
+
+### Importancia de las Referencias de Funciones
+
+Es crucial que la función que se pasa a `removeEventListener()` sea la misma que se pasó a `addEventListener()`. Esto significa que si defines una función inline, no podrás removerla fácilmente:
+
+```javascript
+button.addEventListener('click', function() {
+  console.log('Button clicked!');
+});
+
+// Esto no funcionará para remover el listener
+button.removeEventListener('click', function() {
+  console.log('Button clicked!');
+});
+```
+
+### Ejemplo con Opciones
+
+Puedes usar opciones para especificar más detalles sobre la eliminación del listener:
+
+```javascript
+const button = document.getElementById('myButton');
+
+function handleClick() {
+  console.log('Button clicked!');
+}
+
+const options = { capture: true };
+
+// Añadir el listener con opciones
+button.addEventListener('click', handleClick, options);
+
+// Eliminar el listener con las mismas opciones
+button.removeEventListener('click', handleClick, options);
+```
+
+### Consideraciones
+
+1. **Compatibilidad**: Asegúrate de que los navegadores que necesitas soporten las características específicas de `removeEventListener()`.
+2. **Memoria**: Remover listeners que ya no son necesarios puede ayudar a prevenir fugas de memoria, especialmente en aplicaciones web grandes y complejas.
+3. **Debugging**: Si encuentras que un listener no se está removiendo, verifica que la referencia a la función y las opciones coincidan exactamente con las usadas al añadir el listener.
+
+### Conclusión
+
+`removeEventListener()` es una herramienta esencial para manejar eventos de forma efectiva en aplicaciones web. Te permite limpiar y gestionar mejor los recursos y el comportamiento de los eventos en tu aplicación. Asegúrate de usarla correctamente pasando las referencias exactas y las opciones apropiadas.
+
+___
+#### Método de instancia: `EventTarget.dispatchEvent()`
+
+## 1. **Concepto de `EventTarget`**
+
+`EventTarget` es una interfaz que se implementa por todos los objetos que pueden recibir eventos y que pueden tener listeners de eventos. Algunos de los objetos que implementan esta interfaz incluyen `Element`, `Document`, y `Window`.
+
+## 2. **Método `dispatchEvent()`**
+
+El método `dispatchEvent()` es una función de `EventTarget` que se utiliza para desencadenar un evento en un `EventTarget` específico. Cuando se llama a `dispatchEvent()`, el evento se envía a través de la fase de captura, la fase de destino, y la fase de burbujeo.
+
+## 3. **Sintaxis**
+
+```javascript
+target.dispatchEvent(event);
+```
+
+- `target`: El objeto `EventTarget` en el cual se dispara el evento.
+- `event`: El objeto `Event` que se despachará.
+
+## 4. **Pasos para Usar `dispatchEvent()`**
+
+1. **Crear un evento**
+
+Primero, necesitas crear un objeto de evento. Puedes usar el constructor de la clase `Event` o de otras clases derivadas como `MouseEvent`, `KeyboardEvent`, etc.
+
+```javascript
+let event = new Event('myEvent', {
+  bubbles: true, // El evento burbujea.
+  cancelable: true // El evento puede ser cancelado.
+});
+```
+
+2. **Agregar un listener para el evento**
+
+Luego, agregas un listener para ese evento en el `EventTarget` deseado.
+
+```javascript
+document.addEventListener('myEvent', function(event) {
+  console.log('El evento myEvent fue disparado');
+});
+```
+
+3. **Despachar el evento**
+
+Finalmente, utilizas `dispatchEvent()` para disparar el evento.
+
+```javascript
+document.dispatchEvent(event);
+```
+
+## 5. **Ejemplo Completo**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>dispatchEvent Example</title>
+</head>
+<body>
+  <button id="myButton">Click Me</button>
+
+  <script>
+    // Crear el evento
+    let myEvent = new Event('myCustomEvent', {
+      bubbles: true,
+      cancelable: true
+    });
+
+    // Obtener el botón
+    let button = document.getElementById('myButton');
+
+    // Agregar un listener para el evento
+    button.addEventListener('myCustomEvent', function(event) {
+      alert('myCustomEvent fue disparado!');
+    });
+
+    // Despachar el evento cuando se hace click en el botón
+    button.addEventListener('click', function() {
+      button.dispatchEvent(myEvent);
+    });
+  </script>
+</body>
+</html>
+```
+
+## 6. **Detalles Adicionales**
+
+- **Fases del evento**: Un evento tiene tres fases: captura, destino y burbujeo. `bubbles` y `cancelable` son propiedades que puedes definir para determinar si el evento burbujea hacia arriba en el DOM y si puede ser cancelado.
+
+- **`CustomEvent`**: Para eventos personalizados que necesitan datos adicionales, puedes usar `CustomEvent`.
+
+```javascript
+let customEvent = new CustomEvent('myCustomEvent', {
+  detail: { key1: 'value1', key2: 'value2' },
+  bubbles: true,
+  cancelable: true
+});
+
+document.addEventListener('myCustomEvent', function(event) {
+  console.log(event.detail);
+});
+
+document.dispatchEvent(customEvent);
+```
+
+- **Manejo de eventos cancelables**: Si un evento es cancelable, se puede detener su propagación y acción predeterminada.
+
+```javascript
+let event = new Event('myEvent', { cancelable: true });
+
+document.addEventListener('myEvent', function(event) {
+  event.preventDefault(); // Cancela la acción predeterminada
+  console.log('Acción predeterminada cancelada');
+});
+
+document.dispatchEvent(event);
+```
+___

@@ -1,12 +1,12 @@
 # Web Developer Blog
 
-Web Developer Blog es un blog personal que comparte contenido de calidad y actualizado sobre el desarrollo web full stack con Javascript. El objetivo del blog es ayudar a los desarrolladores web jr a mejorar sus habilidades y superar las pruebas técnicas. El blog está creado con Next.js y Tailwind CSS, usando el template Tailwind Nextjs Starter Blog.
+Web Developer Blog es un blog personal que comparte contenido de calidad y actualizado sobre el desarrollo web full stack con Javascript. El objetivo del blog es ayudar a los desarrolladores web Jr. a mejorar sus habilidades y superar pruebas técnicas.
 
 ## Características
 
 - Escritura técnica en formato markdown con soporte para MDX, que permite usar componentes de React dentro del markdown.
 - Estilo personalizable con Tailwind CSS, un framework de CSS basado en utilidades que permite crear sitios web modernos sin salir del HTML.
-- Generación de sitio web estático con Next.js, un marco de desarrollo web basado en React que permite crear sitios web estáticos y dinámicos con un alto rendimiento y una buena experiencia de usuario.
+- Generación de sitio web estático con Next.js, un marco de desarrollo web basado en React que permite una buena experiencia de usuario.
 - Despliegue fácil en Vercel, un servicio de hosting gratuito que permite publicar sitios web estáticos directamente desde un repositorio local.
 
 ## Uso
