@@ -1,7 +1,7 @@
 ---
 title: The `EventTarget` DOM interface
 date: '2024-06-13'
-tags: ['JavaScript', 'DOM', 'EventTarget']
+tags: ['JavaScript', 'DOM']
 draft: false
 summary: 'Helpful guide to understanding and using `addEventListener()`, `removeEventListener()` and `dispatchEvent()` in JavaScript Web API.'
 ---
@@ -11,10 +11,9 @@ summary: 'Helpful guide to understanding and using `addEventListener()`, `remove
 ## EventTarget
 
 `EventTarget` es una interfaz en la API web que implementan objetos capaces de recibir eventos y puede tener oyentes para ellos. Los ejemplos comunes de `EventTarget` incluyen elementos `HTML`, `Document`, y `Window`.
-
-```
-Nota: Esta característica está disponible en Web Workers.
-```
+___
+> Nota: Esta característica está disponible en Web Workers.
+___
 
 La interfaz `EventTarget` se implementa mediante objetos que pueden recibir eventos y pueden tener oyentes para ellos. En otras palabras, cualquier objetivo de eventos implementa los tres métodos asociados con esta interfaz.
 
@@ -37,8 +36,8 @@ Crea una nueva instancia de objeto `EventTarget`.
 
 `EventTarget.dispatchEvent()`
 > Envía un evento a este EventTarget.
-
 ___
+
 #### Método de instancia: `EventTarget.addEventListener()`
 
 ### addEventListener()
@@ -70,16 +69,16 @@ En este ejemplo, se selecciona un botón y se agrega un manejador de eventos par
 ### Parámetros del método addEventListener
 
 1. **type**:
-    - Especifica el tipo de evento a escuchar, como `"click"`, `"mouseover"`, `"keydown"`, etc.
+  - Especifica el tipo de evento a escuchar, como `"click"`, `"mouseover"`, `"keydown"`, etc.
 
 2. **listener**:
-    - Una función o un objeto que implementa el método `handleEvent`. Esta función recibe un objeto `Event` como argumento cuando se ejecuta.
+  - Una función o un objeto que implementa el método `handleEvent`. Esta función recibe un objeto `Event` como argumento cuando se ejecuta.
 
 3. **options** (opcional):
-    - Un objeto opcional que puede tener las siguientes propiedades:
-        - `capture`: Un booleano que indica si el evento debe ser capturado en la fase de captura (`true`) o en la fase de burbujeo (`false`). El valor predeterminado es `false`.
-        - `once`: Un booleano que indica si el manejador debe ser invocado solo una vez después de que se añade. Si es `true`, el manejador se elimina después de invocar.
-        - `passive`: Un booleano que indica que el manejador nunca llamará a `preventDefault()`. Si se establece en `true`, mejora el rendimiento en eventos de desplazamiento.
+  - Un objeto opcional que puede tener las siguientes propiedades:
+  - `capture`: Un booleano que indica si el evento debe ser capturado en la fase de captura (`true`) o en la fase de burbujeo (`false`). El valor predeterminado es `false`.
+  - `once`: Un booleano que indica si el manejador debe ser invocado solo una vez después de que se añade. Si es `true`, el manejador se elimina después de invocar.
+  - `passive`: Un booleano que indica que el manejador nunca llamará a `preventDefault()`. Si se establece en `true`, mejora el rendimiento en eventos de desplazamiento.
 
 ### Ejemplo con opciones
 
@@ -214,6 +213,43 @@ button.removeEventListener('click', function() {
 });
 ```
 
+Cuando agregas un event listener con `addEventListener`, pasas una referencia de una función que se ejecutará cuando el evento ocurra. Para remover ese event listener más tarde con `removeEventListener`, necesitas pasar la misma referencia de la función que usaste con `addEventListener`. 
+
+Si defines la función inline (como en el ejemplo anterior), no puedes removerla fácilmente porque estás creando dos funciones diferentes en memoria. Aunque tienen el mismo código, no son la misma instancia de la función, por lo que `removeEventListener` no encontrará el listener correspondiente para removerlo.
+
+Aquí está tu ejemplo con un poco más de explicación:
+
+```js
+// Agregar el event listener con una función inline
+button.addEventListener('click', function() {
+  console.log('Button clicked!');
+});
+
+// Intentar remover el event listener con una función inline idéntica
+button.removeEventListener('click', function() {
+  console.log('Button clicked!');
+});
+```
+
+En este caso, la función pasada a `removeEventListener` es una función diferente de la pasada a `addEventListener`, por lo que el listener no será removido.
+
+Para poder remover correctamente un event listener, debes usar una referencia a la misma función. Aquí hay un ejemplo de cómo hacerlo correctamente:
+
+```js
+// Define la función en una variable
+function handleClick() {
+  console.log('Button clicked!');
+}
+
+// Agregar el event listener usando la referencia de la función
+button.addEventListener('click', handleClick);
+
+// Remover el event listener usando la misma referencia de la función
+button.removeEventListener('click', handleClick);
+```
+
+En este caso, `addEventListener` y `removeEventListener` están usando la misma referencia de la función `handleClick`, por lo que el listener se puede agregar y remover correctamente.
+
 ### Ejemplo con Opciones
 
 Puedes usar opciones para especificar más detalles sobre la eliminación del listener:
@@ -266,7 +302,7 @@ target.dispatchEvent(event);
 
 ## 4. **Pasos para Usar `dispatchEvent()`**
 
-1. **Crear un evento**
+  1. **Crear un evento**
 
 Primero, necesitas crear un objeto de evento. Puedes usar el constructor de la clase `Event` o de otras clases derivadas como `MouseEvent`, `KeyboardEvent`, etc.
 
@@ -277,7 +313,7 @@ let event = new Event('myEvent', {
 });
 ```
 
-2. **Agregar un listener para el evento**
+  2. **Agregar un listener para el evento**
 
 Luego, agregas un listener para ese evento en el `EventTarget` deseado.
 
@@ -287,7 +323,7 @@ document.addEventListener('myEvent', function(event) {
 });
 ```
 
-3. **Despachar el evento**
+  3. **Despachar el evento**
 
 Finalmente, utilizas `dispatchEvent()` para disparar el evento.
 
@@ -333,9 +369,9 @@ document.dispatchEvent(event);
 
 ## 6. **Detalles Adicionales**
 
-- **Fases del evento**: Un evento tiene tres fases: captura, destino y burbujeo. `bubbles` y `cancelable` son propiedades que puedes definir para determinar si el evento burbujea hacia arriba en el DOM y si puede ser cancelado.
+  - **Fases del evento**: Un evento tiene tres fases: captura, destino y burbujeo. `bubbles` y `cancelable` son propiedades que puedes definir para determinar si el evento burbujea hacia arriba en el DOM y si puede ser cancelado.
 
-- **`CustomEvent`**: Para eventos personalizados que necesitan datos adicionales, puedes usar `CustomEvent`.
+  - **`CustomEvent`**: Para eventos personalizados que necesitan datos adicionales, puedes usar `CustomEvent`.
 
 ```javascript
 let customEvent = new CustomEvent('myCustomEvent', {
@@ -363,4 +399,3 @@ document.addEventListener('myEvent', function(event) {
 
 document.dispatchEvent(event);
 ```
-___
