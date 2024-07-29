@@ -13,7 +13,7 @@ const siteMetadata = {
   email: 'decaldas.digital@yahoo.com',
   github: 'https://github.com/deCaldas',
   twitter: 'https://twitter.com/d_caldasCaridad/',
-  linkedin: 'https://www.linkedin.com/in/diegowhiskey/',
+  linkedin: 'https://www.linkedin.com/in/deCaldas/',
   youtube: 'https://www.youtube.com/@deCaldas-webDeveloper',
   locale: 'es-CO',
   analytics: {
@@ -87,4 +87,3 @@ const siteMetadata = {
 }
 
 module.exports = siteMetadata
-
