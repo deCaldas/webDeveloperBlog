@@ -4,6 +4,8 @@
   "freelance": 3,
   "networking": 5,
   "experience": 1,
+  "soft-skills": 1,
+  "focus-on": 1,
   "it-recruiter": 2,
   "hiring": 1,
   "css": 33,
@@ -80,7 +82,7 @@
   "scalability": 1,
   "code-reuse": 1,
   "documentation": 1,
+  "node": 9,
   "react": 2,
-  "modal-window": 2,
-  "node": 9
+  "modal-window": 2
 }
