@@ -23,7 +23,7 @@ export default function AuthorLayout({ children, content }: Props) {
           </h1>
         </div>
         <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
-          <div className="flex flex-col items-center space-x-2 pt-8">
+          <div className="  ">
             {avatar && (
               <Image
                 src={avatar}
@@ -40,12 +40,11 @@ export default function AuthorLayout({ children, content }: Props) {
               <SocialIcon kind="mail" href={`mailto:${email}`} />
               <SocialIcon kind="github" href={github} />
               <SocialIcon kind="linkedin" href={linkedin} />
-              {/* <SocialIcon kind="twitter" href={twitter} /> */}
+              <SocialIcon kind="twitter" href={twitter} />
             </div>
           </div>
           <div className="prose max-w-none pb-8 pt-8 dark:prose-invert xl:col-span-2">
             {children}
-            {/* I'll write here directly while I get {children} working */}
           </div>
         </div>
       </div>
