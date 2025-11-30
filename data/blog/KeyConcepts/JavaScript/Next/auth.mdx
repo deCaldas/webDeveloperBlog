@@ -1,0 +1,117 @@
+```mdx
+---
+title: La verdad sobre Auth.js y Better Auth en 2025
+date: '2025-11-30'
+tags: ['nextjs', 'auth', 'better-auth']
+draft: false
+summary: 'Una guía clara y actualizada (noviembre 2025) sobre qué usar para autenticación en Next.js con App Router: next-auth v4, Auth.js v5 o Better Auth.'
+---
+
+La autenticación en Next.js sigue siendo uno de los temas que más confusión genera.  
+Has oído hablar de **next-auth**, de **Auth.js**, de **@auth/core**, de **@auth/nextjs** y ahora también de **Better Auth**.  
+La pregunta del millón es:
+
+> ¿Qué demonios debo instalar en un proyecto nuevo con App Router en 2025?
+
+La respuesta corta y directa:
+
+- **Proyectos nuevos → Better Auth**  
+- **Proyectos existentes que ya usan Auth.js → quédate con `next-auth@beta` (v5)**  
+- **next-auth v4 → solo si estás en Pages Router o no puedes migrar todavía**
+
+Vamos paso a paso, sin rollos.
+
+---
+## 🧩 ¿De dónde viene todo este lío?
+
+| Año    | Qué pasó                                                                 |
+|--------|--------------------------------------------------------------------------|
+| 2018-2023 | `next-auth` (v4) era el rey indiscutible para Next.js                    |
+| 2023   | Rebranding a **Auth.js** + lanzamiento de la v5 modular                 |
+| 2025   | En septiembre, **Auth.js pasa a ser mantenido por el equipo de Better Auth** |
+
+Hoy (noviembre 2025) el panorama oficial es:
+
+- `next-auth` v4 → legado (Pages Router)  
+- `next-auth@beta` → Auth.js v5, sigue vivo y con soporte de seguridad  
+- **Better Auth** → el nuevo estándar recomendado para proyectos nuevos
+
+---
+## 🔥 ¿Qué paquete instalar según tu caso?
+
+| Situación                                      | Recomendación 2025                         | Por qué                                                                 |
+|------------------------------------------------|--------------------------------------------|-------------------------------------------------------------------------|
+| Proyecto nuevo con App Router (Next.js 14-15) | **Better Auth**                            | Más features, mantenimiento activo, API más limpia                     |
+| Ya tienes Auth.js v5 y no quieres tocar nada   | `next-auth@beta` + `@auth/core`            | Continuidad total, cero breaking changes                               |
+| Todavía en Pages Router                        | `next-auth` v4 (por ahora)                 | Funciona perfecto, aunque ya no recibe nuevas features                  |
+| Quieres algo hosted y con UI lista             | Clerk / Supabase Auth / Kinde              | Fuera del scope de este post, pero son opciones válidas                     |
+
+**Nunca instales `@auth/nextjs`** → paquete experimental abandonado hace años.
+
+---
+## ✅ Instalación limpia en 2025
+
+### Opción 1 – Better Auth (recomendada para nuevos proyectos)
+```bash
+npm install better-auth
+# o
+pnpm add better-auth
+```
+
+Ejemplo básico:
+```ts
+// auth.ts
+import { betterAuth } from "better-auth";
+
+export const auth = betterAuth({
+  database: { /* tu adapter: Prisma, Drizzle, etc. */ },
+  socialProviders: {
+    github: {
+      clientId: process.env.GITHUB_ID!,
+      clientSecret: process.env.GITHUB_SECRET!,
+    },
+  },
+});
+```
+
+### Opción 2 – Seguir con Auth.js v5 (proyectos existentes)
+```bash
+npm install next-auth@beta
+# providers siguen viniendo de @auth/core
+npm install @auth/core
+```
+
+Ejemplo clásico que sigue funcionando:
+```ts
+// auth.ts
+import NextAuth from "next-auth";
+import GitHub from "@auth/core/providers/github";
+
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  providers: [GitHub],
+});
+```
+
+---
+## ⚠️ Errores típicos que debes evitar
+
+- Instalar `next-auth` v4 + `next-auth@beta` al mismo tiempo → sesiones rotas  
+- Usar `@auth/nextjs` → paquete muerto desde 2023  
+- Mezclar adapters de versiones diferentes → errores crípticos en build  
+- Olvidar `AUTH_SECRET` en producción → sesiones inseguras
+
+---
+## Conclusión rápida
+
+| Quiero…                             | Instalación 2025                                 |
+|-------------------------------------|--------------------------------------------------|
+| Lo más moderno y mantenido          | `better-auth`                                    |
+| Seguir con Auth.js sin romper nada  | `next-auth@beta`                                 |
+| Quedarme en lo clásico (Pages)      | `next-auth` v5                                   |
+
+Better Auth es la apuesta de futuro, pero `next-auth@beta` sigue 100 % válido y con soporte.
+
+¡Listo! Ya puedes elegir con los ojos abiertos en noviembre de 2025.
+
+¿Estás migrando un proyecto grande y necesitas ayuda paso a paso? Déjame un comentario y te echo una mano.
+```
