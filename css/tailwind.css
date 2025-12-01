@@ -1,25 +1,54 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/preflight" layer(base);
+@import "tailwindcss/utilities" layer(utilities);
+
+/* stylelint-disable-next-line at-rule-no-unknown */
+@theme {
+  --font-family-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --color-primary-50: #fdf2f8;
+  --color-primary-100: #fce7f3;
+  --color-primary-200: #fbcfe8;
+  --color-primary-300: #f9a8d4;
+  --color-primary-400: #f472b6;
+  --color-primary-500: #ec4899;
+  --color-primary-600: #db2777;
+  --color-primary-700: #be185d;
+  --color-primary-800: #9f1239;
+  --color-primary-900: #831843;
+  --color-primary-950: #500724;
+
+  --line-height-11: 2.75rem;
+  --line-height-12: 3rem;
+  --line-height-13: 3.25rem;
+  --line-height-14: 3.5rem;
+}
 
 .task-list-item::before {
-  @apply hidden;
+  display: none;
 }
 
 .task-list-item {
-  @apply list-none;
+  list-style-type: none;
 }
 
 .footnotes {
-  @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+  margin-top: 3rem;
+  border-top: 1px solid rgb(229 231 235);
+  padding-top: 2rem;
+}
+
+.footnotes:where(.dark, .dark *) {
+  border-color: rgb(55 65 81);
 }
 
 .data-footnote-backref {
-  @apply no-underline;
+  text-decoration: none;
 }
 
 .csl-entry {
-  @apply my-5;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 
 /* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
