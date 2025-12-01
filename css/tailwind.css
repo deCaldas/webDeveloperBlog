@@ -58,3 +58,21 @@ input:-webkit-autofill:focus {
     background-color 600000s 0s,
     color 600000s 0s;
 }
+
+/* Override KBar Modal styles for better contrast */
+div[class*="z-50"][class*="bg-gray-300/50"] div[class*="bg-gray-50"] {
+  @apply !bg-white dark:!bg-gray-900 !border-gray-200 dark:!border-gray-700 !text-gray-900 dark:!text-gray-100;
+}
+
+div[class*="z-50"][class*="bg-gray-300/50"] input {
+  @apply !text-gray-900 dark:!text-gray-100 !placeholder-gray-500 dark:!placeholder-gray-400;
+}
+
+div[class*="z-50"][class*="bg-gray-300/50"] svg {
+  @apply !text-gray-500 dark:!text-gray-400;
+}
+
+/* Fix result items */
+div[class*="z-50"][class*="bg-gray-300/50"] div[class*="text-gray-700"] {
+  @apply !text-gray-700 dark:!text-gray-200;
+}
