@@ -2,6 +2,8 @@
 @import "tailwindcss/preflight" layer(base);
 @import "tailwindcss/utilities" layer(utilities);
 
+@variant dark (&:where(.dark, .dark *));
+
 /* stylelint-disable-next-line at-rule-no-unknown */
 @theme {
   --font-family-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
