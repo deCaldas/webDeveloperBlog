@@ -38,7 +38,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
               <PageTitle>{title}</PageTitle>
             </div>
           </div>
-          <div className="prose max-w-none py-4 dark:prose-invert">{children}</div>
+          <div className="prose prose-lg max-w-none px-4 py-4 dark:prose-invert sm:px-6 md:px-8 lg:prose-xl">{children}</div>
           <footer>
             <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
               {prev && prev.path && (

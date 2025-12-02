@@ -59,7 +59,7 @@ def main():
     tags_to_remove = {'key concept', 'feature'} 
     
     count = 0
-    for root, dirs, files in os.walk(root_dir):
+    for root, files in os.walk(root_dir):
         for file in files:
             if file.endswith('.mdx'):
                 filepath = os.path.join(root, file)
