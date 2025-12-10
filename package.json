@@ -1,7 +1,7 @@
 {
   "name": "web-developer-blog",
-  "version": "2.4.0",
-  "webDeveloper": "Diego Whiskey",
+  "version": "3.0.0",
+  "webDeveloper": "Armando Toro Cárdenas",
   "private": true,
   "scripts": {
     "prepare": "husky",
@@ -25,7 +25,7 @@
     "gray-matter": "4.0.3",
     "hast-util-from-html-isomorphic": "2.0.0",
     "image-size": "2.0.2",
-    "next": "16.0.6",
+    "next": "16.0.7",
     "next-contentlayer2": "0.5.8",
     "next-themes": "0.4.6",
     "pliny": "0.4.1",
