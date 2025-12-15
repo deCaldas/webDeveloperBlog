@@ -1,0 +1,361 @@
+---
+title: Caridad UI – Apuntes técnicos
+date: '2025-12-15'
+tags: ['web-components', 'design-system', 'frontend-security', 'caridad-ui']
+draft: false
+summary: Apuntes técnicos personales sobre Web Components, Design Systems y seguridad frontend aplicados a Caridad UI.
+---
+
+# Caridad UI
+
+Estos apuntes son notas técnicas, con decisiones claras y ejemplos reales, pensadas para volver a ellas.
+
+---
+
+## 1. ¿Qué es un Web Component?
+
+Un **Web Component** es un componente nativo del navegador.
+
+No depende de React, Vue, Angular ni de ningún framework. Vive en el estándar de la web.
+
+Un Web Component se construye con **cuatro tecnologías**:
+
+* **Custom Elements** 
+* **Shadow DOM** 
+* **HTML Templates** 
+* **ES Modules** 
+
+#### 1. Custom Elements – define una nueva etiqueta HTML
+#### 2. Shadow DOM – encapsula DOM y estilos
+#### 3. HTML Templates – estructura reutilizable
+#### 4. ES Modules – organización del código
+
+Un Web Component:
+
+* es reutilizable
+* es encapsulado
+* funciona en cualquier framework (o sin framework)
+* es predecible
+
+Ejemplo de uso:
+
+```html
+<c-button variant="primary">Guardar</c-button>
+```
+
+Eso es una clase JavaScript registrada en el navegador.
+
+---
+
+## 2. Cómo se escribe un Web Component desde cero
+
+### 2.1 Custom Element mínimo
+
+```js
+class CButton extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+customElements.define('c-button', CButton);
+```
+
+Reglas importantes:
+
+* El nombre **debe** tener guion (`c-button`)
+* Hereda de `HTMLElement`
+* Se registra una sola vez
+
+---
+
+### 2.2 Shadow DOM
+
+El Shadow DOM crea un árbol DOM aislado.
+
+```js
+class CButton extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+  }
+}
+```
+
+`mode: 'open'` permite:
+
+```js
+el.shadowRoot.querySelector(...)
+```
+
+En Caridad UI esto es obligatorio para:
+
+* evitar colisiones de estilos
+* garantizar aislamiento
+* hacer componentes predecibles
+
+---
+
+### 2.3 Template y render
+
+```js
+const template = document.createElement('template');
+template.innerHTML = `
+  <style>
+    button {
+      font: inherit;
+      padding: 0.5rem 1rem;
+    }
+  </style>
+  <button part="button">
+    <slot></slot>
+  </button>
+`;
+
+class CButton extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.appendChild(
+        template.content.cloneNode(true)
+    );
+  }
+}
+```
+
+Notas:
+
+* `slot` define contenido externo
+* `part` permite estilizar desde fuera (`::part`)
+* los estilos están encapsulados
+
+---
+
+## 3. ¿Para qué sirven los Web Components?
+
+En Caridad UI sirven para:
+
+* construir un **Design System real**;
+* evitar dependencia de frameworks;
+* garantizar estabilidad a largo plazo;
+* compartir componentes entre proyectos;
+* reducir deuda técnica.
+
+No sirven para:
+
+* prototipos rápidos sin estructura;
+* reemplazar lógica compleja de apps;
+* competir con frameworks.
+
+Son una **capa base** para construir web apps.
+
+---
+
+## 4. ¿Qué es un Design System?
+
+Un **Design System** no es:
+
+* una librería de componentes sueltos;
+* un set de colores;
+* un Figma bonito.
+
+Un **Design System** es:
+
+> Un sistema coherente de decisiones técnicas, visuales y de uso.
+
+Incluye:
+
+* principios
+* tokens (color, spacing, tipografía)
+* componentes
+* estados
+* reglas
+
+Caridad UI es un Design System porque:
+
+* define cómo se escribe un componente
+* define cómo se estiliza
+* define cómo se comunica estado
+* define cómo se asegura la seguridad
+
+---
+
+## 5. Tokens y estilos
+
+Ejemplo de tokens CSS:
+
+```css
+:host {
+  --c-color-primary: #111;
+  --c-radius-sm: 4px;
+}
+```
+
+Uso interno:
+
+```css
+button {
+  border-radius: var(--c-radius-sm);
+  background: var(--c-color-primary);
+}
+```
+
+Esto permite:
+
+* theming
+* consistencia
+* overrides controlados
+
+---
+
+## 6. Seguridad frontend (obligatorio)
+
+Caridad UI **no confía en el input**.
+
+### 6.1 XSS (Cross-Site Scripting)
+
+XSS ocurre cuando:
+
+* se inyecta HTML o JS malicioso
+* el navegador lo ejecuta
+
+Ejemplo peligroso:
+
+```js
+label.innerHTML = userInput;
+```
+
+Ejemplo seguro:
+
+```js
+label.textContent = userInput;
+```
+
+Regla:
+
+> Nunca usar `innerHTML` con datos externos.
+
+---
+
+### 6.2 Sanitización
+
+Si **necesitas** HTML:
+
+* sanitiza
+* controla whitelist
+
+Pero en Caridad UI:
+
+* se prefiere **no permitir HTML**
+* los componentes trabajan con texto plano
+
+---
+
+### 6.3 Content Security Policy (CSP)
+
+CSP limita qué se puede ejecutar.
+
+Ejemplo:
+
+```http
+Content-Security-Policy:
+  default-src 'self';
+  script-src 'self';
+```
+
+Impacto:
+
+* bloquea scripts inline
+* reduce superficie XSS
+
+---
+
+### 6.4 Trusted Types
+
+Trusted Types evita asignaciones inseguras.
+
+Concepto clave:
+
+```js
+element.innerHTML = string; // ❌ bloqueado
+```
+
+Solo se permiten objetos explícitamente confiables.
+
+Es una defensa avanzada, ideal para apps grandes.
+
+---
+
+## 7. Buenas prácticas en Caridad UI
+
+### Componentes
+
+* una responsabilidad
+* API pequeña
+* atributos claros
+* eventos explícitos
+
+### DOM
+
+* usar `textContent`
+* evitar mutaciones innecesarias
+* no exponer shadowRoot sin razón
+
+### Accesibilidad
+
+* roles ARIA cuando aplica
+* focus visible
+* teclado primero
+
+---
+
+## 8. Patrones comunes
+
+### Observed Attributes
+
+```js
+static get observedAttributes() {
+  return ['disabled'];
+}
+
+attributeChangedCallback(name, oldValue, newValue) {
+  if (name === 'disabled') {
+    this.button.disabled = newValue !== null;
+  }
+}
+```
+
+### Eventos personalizados
+
+```js
+this.dispatchEvent(new CustomEvent('change', {
+  detail: { value },
+  bubbles: true,
+}));
+```
+
+---
+
+## 9. Checklist mental antes de publicar un componente
+
+* ¿Usa Shadow DOM?
+* ¿Evita `innerHTML`?
+* ¿Es accesible con teclado?
+* ¿Tiene API mínima?
+* ¿Es testeable?
+* ¿Rompe algo si falla?
+
+Si alguna respuesta es "no", el componente no está listo.
+
+---
+
+## 10. Visión
+
+Caridad UI. Busca:
+
+* estabilidad
+* control
+* seguridad
+* independencia
+
+Esto es una base técnica para que proyectos duren años.
