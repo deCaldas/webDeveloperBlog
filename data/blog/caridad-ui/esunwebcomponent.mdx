@@ -1,0 +1,191 @@
+---
+title: Qué es un Web Component (sin frameworks)
+date: '2025-12-16'
+tags: ['web-components', 'custom-elements', 'shadow-dom', 'caridad-ui']
+draft: false
+summary: Definición técnica y práctica de qué es un Web Component, cómo funciona en el navegador y qué problemas resuelve sin depender de frameworks.
+---
+
+# Qué es un Web Component (sin frameworks)
+
+Este texto existe para **despejar confusión**.
+
+Un Web Component no es:
+
+* un mini framework
+* un reemplazo de React
+* una abstracción experimental
+
+Es una **capacidad nativa del navegador**.
+
+---
+
+## 1. Definición directa
+
+Un **Web Component** es un componente HTML personalizado, definido en JavaScript, que:
+
+* tiene una etiqueta propia
+* encapsula su DOM y estilos
+* expone una API clara
+* funciona sin dependencias externas
+
+Ejemplo real:
+
+```html
+<c-button>Guardar</c-button>
+```
+
+Eso es HTML válido porque el navegador fue instruido para entenderlo.
+
+---
+
+## 2. Qué lo hace posible
+
+Los Web Components existen gracias a **estándares web**, no a librerías.
+
+Sus piezas son:
+
+1. **Custom Elements** – definición de nuevas etiquetas
+2. **Shadow DOM** – encapsulación
+3. **HTML Templates** – estructura reutilizable
+4. **ES Modules** – organización y carga
+
+Si sabes JavaScript moderno, ya tienes todo lo necesario.
+
+---
+
+## 3. Custom Elements
+
+Los Custom Elements permiten registrar una etiqueta.
+
+```js
+class CButton extends HTMLElement {}
+
+customElements.define('c-button', CButton);
+```
+
+Reglas:
+
+* el nombre debe contener guion
+* se registra una sola vez
+* vive en el `CustomElementRegistry`
+
+Desde ese momento, el navegador sabe qué hacer cuando encuentra `<c-button>`.
+
+---
+
+## 4. Ciclo de vida
+
+Un Web Component tiene callbacks claros.
+
+```js
+class Example extends HTMLElement {
+  connectedCallback() {
+    // el elemento entra al DOM
+  }
+
+  disconnectedCallback() {
+    // el elemento sale del DOM
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {}
+}
+```
+
+No hay magia oculta.
+
+El ciclo es explícito y predecible.
+
+---
+
+## 5. Shadow DOM
+
+El Shadow DOM crea un árbol DOM aislado.
+
+```js
+this.attachShadow({ mode: 'open' });
+```
+
+Efectos reales:
+
+* estilos encapsulados
+* selectores externos no entran
+* menos efectos colaterales
+
+Importante:
+
+> Shadow DOM **no es seguridad**, es encapsulación.
+
+---
+
+## 6. Slots
+
+Los slots definen puntos de inserción de contenido.
+
+```html
+<c-card>
+  <h2 slot="title">Título</h2>
+</c-card>
+```
+
+```html
+<slot name="title"></slot>
+```
+
+El navegador maneja el DOM del contenido.
+
+El componente **no lo reescribe**.
+
+---
+
+## 7. Web Component vs Framework Component
+
+| Aspecto      | Web Component | React / Vue    |
+| ------------ | ------------- | -------------- |
+| Dependencias | Ninguna       | Framework      |
+| Runtime      | Navegador     | Virtual DOM    |
+| Estilos      | Shadow DOM    | Scope simulado |
+| Portabilidad | Total         | Limitada       |
+
+Un Web Component es **infraestructura**, no conveniencia.
+
+---
+
+## 8. Por qué usar Web Components en Caridad UI
+
+Decisión técnica:
+
+* independencia a largo plazo
+* interoperabilidad
+* menor deuda
+* control total del DOM
+
+Caridad UI no busca velocidad inicial.
+
+Busca estabilidad.
+
+---
+
+## 9. Cuándo NO usar Web Components
+
+No son buena idea si:
+
+* necesitas prototipar en horas
+* el equipo no domina JS
+* el producto vive y muere con un framework
+
+Usarlos por moda es un error.
+
+---
+
+## 10. Posición clara
+
+Un Web Component:
+
+* no compite con frameworks
+* no los reemplaza
+* los complementa
+
+Es una capa base.
+
+En Caridad UI esa capa es deliberada, mínima y controlada.
