@@ -1,0 +1,249 @@
+---
+title: Seguridad en Web Components
+date: '2025-12-16'
+tags: ['web-components', 'frontend-security', 'xss', 'caridad-ui']
+draft: false
+summary: XSS, sanitización, CSP y Trusted Types.
+---
+
+# Seguridad en Web Components
+
+### Apuntes técnicos sobre seguridad frontend aplicada a Web Components: XSS, sanitización, CSP y Trusted Types.
+
+`Estos apuntes documentan decisiones de seguridad`
+
+En Caridad UI la seguridad no es un extra: es parte del diseño del componente.
+
+---
+
+## 1. Modelo mental: el input es hostil
+
+Regla base:
+
+> Todo dato que entra a un Web Component es potencialmente malicioso.
+
+No importa si viene de:
+
+* atributos HTML
+* propiedades JS
+* slots
+* eventos
+
+El componente **no confía**.
+
+---
+
+## 2. XSS (Cross-Site Scripting)
+
+XSS ocurre cuando se permite que contenido controlado por el usuario:
+
+* se interprete como HTML
+* ejecute JavaScript
+
+Ejemplo vulnerable:
+
+```js
+this.label.innerHTML = value;
+```
+
+Input:
+
+```html
+<img src=x onerror=alert('XSS')>
+```
+
+Resultado: ejecución de código.
+
+---
+
+### 2.1 Regla no negociable
+
+En Caridad UI:
+
+> `innerHTML` está prohibido para datos externos.
+
+Uso correcto:
+
+```js
+this.label.textContent = value;
+```
+
+Esto convierte cualquier entrada en **texto literal**, no ejecutable.
+
+---
+
+## 3. Atributos HTML como vector de ataque
+
+Los atributos también son input.
+
+Ejemplo:
+
+```html
+<c-select placeholder="<b>XSS</b>"></c-select>
+```
+
+Implementación segura:
+
+```js
+attributeChangedCallback(name, _, newValue) {
+  if (name === 'placeholder') {
+    this.label.textContent = newValue ?? '';
+  }
+}
+```
+
+Nunca:
+
+```js
+this.label.innerHTML = newValue; // ❌
+```
+
+---
+
+## 4. Slots y contenido externo
+
+Los slots **no son inseguros por sí mismos**, pero:
+
+* el componente no debe reinterpretar su contenido
+* no debe clonarlo con `innerHTML`
+
+Uso correcto:
+
+```html
+<c-button>
+  <span>Guardar</span>
+</c-button>
+```
+
+El navegador gestiona el DOM del slot.
+
+Regla:
+
+> El componente no procesa HTML del slot, solo lo presenta.
+
+---
+
+## 5. Sanitización: cuándo y por qué evitarla
+
+Sanitizar HTML implica:
+
+* librerías
+* reglas
+* mantenimiento
+
+En Caridad UI:
+
+* **no se permite HTML dinámico**
+* los componentes trabajan con texto plano
+
+Decisión consciente:
+
+> Mejor restringir la API que intentar limpiar input complejo.
+
+---
+
+## 6. Content Security Policy (CSP)
+
+CSP reduce el impacto de un XSS que logre colarse.
+
+Ejemplo de política básica:
+
+```http
+Content-Security-Policy:
+  default-src 'self';
+  script-src 'self';
+```
+
+Efectos:
+
+* bloquea scripts inline
+* impide `eval`
+* obliga a código estructurado
+
+CSP no reemplaza buenas prácticas, las **refuerza**.
+
+---
+
+## 7. Trusted Types
+
+Trusted Types evita asignaciones peligrosas al DOM.
+
+Con Trusted Types activo:
+
+```js
+element.innerHTML = string; // ❌ bloqueado por el navegador
+```
+
+Solo se aceptan objetos creados por una policy explícita.
+
+Esto:
+
+* fuerza disciplina
+* hace visibles los errores
+* elimina XSS silencioso
+
+Ideal para proyectos grandes o críticos.
+
+---
+
+## 8. Shadow DOM y seguridad
+
+El Shadow DOM:
+
+* **no es una sandbox de seguridad**
+* pero reduce colisiones y errores
+
+Beneficio real:
+
+* menos manipulación externa del DOM interno
+* menos superficie de error
+
+La seguridad sigue dependiendo del código.
+
+---
+
+## 9. Tests de seguridad (ejemplo real)
+
+```js
+test('usa textContent y no innerHTML', () => {
+  const el = mount(`<c-select placeholder="<b>XSS</b>"></c-select>`);
+  const label = el.shadowRoot.querySelector('.selected-label');
+
+  expect(label.textContent).toBe('<b>XSS</b>');
+});
+```
+
+Si este test falla:
+
+* el componente es inseguro
+* no se publica
+
+---
+
+## 10. Checklist de seguridad
+
+Antes de dar por terminado un componente:
+
+* ¿Evita `innerHTML`?
+* ¿Trata atributos como input hostil?
+* ¿No evalúa strings?
+* ¿No clona HTML externo?
+* ¿Funciona con CSP estricta?
+
+Si alguna respuesta es "no", hay que corregir.
+
+---
+
+## 11. Posición técnica
+
+Caridad UI prioriza:
+
+* restricciones claras
+* APIs pequeñas
+* fallos visibles
+
+Menos flexibilidad.
+
+Más control.
+
+Eso es seguridad real en frontend.

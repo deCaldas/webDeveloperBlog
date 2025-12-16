@@ -1,7 +1,7 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title: 'webDeveloperBlog',
-  author: 'Diego Whiskey',
+  author: 'Armando Toro Cárdenas',
   headerTitle: 'Web Developer Blog',
   description: 'A blog about Full Stack JavaScript web development',
   language: 'es-co',
@@ -10,9 +10,9 @@ const siteMetadata = {
   socialBanner: '/static/images/opengrapg-imagotype.png',
   siteRepo: 'https://github.com/decaldas/webDeveloperBlog', // private repo,
   siteLogo: '/static/images/imagotype.png',
-  email: 'd.caldascaridad@gmail.com',
+  email: 'armandotorocardenas@gmail.com',
   github: 'https://github.com/deCaldas',
-  twitter: 'https://twitter.com/d_caldasCaridad/',
+  twitter: 'https://twitter.com/@WhiskeyDeCaldas',
   linkedin: 'https://www.linkedin.com/in/deCaldas/',
   youtube: 'https://www.youtube.com/@deCaldas-webDeveloper',
   locale: 'es-CO',
