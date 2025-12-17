@@ -1,0 +1,261 @@
+---
+title: Cómo escribir un Web Component desde cero
+date: '2025-12-16'
+tags: ['web-components', 'custom-elements', 'shadow-dom', 'caridad-ui']
+draft: false
+summary: Construcción paso a paso de un Web Component real, sin frameworks ni abstracciones, incluyendo errores comunes y decisiones técnicas.
+---
+
+# Escribir un Web Component
+
+* sin frameworks
+* sin helpers
+* sin magia
+* como lo ejecuta el navegador
+
+---
+
+## 1. El mínimo absoluto
+
+Un Web Component empieza con **una clase y un registro**.
+
+```js
+class CExample extends HTMLElement {}
+
+customElements.define('c-example', CExample);
+```
+
+Nada más.
+
+Si esto no existe:
+
+* `<c-example>` es HTML inválido
+* el navegador no sabe qué hacer
+
+---
+
+## 2. Error común #1: olvidar el guion
+
+```js
+customElements.define('cexample', CExample); // ❌
+```
+
+Los Custom Elements **deben** tener guion.
+
+Esto evita colisiones con HTML nativo.
+
+---
+
+## 3. Constructor: qué sí y qué no
+
+```js
+class CExample extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+```
+
+### Regla crítica
+
+> Siempre llamar `super()` primero.
+
+Si no:
+
+* el elemento no se inicializa
+* el error es silencioso
+
+---
+
+### Qué NO hacer en el constructor
+
+❌ Acceder al DOM externo
+❌ Leer atributos finales
+❌ Renderizar contenido complejo
+
+El elemento **aún no está en el DOM**.
+
+---
+
+## 4. connectedCallback: el verdadero inicio
+
+```js
+connectedCallback() {
+  console.log('Elemento conectado al DOM');
+}
+```
+
+Aquí sí:
+
+* el elemento existe en el DOM
+* los atributos ya están disponibles
+
+En Caridad UI, el render inicial ocurre aquí.
+
+---
+
+## 5. Shadow DOM mínimo
+
+```js
+connectedCallback() {
+  if (this.shadowRoot) return;
+
+  this.attachShadow({ mode: 'open' });
+}
+```
+
+Error común:
+
+* crear múltiples shadowRoots
+
+Este `guard` es obligatorio.
+
+---
+
+## 6. Render real (sin innerHTML)
+
+```js
+const template = document.createElement('template');
+
+template.innerHTML = `
+  <style>
+    :host { display: block; }
+  </style>
+  <div class="content">
+    <slot></slot>
+  </div>
+`;
+
+connectedCallback() {
+  if (!this.shadowRoot) {
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+}
+```
+
+Nota importante:
+
+* `innerHTML` solo se usa con **HTML controlado** (el template)
+* nunca con input externo
+
+---
+
+## 7. Error común #2: renderizar múltiples veces
+
+```js
+connectedCallback() {
+  this.render(); // ❌ sin control
+}
+```
+
+Esto duplica nodos si el elemento se reconecta.
+
+Solución:
+
+* render una sola vez
+* luego actualizar nodos puntuales
+
+---
+
+## 8. Atributos observados
+
+```js
+static get observedAttributes() {
+  return ['disabled'];
+}
+
+attributeChangedCallback(name, oldValue, newValue) {
+  if (name === 'disabled') {
+    this.toggleAttribute('aria-disabled', newValue !== null);
+  }
+}
+```
+
+Reglas:
+
+* atributos son **string o null**
+* no usar lógica pesada aquí
+
+---
+
+## 9. Propiedades vs atributos (error clásico)
+
+❌ Esto es incorrecto:
+
+```js
+this.setAttribute('value', obj);
+```
+
+✔ Correcto:
+
+```js
+this.value = obj;
+```
+
+Atributos:
+
+* configuración inicial
+* interoperabilidad HTML
+
+Propiedades:
+
+* estado interno
+* objetos
+
+---
+
+## 10. Limpieza: disconnectedCallback
+
+```js
+disconnectedCallback() {
+  this.removeEventListener('click', this.onClick);
+}
+```
+
+Error común:
+
+* olvidar limpiar listeners
+* memory leaks silenciosos
+
+---
+
+## 11. Componente mínimo funcional
+
+```js
+class CBox extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+  }
+
+  connectedCallback() {
+    if (this.shadowRoot.children.length) return;
+
+    const div = document.createElement('div');
+    div.textContent = 'Hola desde CBox';
+
+    this.shadowRoot.appendChild(div);
+  }
+}
+
+customElements.define('c-box', CBox);
+```
+
+Eso es un Web Component real.
+
+---
+
+## 12. Posición técnica
+
+Un Web Component bien escrito:
+
+* tiene poco código
+* tiene reglas claras
+* falla de forma visible
+
+En Caridad UI:
+
+> Primero control. Luego ergonomía.
+
+Nunca al revés.
