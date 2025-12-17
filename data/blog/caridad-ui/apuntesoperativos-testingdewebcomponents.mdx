@@ -1,0 +1,220 @@
+---
+title: Testing de Web Components
+date: '2025-12-17'
+tags: ['web-components', 'testing', 'frontend', 'caridad-ui']
+draft: false
+summary: Qué probar, qué no, y cómo detectar errores reales antes de publicar.
+---
+
+# Apuntes operativos
+
+Estos apuntes existen para evitar una trampa común:
+
+> “Funciona en el navegador, entonces está bien.”
+
+Un Web Component sin tests:
+
+* se rompe en silencio
+* acumula deuda
+* falla meses después
+
+---
+
+## 1. Qué significa testear un Web Component
+
+No se trata de testear:
+
+* estilos pixel perfect
+* implementación interna
+* detalles de render
+
+Se trata de testear:
+
+* comportamiento
+* contratos de la API
+* seguridad
+
+El test valida **decisiones**, no código.
+
+---
+
+## 2. Qué sí se debe testear
+
+Checklist base:
+
+* atributos observados
+* propiedades públicas
+* eventos emitidos
+* slots renderizados
+* accesibilidad básica
+* seguridad (XSS)
+
+Si algo es parte de la API, se testea.
+
+---
+
+## 3. Setup mental mínimo
+
+Un test de Web Components necesita:
+
+* DOM real (JSDOM)
+* Custom Elements definidos
+* acceso a `shadowRoot`
+
+No hace falta un framework pesado.
+
+---
+
+## 4. Test de render básico
+
+```js
+test('renderiza contenido base', () => {
+  const el = document.createElement('c-box');
+  document.body.appendChild(el);
+
+  expect(el.shadowRoot).not.toBeNull();
+});
+```
+
+Esto valida:
+
+* registro correcto
+* lifecycle básico
+
+---
+
+## 5. Test de atributos
+
+```js
+test('responde al atributo disabled', () => {
+  const el = document.createElement('c-button');
+  el.setAttribute('disabled', '');
+  document.body.appendChild(el);
+
+  const button = el.shadowRoot.querySelector('button');
+  expect(button.disabled).toBe(true);
+});
+```
+
+Esto prueba:
+
+* `observedAttributes`
+* sincronización correcta
+
+---
+
+## 6. Test de propiedades
+
+```js
+test('actualiza value vía propiedad', () => {
+  const el = document.createElement('c-input');
+  document.body.appendChild(el);
+
+  el.value = 'hola';
+
+  expect(el.value).toBe('hola');
+});
+```
+
+Nunca depender solo de atributos para estado.
+
+---
+
+## 7. Test de eventos
+
+```js
+test('emite evento change', () => {
+  const el = document.createElement('c-input');
+  document.body.appendChild(el);
+
+  const handler = jest.fn();
+  el.addEventListener('change', handler);
+
+  el.value = 'nuevo';
+
+  expect(handler).toHaveBeenCalled();
+});
+```
+
+Un evento sin test es una promesa rota.
+
+---
+
+## 8. Test de slots
+
+```js
+test('proyecta contenido en slot title', () => {
+  const el = document.createElement('c-card');
+  el.innerHTML = `<h2 slot="title">Título</h2>`;
+  document.body.appendChild(el);
+
+  const slot = el.shadowRoot.querySelector('slot[name="title"]');
+  const nodes = slot.assignedNodes();
+
+  expect(nodes[0].textContent).toBe('Título');
+});
+```
+
+Esto valida contrato de slots.
+
+---
+
+## 9. Test de seguridad (obligatorio)
+
+```js
+test('no interpreta HTML externo', () => {
+  const el = document.createElement('c-select');
+  el.setAttribute('placeholder', '<img src=x onerror=alert(1)>');
+  document.body.appendChild(el);
+
+  const label = el.shadowRoot.querySelector('.selected-label');
+  expect(label.textContent).toBe('<img src=x onerror=alert(1)>');
+});
+```
+
+Si este test falla:
+
+* el componente no es publicable
+
+---
+
+## 10. Qué NO testear
+
+No testear:
+
+* estructura exacta del DOM
+* clases internas
+* estilos específicos
+
+Eso acopla tests a implementación.
+
+---
+
+## 11. Errores comunes en testing
+
+* testear `innerHTML`
+* mockear demasiado
+* depender de snapshots grandes
+* ignorar Shadow DOM
+
+Todos llevan a falsos positivos.
+
+---
+
+## 12. Regla operativa Caridad UI
+
+> Ningún componente nuevo sin tests mínimos.
+
+Tests pequeños.
+
+Claros.
+
+Que fallen cuando deben.
+
+---
+
+## 13. Nota final
+
+Un test no garantiza calidad.
+
+Pero la ausencia de tests garantiza problemas.

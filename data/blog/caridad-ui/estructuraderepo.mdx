@@ -1,0 +1,205 @@
+---
+title: Estructura de repositorio
+date: '2025-12-17'
+tags: ['web-components', 'design-system', 'arquitectura', 'caridad-ui']
+draft: false
+summary: Cómo organizar un repositorio de Web Components para que escale sin volverse inmanejable.
+---
+
+Estos apuntes existen para evitar una situación concreta:
+
+> “No quiero tocar nada porque no sé qué se rompe.”
+
+Una mala estructura de repo no falla de inmediato.
+Falla cuando el proyecto crece.
+
+---
+
+## 1. Principio base
+
+La estructura debe responder a estas preguntas sin pensar:
+
+* ¿Dónde vive un componente?
+* ¿Qué depende de qué?
+* ¿Qué es público y qué es interno?
+
+Si la estructura no responde eso, está mal.
+
+---
+
+## 2. Estructura mínima para un repositorio de Web Components inicialmente.
+
+```txt
+caridad-ui/design-system/
+├── src/
+│   ├── components/
+│   └── __securitytest__/
+│		   ├── helpers.js
+│		   ├── xss.attribute.test.js
+│		   ├── xss.slots.test.js
+│		   └── xss.text-content.test.js
+│       └── button/
+│           └── c-button.js
+│       └── card/
+│           └── c-card.js
+│       └── contact-form/
+│           └── c-contact-form.js
+│       └── cta/
+│           └── c-cta.js
+│       └── feature/
+│           └── c-feature.js
+│       └── footer/
+│           └── c-footer.js
+│       └── form/
+│   		├── c-checkbox.js
+│   		├── c-fields.js
+│   		├── c-label.js
+│   		├── c-switch.js
+│           └── c-textarea.js
+│       └── grid/
+│           └── c-grid.js
+│       └── header/
+│           └── c-header.js
+│       └── hero/
+│           └── c-hero.js
+│       └── input/
+│           └── c-input.js
+│       └── navbar/
+│           └── c-navbar.js
+│       └── section/
+│           └── c-section.js
+│       └── select/
+│           └── c-select.js
+│   └── tokens/
+│       ├── colors.css  
+│       ├── spacing.css
+│       └── typography.css
+│   └─ styles/
+│      └─ base.css
+│   └── index.js        <!-- Punto de entrada (registra todos los componentes) -->
+├── tests/
+|    └── test.html      <!-- Demo local -->
+├── .babelrc            <!-- Babel para transpilar JS moderno -->
+├── .gitignore
+├── jest.config.js
+├── jest.setup.js
+├── package-lock.json
+├── package.json
+├── README.md
+└── webpack.config.mjs  <!-- Webpack config (ESM) -->
+```
+
+---
+
+## 3. Componentes aislados por carpeta
+
+Cada componente es una unidad completa:
+
+* implementación
+* tests
+* documentación mínima
+
+---
+
+## 4. Un archivo = un custom element
+
+Regla estricta:
+
+* un `customElements.define`
+* una clase
+* un nombre
+
+Nunca:
+
+* múltiples componentes en un mismo archivo
+* lógica compartida “porque es más fácil”
+
+Eso se paga después.
+
+---
+
+## 5. Tokens separados de componentes
+
+Los tokens **no importan componentes**.
+
+Los componentes **sí consumen tokens**.
+
+```txt
+tokens/
+├─ colors.css
+├─ spacing.css
+└─ typography.css
+```
+
+Esto evita dependencias circulares.
+
+---
+
+## 6. Estilos base globales (pocos)
+
+`styles/` existe solo para:
+
+* reset mínimo
+* variables base
+* reglas compartidas inevitables
+
+Si crece demasiado, algo va mal.
+
+---
+
+## 7. 8. index.js: frontera pública
+
+```js
+export './components/button/c-button.js';
+export './components/card/c-card.js';
+```
+
+Todo lo que no se exporta aquí:
+
+* no existe públicamente
+* puede romperse sin aviso
+
+Esta es la API real del sistema.
+
+---
+
+## 8. README por componente
+
+No para marketing.
+
+Para recordar:
+
+* qué hace
+* qué NO hace
+* cómo se usa
+
+Si no puedes explicarlo en 10 líneas, es demasiado grande.
+
+---
+
+## 9. Errores comunes
+
+* carpeta `shared/`
+* carpeta `common/`
+* componentes anidados
+* imports cruzados entre componentes
+
+Todos indican falta de límites.
+
+---
+
+## 10. Señales tempranas de deuda
+
+* miedo a mover archivos
+* cambios que afectan componentes no relacionados
+* tests frágiles
+
+La estructura suele ser la causa.
+
+---
+
+## 11. Regla operativa Caridad UI
+
+> Si no sabes dónde poner algo, probablemente no debería existir.
+
+La estructura también diseña el sistema.

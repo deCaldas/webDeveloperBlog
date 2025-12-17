@@ -1,0 +1,218 @@
+---
+title: Shadow DOM
+date: '2025-12-17'
+tags: ['shadow-dom', 'web-components', 'frontend-security', 'caridad-ui']
+draft: false
+summary: Encapsulación, no seguridad
+---
+
+**¿Qué es realmente el Shadow DOM, qué problemas resuelve, qué NO protege y por qué Caridad UI lo usa siempre de forma deliberada?**
+
+
+El Shadow DOM es una de las partes más malentendidas de los Web Components.
+
+Muchos creen que:
+
+* es una sandbox
+* aísla código malicioso
+* protege contra XSS
+
+Nada de eso es cierto.
+
+---
+
+## 1. Definición precisa
+
+El **Shadow DOM** es un árbol DOM separado que:
+
+* encapsula estilos
+* encapsula estructura
+* limita el alcance de selectores
+
+No es una frontera de seguridad.
+
+---
+
+## 2. Qué problema real resuelve
+
+Antes del Shadow DOM:
+
+* estilos globales colisionaban
+* `.button {}` rompía componentes
+* el orden de carga importaba demasiado
+
+Con Shadow DOM:
+
+* los estilos viven dentro del componente
+* no afectan al resto de la página
+* el componente es más predecible
+
+Eso es **encapsulación**, no protección.
+
+---
+
+## 3. Ejemplo mínimo
+
+```js
+class CCard extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+  }
+
+  connectedCallback() {
+    this.shadowRoot.innerHTML = `
+      <style>
+        .card { border: 1px solid #ccc; }
+      </style>
+      <div class="card">
+        <slot></slot>
+      </div>
+    `;
+  }
+}
+```
+
+El selector `.card`:
+
+* solo existe dentro del componente
+* no colisiona
+
+---
+
+## 4. Qué NO hace el Shadow DOM
+
+El Shadow DOM **NO**:
+
+* bloquea JavaScript externo
+* impide acceso al DOM interno (si es `open`)
+* sanitiza contenido
+* evita XSS
+
+Ejemplo:
+
+```js
+document.querySelector('c-card').shadowRoot
+  .querySelector('.card');
+```
+
+Acceso completo.
+
+---
+
+## 5. `mode: open` vs `mode: closed`
+
+```js
+this.attachShadow({ mode: 'open' });
+```
+
+### `open`
+
+* `shadowRoot` accesible
+* mejor para testing
+* mejor debugging
+
+### `closed`
+
+* `shadowRoot` no accesible
+* falsa sensación de seguridad
+
+Decisión Caridad UI:
+
+> Siempre `open`.
+
+La seguridad no depende del modo.
+
+---
+
+## 6. Estilos externos y `::part`
+
+El Shadow DOM bloquea CSS externo.
+
+Para permitir personalización:
+
+```html
+<button part="button"></button>
+```
+
+```css
+c-button::part(button) {
+  background: red;
+}
+```
+
+Esto es una **API explícita de estilo**.
+
+Nada implícito.
+
+---
+
+## 7. Relación con seguridad
+
+El Shadow DOM ayuda indirectamente a la seguridad porque:
+
+* reduce manipulación accidental
+* limita efectos colaterales
+* obliga a APIs más claras
+
+Pero:
+
+> Si escribes código inseguro, el Shadow DOM no te salva.
+
+---
+
+## 8. Error común: confiarse
+
+Creer esto es peligroso:
+
+> “Está en el Shadow DOM, nadie lo toca.”
+
+Eso lleva a:
+
+* usar `innerHTML`
+* parsear strings
+* ignorar input hostil
+
+Exactamente lo contrario de lo que Caridad UI busca.
+
+---
+
+## 9. Por qué Caridad UI lo usa siempre
+
+Decisión técnica:
+
+* aislamiento de estilos
+* consistencia visual
+* reducción de bugs
+* APIs explícitas (`slot`, `part`)
+
+No por seguridad.
+
+Por **control**.
+
+---
+
+## 10. Conexión con seguridad real
+
+La seguridad real viene de:
+
+* `textContent`
+* CSP
+* Trusted Types
+* APIs pequeñas
+
+El Shadow DOM solo ordena la casa.
+
+---
+
+## 11. Posición clara
+
+Shadow DOM:
+
+* encapsula
+* ordena
+* reduce errores
+
+No protege.
+
+En Caridad UI se usa con los ojos abiertos.

@@ -1,0 +1,249 @@
+---
+title: API de un Web Component bien diseñada
+date: '2025-12-17'
+tags: ['web-components', 'api-design', 'custom-elements', 'caridad-ui']
+draft: false
+summary: Apuntes prácticos sobre cómo diseñar la API de un Web Component
+---
+
+# Atributos, propiedades, eventos y límites claros
+
+Estos apuntes existen para responder siempre a la misma pregunta:
+
+> ¿Qué expongo y qué no?
+
+Una API mal diseñada no falla de inmediato.
+
+Falla con el tiempo.
+
+---
+
+## 1. Principio base
+
+Un Web Component es una **caja con fronteras claras**.
+
+Todo lo que cruza esa frontera es API.
+
+Si no decides conscientemente esa frontera:
+
+* el DOM se filtra
+* el estado se acopla
+* el componente se vuelve frágil
+
+---
+
+## 2. Atributos: configuración declarativa
+
+Los **atributos** son HTML.
+
+Características:
+
+* strings o `null`
+* visibles en el markup
+* serializables
+
+Ejemplo:
+
+```html
+<c-button disabled></c-button>
+```
+
+```js
+static get observedAttributes() {
+  return ['disabled'];
+}
+
+attributeChangedCallback(name, _, newValue) {
+  if (name === 'disabled') {
+    this._button.disabled = newValue !== null;
+  }
+}
+```
+
+Uso recomendado:
+
+* flags
+* estados simples
+* configuración inicial
+
+---
+
+## 3. Error común: meter lógica en atributos
+
+❌ Incorrecto:
+
+```html
+<c-modal config="{ open: true }"></c-modal>
+```
+
+Los atributos **no son JSON confiable**.
+
+Evitar:
+
+* objetos
+* arrays
+* lógica compleja
+
+---
+
+## 4. Propiedades: estado y lógica
+
+Las **propiedades** son JavaScript.
+
+Ejemplo:
+
+```js
+set value(val) {
+  this._value = val;
+  this._renderValue();
+}
+
+get value() {
+  return this._value;
+}
+```
+
+Uso recomendado:
+
+* objetos
+* estado interno
+* interacción programática
+
+---
+
+## 5. Regla práctica
+
+> Atributos para HTML. Propiedades para JS.
+
+Si dudas:
+
+* empieza como propiedad
+* promueve a atributo solo si aporta valor
+
+---
+
+## 6. Eventos: comunicación hacia afuera
+
+Un Web Component **no llama callbacks externos**.
+
+Comunica con eventos.
+
+```js
+this.dispatchEvent(new CustomEvent('change', {
+  detail: { value: this.value },
+  bubbles: true,
+  composed: true,
+}));
+```
+
+Opciones importantes:
+
+* `bubbles`: permite escuchar arriba
+* `composed`: atraviesa Shadow DOM
+
+---
+
+## 7. Error común: eventos mudos
+
+❌ Esto no sirve:
+
+```js
+new CustomEvent('change');
+```
+
+Un evento sin `detail` obliga a inspeccionar el componente.
+
+La API se vuelve opaca.
+
+---
+
+## 8. Qué NO exponer
+
+No exponer:
+
+* nodos internos
+* referencias a `shadowRoot`
+* métodos de render
+* estado intermedio
+
+Si el usuario necesita eso:
+
+* la API está mal
+
+---
+
+## 9. Slots como parte de la API
+
+Los slots **son API pública**.
+
+```html
+<slot name="title"></slot>
+```
+
+Eso implica:
+
+* nombre estable
+* comportamiento documentado
+* no romper compatibilidad
+
+Cambiar un slot rompe usuarios.
+
+---
+
+## 10. `part` como API de estilo
+
+```html
+<button part="button"></button>
+```
+
+`::part` es:
+
+* explícito
+* limitado
+* versionable
+
+Mejor que permitir CSS global.
+
+---
+
+## 11. API pequeña > API flexible
+
+Cada nueva opción:
+
+* aumenta superficie de error
+* complica testing
+* dificulta refactors
+
+Caridad UI prefiere:
+
+> pocas opciones, bien definidas
+
+---
+
+## 12. Checklist mental
+
+Antes de cerrar un componente:
+
+* ¿Cada atributo tiene razón de existir?
+* ¿Cada evento tiene `detail` claro?
+* ¿Las propiedades están documentadas?
+* ¿Los slots están definidos?
+* ¿Puedo cambiar la implementación sin romper la API?
+
+Si no:
+
+* simplificar
+
+---
+
+## 13. Nota final
+
+Diseñar la API **es diseño de sistemas**, no sintaxis.
+
+Una buena API:
+
+* envejece bien
+* obliga a buen uso
+* reduce bugs futuros
+
+Eso es lo que se busca en Caridad UI.

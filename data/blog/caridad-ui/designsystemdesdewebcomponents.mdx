@@ -1,0 +1,245 @@
+---
+title: Design System desde Web Components
+date: '2025-12-17'
+tags: ['design-system', 'web-components', 'tokens', 'caridad-ui']
+draft: false
+summary: Apuntes técnicos sobre qué es realmente un Design System
+---
+
+### Cómo se implementa con Web Components y qué decisiones definen a Caridad UI
+
+Estos apuntes existen para responder una pregunta concreta:
+
+> ¿Qué estamos construyendo realmente cuando construimos Caridad UI?
+
+No es una colección de componentes.
+
+Es un **sistema de decisiones**.
+
+---
+
+## 1. Qué es (y qué no es) un Design System
+
+Un Design System **NO es**:
+
+* una librería de UI
+* un set de componentes reutilizables
+* un Figma sincronizado con código
+
+Un Design System **es**:
+
+> Un conjunto coherente de reglas, límites y convenciones que gobiernan cómo se construye la interfaz.
+
+Los componentes son una consecuencia, no el centro.
+
+---
+
+## 2. El problema que resuelve
+
+Sin Design System:
+
+* cada componente decide por su cuenta
+* aparecen variantes infinitas
+* la UI se fragmenta
+* el mantenimiento se vuelve costoso
+
+Con Design System:
+
+* las decisiones se toman una vez
+* los componentes obedecen reglas
+* el sistema es consistente
+
+Caridad UI existe para **reducir decisiones repetidas**.
+
+---
+
+## 3. Por qué Web Components como base
+
+Decisión técnica:
+
+* estándar del navegador
+* sin dependencia de frameworks
+* interoperable
+* duradero
+
+Un Design System no debe estar atado a:
+
+* React
+* Vue
+* la moda del año
+
+Web Components permiten que el sistema sobreviva a la capa de aplicación.
+
+---
+
+## 4. Tokens: decisiones convertidas en variables
+
+Los **tokens** son valores que representan decisiones.
+
+Ejemplo:
+
+```css
+:host {
+  --c-color-primary: #111;
+  --c-radius-sm: 4px;
+  --c-spacing-md: 0.75rem;
+}
+```
+
+Esto NO es solo CSS.
+
+Es decir:
+
+* qué color se considera primario
+* qué radio es aceptable
+* cuánto espacio es normal
+
+---
+
+## 5. Uso de tokens en componentes
+
+```css
+button {
+  border-radius: var(--c-radius-sm);
+  padding: var(--c-spacing-md);
+  background: var(--c-color-primary);
+}
+```
+
+Beneficios:
+
+* consistencia automática
+* theming controlado
+* refactors globales
+
+Un componente no decide valores.
+
+Consume tokens.
+
+---
+
+## 6. Componentes como contratos
+
+Cada componente en Caridad UI es un **contrato**:
+
+* API pequeña
+* comportamiento estable
+* límites claros
+
+Ejemplo:
+
+```html
+<c-button variant="primary" disabled></c-button>
+```
+
+No hay:
+
+* 20 props
+* estilos implícitos
+* overrides mágicos
+
+---
+
+## 7. Slots y `part` como extensibilidad controlada
+
+Extender sin romper es clave.
+
+### Slots
+
+```html
+<slot name="title"></slot>
+```
+
+Permiten:
+
+* control de contenido
+* sin tocar estructura interna
+
+### `::part`
+
+```html
+<button part="button"></button>
+```
+
+Permite:
+
+* personalización explícita
+* sin abrir todo el DOM
+
+Ambos son **APIs del sistema**.
+
+---
+
+## 8. Seguridad como parte del sistema
+
+En Caridad UI:
+
+* no se permite HTML dinámico
+* no se usa `innerHTML` con input
+* se prioriza `textContent`
+
+Esto no es una recomendación.
+
+Es una **regla del sistema**.
+
+Un componente inseguro rompe el Design System.
+
+---
+
+## 9. Lo que Caridad UI decide NO permitir
+
+Decisiones conscientes:
+
+* no CSS global
+* no acceso a DOM interno
+* no APIs ambiguas
+* no configuraciones infinitas
+
+Menos libertad.
+
+Más previsibilidad.
+
+---
+
+## 10. Caridad UI y el concepto de “librería”
+
+Sí:
+
+* se distribuye por npm
+* se importa como dependencia
+
+Pero conceptualmente:
+
+> Caridad UI no es una librería de uso, es un sistema de reglas.
+
+Los componentes son la implementación visible de esas reglas.
+
+---
+
+## 11. Cómo se usa un Design System
+
+No se “consume” como una API cualquiera.
+
+Se **adopta**:
+
+* respetando límites
+* aceptando restricciones
+* entendiendo decisiones
+
+Si necesitas romper reglas constantemente:
+
+* el sistema no encaja
+
+---
+
+## 12. Cierre mental
+
+Caridad UI no busca flexibilidad total.
+
+Busca:
+
+* coherencia
+* longevidad
+* control
+
+Eso es lo que define a un Design System real.
