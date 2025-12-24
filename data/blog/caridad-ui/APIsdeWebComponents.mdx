@@ -1,0 +1,312 @@
+---
+title: Diseño de APIs estables en Web Components
+date: '2025-12-24'
+tags: ['web-components', 'api-design', 'caridad-ui']
+draft: false
+summary: Diseñar APIs de Web Components que no se rompan con el tiempo
+---
+
+# APIs estables en Web Components: atributos, propiedades, eventos y compatibilidad.
+
+Este post no trata de sintaxis.
+
+Trata de **responsabilidad**.
+
+Una API mal diseñada:
+
+* obliga a breaking changes
+* genera workarounds
+* rompe la confianza del usuario
+
+En Caridad UI, **la API es el contrato más caro de cambiar**.
+
+---
+
+## 1. Qué es una API en un Web Component
+
+La API de un Web Component es todo lo que el exterior puede tocar:
+
+* atributos HTML
+* propiedades JS públicas
+* eventos emitidos
+* CSS Custom Properties expuestas
+* parts (`::part`)
+
+Si algo es accesible desde fuera, **es API**, aunque no lo documentes.
+
+---
+
+## 2. Principio base: API pequeña, explícita
+
+Regla:
+
+> Si no puedes explicar un componente en 30 segundos, la API es demasiado grande.
+
+Consecuencias:
+
+* menos superficie de bugs
+* menos dependencias
+* menos breaking changes
+
+---
+
+## 3. Atributos vs propiedades
+
+### 3.1 Atributos (HTML)
+
+Sirven para:
+
+* configuración declarativa
+* valores simples
+* interoperabilidad
+
+Ejemplo:
+
+```html
+<c-button disabled></c-button>
+```
+
+Características:
+
+* siempre strings
+* visibles en HTML
+* reflejan estado básico
+
+---
+
+### 3.2 Propiedades (JavaScript)
+
+Sirven para:
+
+* valores complejos
+* control imperativo
+* integración con frameworks
+
+```js
+el.disabled = true;
+el.options = [{ label: 'A', value: 1 }];
+```
+
+Características:
+
+* tipos reales
+* no serializables
+* no visibles en markup
+
+---
+
+### 3.3 Regla de oro
+
+* Atributos → **configuración**
+* Propiedades → **estado y datos**
+
+No mezclar.
+
+---
+
+## 4. Sincronización atributo ↔ propiedad
+
+Si expones ambos, **deben reflejarse**.
+
+```js
+static get observedAttributes() {
+  return ['disabled'];
+}
+
+get disabled() {
+  return this.hasAttribute('disabled');
+}
+
+set disabled(value) {
+  if (value) {
+    this.setAttribute('disabled', '');
+  } else {
+    this.removeAttribute('disabled');
+  }
+}
+```
+
+Esto evita:
+
+* estados inconsistentes
+* APIs sorpresa
+
+---
+
+## 5. Booleanos bien hechos
+
+Mal:
+
+```html
+<c-button disabled="false"></c-button>
+```
+
+Bien:
+
+```html
+<c-button disabled></c-button>
+```
+
+Regla:
+
+> En HTML, la presencia del atributo es `true`.
+
+Nunca interpretar strings como booleanos.
+
+---
+
+## 6. Defaults explícitos
+
+Un componente sin defaults claros es frágil.
+
+```js
+constructor() {
+  super();
+  this._size = 'md';
+}
+```
+
+Y documentar:
+
+* qué pasa si no se pasa nada
+* qué valores son válidos
+
+---
+
+## 7. Eventos como salida, no callbacks
+
+Un Web Component **no acepta callbacks**.
+
+Comunica por eventos.
+
+```js
+this.dispatchEvent(new CustomEvent('change', {
+  detail: { value },
+  bubbles: true,
+  composed: true,
+}));
+```
+
+Reglas:
+
+* nombres en minúscula
+* payload mínimo
+* no exponer estado interno
+
+---
+
+## 8. `bubbles` y `composed` no son opcionales
+
+Si el evento debe salir del Shadow DOM:
+
+```js
+bubbles: true,
+composed: true,
+```
+
+Si no, el componente queda aislado.
+
+---
+
+## 9. No exponer implementación interna
+
+Nunca:
+
+* métodos privados como públicos
+* referencias al DOM interno
+* estado mutable sin control
+
+Ejemplo incorrecto:
+
+```js
+el.shadowRoot.querySelector('button')
+```
+
+Eso **rompe encapsulación**.
+
+---
+
+## 10. CSS como API (con límites)
+
+Exponer solo:
+
+* Custom Properties necesarias
+* `::part` con intención
+
+```css
+::part(button) {
+  border-radius: 8px;
+}
+```
+
+Cada `part` agregado es un compromiso a largo plazo.
+
+---
+
+## 11. Compatibilidad hacia atrás
+
+Antes de romper una API:
+
+* ¿puede deprecarsarse?
+* ¿puede mantenerse como alias?
+* ¿vale el costo?
+
+Ejemplo:
+
+```js
+console.warn('[c-button] "primary" está deprecado, usa "variant"');
+```
+
+---
+
+## 12. Tests de API
+
+### 12.1 La API existe
+
+```js
+test('expone propiedad disabled', () => {
+  const el = document.createElement('c-button');
+  expect('disabled' in el).toBe(true);
+});
+```
+
+### 12.2 Atributo y propiedad sincronizados
+
+```js
+test('disabled refleja atributo', () => {
+  const el = document.createElement('c-button');
+  el.disabled = true;
+
+  expect(el.hasAttribute('disabled')).toBe(true);
+});
+```
+
+---
+
+## 13. Checklist de API estable
+
+Antes de publicar:
+
+* ¿La API es pequeña?
+* ¿Atributos y propiedades están claros?
+* ¿Los eventos salen del Shadow DOM?
+* ¿Los defaults están definidos?
+* ¿Puedo mantener esta API 2 años?
+
+Si dudas, no publiques.
+
+---
+
+## 14. Cierre
+
+Una API estable no es flexible.
+
+Es **predecible**.
+
+Caridad UI prioriza:
+
+* contratos claros
+* cambios lentos
+* confianza a largo plazo
+
+Eso es más valioso que cualquier feature nueva.

@@ -1,0 +1,108 @@
+---
+title: Versionado y breaking changes en Web Components
+date: '2025-12-24'
+tags: ['design-system', 'web-components', 'versioning', 'caridad-ui']
+draft: false
+summary: Criterios estrictos para versionar componentes nativos y manejar cambios incompatibles sin romper consumidores.
+---
+
+## Principio base
+
+**Un Web Component es una API pública viva.**  
+Cualquier cambio en su contrato rompe o mantiene compatibilidad. No hay punto medio.
+
+Caridad UI usa **SemVer estricto** aplicado a *interfaces reales*, no a implementación.
+
+---
+
+## Qué cuenta como API pública
+
+- Nombre del Custom Element (`<c-button>`)
+- Atributos observados y su semántica
+- Propiedades públicas
+- Eventos emitidos (nombre + `detail`)
+- Slots (nombre, existencia, propósito)
+- CSS Custom Properties documentadas
+- Estados accesibles vía atributos (`disabled`, `selected`, etc.)
+
+**Todo lo demás es privado.**
+
+---
+
+## Reglas de versionado
+
+### PATCH (x.y.Z)
+Cambios internos sin impacto externo:
+- Refactor interno
+- Optimización de CSS/JS
+- Fixes de bugs sin alterar comportamiento observable
+
+### MINOR (x.Y.0)
+Cambios compatibles:
+- Nuevos atributos opcionales
+- Nuevos slots *no obligatorios*
+- Nuevas CSS variables
+- Nuevos eventos adicionales
+
+Regla: **el consumidor no debe cambiar nada**.
+
+### MAJOR (X.0.0)
+Breaking changes reales:
+- Renombrar o eliminar atributos
+- Cambiar significado de un atributo existente
+- Eliminar slots
+- Cambiar estructura de slots obligatorios
+- Cambiar payload de eventos
+- Cambiar defaults visibles
+- Cambiar estilos base perceptibles sin opt-in
+
+---
+
+## Decisiones firmes
+
+- ❌ No se versiona por archivo, solo por paquete
+- ❌ No se “corrige” una API rota en minor
+- ❌ No se confía en “nadie lo usa así”
+- ✅ La compatibilidad pesa más que la limpieza interna
+- ✅ El changelog es obligatorio en MAJOR y MINOR
+
+---
+
+## Estrategia ante breaking changes
+
+1. **Deprecación explícita**
+   - Warning en consola
+   - Documentación clara
+   - Al menos una versión MINOR de transición
+
+2. **Convivencia temporal**
+   - Atributo viejo sigue funcionando
+   - Nuevo atributo recomendado
+
+3. **Eliminación solo en MAJOR**
+
+---
+
+## Ejemplo real
+
+```js
+// ❌ BREAKING → MAJOR
+<c-select value="a"></c-select>
+// pasa a
+<c-select selected="a"></c-select>
+````
+
+```js
+// ✅ Compatible → MINOR
+<c-select value="a" searchable></c-select>
+```
+
+---
+
+## Regla final
+
+> Si dudas si algo es breaking, **trátalo como breaking**.
+
+Eso disciplina el diseño y protege al consumidor.
+
+```

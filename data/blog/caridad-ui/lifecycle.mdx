@@ -1,0 +1,371 @@
+---
+title: Lifecycle de Web Components
+date: '2025-12-24'
+tags: ['web-components', 'lifecycle', 'caridad-ui']
+draft: false
+summary: Ciclo de vida real de un Web Component, qué ocurre en cada fase y qué decisiones técnicas tomar para no romper componentes.
+---
+
+Este post documenta **cómo vive realmente un Web Component**.
+
+El lifecycle importa porque:
+
+* define **dónde** inicializar cosas
+* evita **bugs silenciosos**
+* previene **memory leaks**
+* separa construcción de ejecución
+
+En Caridad UI, respetar el lifecycle **no es opcional**.
+
+---
+
+## 1. Fases reales del lifecycle
+
+Un Web Component atraviesa estas fases, en este orden:
+
+1. `constructor`
+2. `connectedCallback`
+3. `attributeChangedCallback` (cuando aplica)
+4. Uso normal
+5. `disconnectedCallback`
+
+No todas ocurren siempre, pero el orden **nunca cambia**.
+
+---
+
+## 2. constructor(): creación, no ejecución
+
+El `constructor` se ejecuta cuando el navegador **crea la instancia**, no cuando se monta en el DOM.
+
+```js
+class CButton extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.appendChild(
+      template.content.cloneNode(true)
+    );
+
+    this._button = this.shadowRoot.querySelector('button');
+  }
+}
+```
+
+### Qué SÍ hacer aquí
+
+* `super()` siempre
+* crear Shadow DOM
+* clonar templates
+* inicializar referencias internas
+* definir estado interno básico
+
+### Qué NO hacer aquí
+
+* acceder a atributos finales
+* leer tamaño del DOM
+* hacer fetch
+* registrar listeners globales
+* asumir que el componente está visible
+
+Regla dura:
+
+> El constructor no sabe si el componente existe en la página.
+
+---
+
+## 3. connectedCallback(): el componente entra en escena
+
+Se ejecuta cuando el elemento se conecta al DOM.
+
+```js
+connectedCallback() {
+  this._upgradeProperty('disabled');
+  this._render();
+  this._button.addEventListener('click', this._onClick);
+}
+```
+
+### Qué SÍ hacer aquí
+
+* sincronizar atributos y propiedades
+* renderizar estado dependiente del DOM
+* registrar event listeners
+* iniciar observers
+
+### Qué NO hacer aquí
+
+* volver a crear Shadow DOM
+* duplicar listeners
+* asumir que solo se ejecuta una vez
+
+Importante:
+
+> `connectedCallback` puede ejecutarse múltiples veces.
+
+Si el nodo se mueve en el DOM, se desconecta y se reconecta.
+
+---
+
+## 4. attributeChangedCallback(): reaccionar, no mandar
+
+Solo se ejecuta si defines `observedAttributes`.
+
+```js
+static get observedAttributes() {
+  return ['disabled'];
+}
+
+attributeChangedCallback(name, oldValue, newValue) {
+  if (oldValue === newValue) return;
+
+  if (name === 'disabled') {
+    this._button.disabled = newValue !== null;
+  }
+}
+```
+
+### Principios
+
+* Nunca asumir orden de ejecución
+* Puede dispararse antes de `connectedCallback`
+* No renderizar todo desde aquí
+
+Regla:
+
+> attributeChangedCallback **reacciona**, no gobierna.
+
+---
+
+## 5. Uso normal: estado y eventos
+
+Durante la vida activa del componente:
+
+* el DOM ya existe
+* los listeners están activos
+* los atributos pueden cambiar
+
+Aquí:
+
+* se despachan eventos
+* se actualiza estado interno
+* se refleja estado visual
+
+Ejemplo:
+
+```js
+_onClick = () => {
+  this.dispatchEvent(new CustomEvent('change', {
+    detail: { pressed: true },
+    bubbles: true,
+    composed: true,
+  }));
+};
+```
+
+---
+
+## 6. disconnectedCallback(): limpieza obligatoria
+
+Se ejecuta cuando el componente sale del DOM.
+
+```js
+disconnectedCallback() {
+  this._button.removeEventListener('click', this._onClick);
+}
+```
+
+### Qué SÍ hacer aquí
+
+* remover event listeners
+* cancelar observers
+* limpiar timers
+
+### Qué NO hacer aquí
+
+* destruir Shadow DOM
+* asumir que no volverá a conectarse
+
+Regla clara:
+
+> Todo lo que se registra en `connectedCallback` se limpia aquí.
+
+---
+
+## 7. Patrón recomendado en Caridad UI
+
+Separación estricta:
+
+* constructor → **estructura**
+* connected → **activación**
+* attributeChanged → **reacción**
+* disconnected → **limpieza**
+
+Visualmente:
+
+```
+constructor
+  └── estructura
+connected
+  └── listeners + render
+attributeChanged
+  └── sync
+usage
+  └── eventos
+connected/disconnected
+  └── toggle
+```
+
+---
+
+## 8. Errores comunes (y costosos)
+
+* Renderizar en el constructor
+* No limpiar listeners
+* Asumir ejecución única
+* Leer atributos demasiado pronto
+* Mezclar lifecycle con lógica de negocio
+
+Cada uno termina en:
+
+* bugs intermitentes
+* fugas de memoria
+* comportamiento impredecible
+
+---
+
+## 9. Tests de lifecycle (endureciendo el contrato)
+
+Si el lifecycle es un contrato, **los tests lo hacen cumplir**.
+
+En Caridad UI no se confía en que el desarrollador "recuerde" las reglas. Se automatizan.
+
+Los siguientes ejemplos usan **Jest + JSDOM**, pero el patrón es independiente del runner.
+
+---
+
+### 9.1 El constructor no depende del DOM
+
+El componente debe poder instanciarse sin estar conectado.
+
+```js
+test('constructor no accede al DOM externo', () => {
+  expect(() => {
+    document.createElement('c-button');
+  }).not.toThrow();
+});
+```
+
+Este test falla si:
+
+* se leen atributos críticos en el constructor
+* se accede a `document` innecesariamente
+
+---
+
+### 9.2 connectedCallback se ejecuta al conectar
+
+```js
+test('connectedCallback se ejecuta al montar', () => {
+  const el = document.createElement('c-button');
+  document.body.appendChild(el);
+
+  expect(el.shadowRoot).not.toBeNull();
+});
+```
+
+Este test asegura:
+
+* que el componente se activa al entrar al DOM
+* que no depende de orden externo
+
+---
+
+### 9.3 connectedCallback puede ejecutarse más de una vez
+
+```js
+test('connectedCallback es idempotente', () => {
+  const el = document.createElement('c-button');
+
+  document.body.appendChild(el);
+  document.body.removeChild(el);
+  document.body.appendChild(el);
+
+  // Si no lanza error, pasa
+  expect(true).toBe(true);
+});
+```
+
+Este test detecta:
+
+* listeners duplicados
+* renders acumulativos
+
+---
+
+### 9.4 attributeChangedCallback reacciona correctamente
+
+```js
+test('attributeChangedCallback sincroniza disabled', () => {
+  const el = document.createElement('c-button');
+  document.body.appendChild(el);
+
+  el.setAttribute('disabled', '');
+  const button = el.shadowRoot.querySelector('button');
+
+  expect(button.disabled).toBe(true);
+});
+```
+
+Este test falla si:
+
+* el atributo no se refleja
+* la lógica depende del orden de callbacks
+
+---
+
+### 9.5 disconnectedCallback limpia efectos
+
+```js
+test('disconnectedCallback limpia listeners', () => {
+  const el = document.createElement('c-button');
+  document.body.appendChild(el);
+
+  const spy = jest.spyOn(el, 'dispatchEvent');
+  document.body.removeChild(el);
+
+  el.click();
+  expect(spy).not.toHaveBeenCalled();
+});
+```
+
+Este test protege contra:
+
+* memory leaks
+* eventos fantasmas
+
+---
+
+### 9.6 Test mental obligatorio
+
+Si no puedes escribir un test para una fase del lifecycle:
+
+* el componente es demasiado complejo
+* o la responsabilidad está mal ubicada
+
+Los tests revelan errores de diseño antes que los usuarios.
+
+---
+
+## 10. Checklist mental y Cierre
+
+El lifecycle no es un detalle.
+
+Es el contrato invisible entre tu componente y el navegador.
+
+Caridad UI lo respeta porque:
+
+* evita hacks
+* reduce deuda técnica
+* hace componentes predecibles
+
+Sin lifecycle claro, no hay Design System sólido.
