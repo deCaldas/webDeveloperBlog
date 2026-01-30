@@ -6,10 +6,9 @@
   "scripts": {
     "prepare": "husky",
     "start": "next dev --webpack",
-    "dev": "cross-env INIT_CWD=$PWD next dev --webpack",
-    "build": "next build",
-    "analyze": "cross-env ANALYZE=true next build",
-    "serve": "next start"
+    "dev": "cross-env BASELINE_BROWSER_MAPPING_IGNORE_OLD_DATA=true INIT_CWD=$PWD next dev --webpack",
+    "build": "cross-env BASELINE_BROWSER_MAPPING_IGNORE_OLD_DATA=true next build",
+    "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
     "@headlessui/react": "2.2.9",
